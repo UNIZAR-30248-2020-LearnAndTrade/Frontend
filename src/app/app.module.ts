@@ -8,16 +8,30 @@ import { PrincipalComponent } from './components/pages/principal/principal.compo
 import { HeaderComponent } from './components/shared/header/header.component';
 import { RootComponent } from './root/root.component';
 
+// Imports Bootstrap
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+
+// Import Angular Material
+import { MatIconModule } from "@angular/material/icon";
+
+
 @NgModule({
   declarations: [
-    PrincipalComponent,
+    RootComponent,
     HeaderComponent,
-    RootComponent
+    PrincipalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    NgbModule,
+    NoopAnimationsModule,
+    MatIconModule
+  ],
+  exports: [
+    MatIconModule
   ],
   providers: [],
   bootstrap: [RootComponent]
