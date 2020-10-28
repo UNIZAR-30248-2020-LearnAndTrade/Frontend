@@ -14,6 +14,10 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 // Import Angular Material
 import { MatIconModule } from "@angular/material/icon";
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
+
 
 
 @NgModule({
@@ -28,10 +32,14 @@ import { MatIconModule } from "@angular/material/icon";
     RouterModule,
     NgbModule,
     NoopAnimationsModule,
-    MatIconModule
+    MatIconModule,
+    MatCardModule,
+    MatFormFieldModule
   ],
   exports: [
-    MatIconModule
+    MatIconModule,
+    MatCardModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [RootComponent]

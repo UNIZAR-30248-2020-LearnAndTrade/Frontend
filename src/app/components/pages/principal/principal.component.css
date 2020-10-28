@@ -1,22 +1,42 @@
 .contenedor{
-    height: 49%;
-    background-color: #6A737C;
-    margin: 1% 1%;
+   
+    background-color: #fafafa;
+
   }
 
   #infoIzq{
     padding: 10px;
     float: left;
-    width: 45%;
+    width: 50%;
+    text-align: justify;
+}
+#imagenTarjeta{
+    padding: 10px;
+    max-width: 20%;
+    border-radius: 50%
+
+}
+#infoTarjeta{
+    padding: 10px;
+    float: left;
+    width: 60%;
     text-align: justify;
 }
 #infoDcha{
     padding: 10px;
     float: left;
-    width: 45%;
+    width: 50%;
     text-align: justify;
 }
 #cuadro{
     border: ridge black 1px;
     padding: 10px;
+}
+
+#tituloCard{
+    width: 100%;
+    text-align: left;
+}
+#ContenidoCard{
+    text-align: left;
 }
