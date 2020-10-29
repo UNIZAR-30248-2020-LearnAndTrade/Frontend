@@ -25,27 +25,25 @@
         <mat-card style="width:100%;">
             <mat-card-title>Usuarios Complementarios</mat-card-title>
             <mat-card-content>
-                <ul class="list-group">
+                <ul class="list-group" *ngFor="let usuario of usuarios">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <img src="assets/img/perfil.jpg" id="imagenTarjeta">
                         <div id="infoTarjeta">
                             <div id="tituloCard">
-                                <b>Usuario</b>
+                                <b>{{usuario.nombre}}</b>
                             </div>
                             <div id="ContenidoCard">
                                 Interés en 
-                                <a href="#" class="alert-link">TEMA 1</a>
+                                <a href="#" class="alert-link">{{usuario.interes}}</a>
                             </div>
                             <div id="ContenidoCard">
                                 Conocimiento en 
-                                <a href="#" class="alert-link">TEMA 2</a>
+                                <a href="#" class="alert-link">{{usuario.conocimiento}}</a>
                             </div>
                         </div>
-                      
-                      
-                      <mat-card-actions style="margin: 0px;">
-                        <button mat-raised-button color="accent">CHAT</button>
-                    </mat-card-actions>
+                        <mat-card-actions style="margin: 0px;">
+                            <button mat-raised-button color="accent">CHAT</button>
+                        </mat-card-actions>
                     </li>
                     
                   </ul>
