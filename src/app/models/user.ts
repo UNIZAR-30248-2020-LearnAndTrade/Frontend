@@ -1,5 +1,9 @@
 export interface user {
-    nombre: string;
-    interes: string;
-    conocimiento: string;
+    username: string;
+    email: string;
+    interests: string[];
+    knowledge: string[];
+    name: string;
+    surname: string;
+    birthdate: Date;
 }

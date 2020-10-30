@@ -8,6 +8,8 @@ import { PrincipalComponent } from './components/pages/principal/principal.compo
 import { HeaderComponent } from './components/shared/header/header.component';
 import { RootComponent } from './root/root.component';
 
+import { ScrollingModule} from '@angular/cdk/scrolling';
+
 // Imports Bootstrap
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -34,7 +36,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     NoopAnimationsModule,
     MatIconModule,
     MatCardModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    ScrollingModule
   ],
   exports: [
     MatIconModule,
