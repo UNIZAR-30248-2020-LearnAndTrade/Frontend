@@ -11,12 +11,14 @@ export class PrincipalComponent implements OnInit {
 
   public usuarios: user[];
   public miPerfil: user;
+  public knowledgeList: String[];
 
   constructor() { }
 
   ngOnInit(): void {
     let compatibles = new Array;
-
+    let knowList = ['Deporte', 'Tecnologia', 'Musica', 'Cocina', 'Literatura'];
+    this.knowledgeList = knowList;
     let usuario1 = {
       name: 'Fernando',
       interests: ['Música'],

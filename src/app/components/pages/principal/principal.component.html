@@ -77,7 +77,25 @@
 
                                 {{interest}}
                             </mat-list-item>
-                          </mat-list>
+                        </mat-list>
+                        <h4>Añadir interés</h4>
+                        <div class="row" style="align-items: center; padding-left: 10%; ">
+                            <mat-form-field appearance="fill" >
+                                <mat-label>Lista de intereses</mat-label>
+                                
+                                    <mat-select>
+                                        <mat-option *ngFor="let knowledgeItem of knowledgeList" [value]="knowledgeItem">
+                                        {{knowledgeItem}}
+                                        </mat-option>
+                                    </mat-select>
+                            </mat-form-field>
+                            <div class="boton">
+                                <button mat-mini-fab style="background-color: lightgreen">
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                            
 
                     </div>
                     <div id="infoDcha" style="text-align: center;">
