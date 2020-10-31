@@ -10,6 +10,7 @@ import { user } from 'src/app/models/user';
 export class PrincipalComponent implements OnInit {
 
   public usuarios: user[];
+  public miPerfil: user;
 
   constructor() { }
 
@@ -66,6 +67,18 @@ export class PrincipalComponent implements OnInit {
     compatibles[6] = usuario1;
 
     this.usuarios = compatibles
+
+    let miPerfil = {
+      username: 'ferbercedo',
+      email: 'fernando@gmail.com',
+      interests: ['Música', 'Literatura', 'gestión'],
+      knowledge: ['Deporte', 'Programación'],
+      name: 'Fernando',
+      surname: 'Bercedo',
+      birthdate: new Date
+    };
+
+    this.miPerfil = miPerfil
   }
 
 }

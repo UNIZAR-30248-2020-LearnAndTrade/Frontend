@@ -18,6 +18,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from "@angular/material/icon";
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatListModule } from '@angular/material/list';
+
 
 
 
@@ -37,12 +39,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatIconModule,
     MatCardModule,
     MatFormFieldModule,
-    ScrollingModule
+    ScrollingModule,
+    MatListModule
   ],
   exports: [
     MatIconModule,
     MatCardModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [RootComponent]

@@ -50,35 +50,53 @@
                     </ul>
                 </cdk-virtual-scroll-viewport>
             </mat-card-content>
-            <mat-card-actions>
-                <button mat-raised-button color="accent">Paginación?</button>
-            </mat-card-actions>
+            
         </mat-card>
     </div>
     <div id="infoDcha">
         <mat-card style="width:100%;">
             <mat-card-title>Mi Perfil</mat-card-title>
             <mat-card-content>
-                
-                <div layout="row" class="row-full-width">
-                    <mat-label></mat-label>
+                <div class="row">
+                    <div class="avatarPerfil">
+                        <img mat-card-md-image src="assets/img/perfil.jpg">
+                    </div>
+                    <div class="columnPerfil">
+                        <h2 style="margin: 0px;"><b>{{miPerfil.name}} {{miPerfil.surname}}</b></h2>
+                        <h3 style="margin: 0px;">{{miPerfil.username}}</h3>
+                        <h3 style="margin: 0px;">{{miPerfil.email}}</h3>
+                    </div>
                 </div>
-                <div layout="row" class="row-full-width">
+                <div class="row">
+                    <div id="infoIzq" style="text-align: center;">
+                        <h2><u>Mis intereses</u></h2>
+                        <mat-list role="list">
+                            <mat-list-item *ngFor="let interest of miPerfil.interests" style="margin-top: -15px; padding-left: 5%;
+                            ">
+                                <mat-icon mat-list-icon class="red-icon">favorite</mat-icon>
+
+                                {{interest}}
+                            </mat-list-item>
+                          </mat-list>
+
+                    </div>
+                    <div id="infoDcha" style="text-align: center;">
+                        <h2><u>Mis conocimientos</u></h2>
+                        <mat-list role="list">
+                            <mat-list-item *ngFor="let knowledge of miPerfil.knowledge" style="margin-top: -15px; padding-left: 5%;
+                            ">
+                                <mat-icon mat-list-icon>school</mat-icon>
+
+                                {{knowledge}}
+                            </mat-list-item>
+                          </mat-list>
+                    </div>
+                </div>
                     
-                        
-                   
-                </div>
-        
-                <div style="display: flex; flex-direction: row; flex:1;">
-                        
-                </div>
-                <!-- {{state | json}}
-                <p><b>{{request | json}}</b></p> -->
-            </mat-card-content>
-            <mat-card-actions>
-                <button mat-raised-button color="accent">TRY</button>
                 
-            </mat-card-actions>
+                
+                
+            </mat-card-content>
         </mat-card>
     </div>
     
