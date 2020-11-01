@@ -63,7 +63,7 @@
                     </div>
                     <div class="columnPerfil">
                         <h2 style="margin: 0px;"><b>{{miPerfil.name}} {{miPerfil.surname}}</b></h2>
-                        <h3 style="margin: 0px;">{{miPerfil.username}}</h3>
+                        <h3 style="margin: 0px;">Username: {{miPerfil.username}}</h3>
                         <h3 style="margin: 0px;">{{miPerfil.email}}</h3>
                     </div>
                 </div>
@@ -101,7 +101,7 @@
                     <div id="infoDcha" style="text-align: center;">
                         <h2><u>Mis conocimientos</u></h2>
                         <mat-list role="list">
-                            <mat-list-item *ngFor="let knowledge of miPerfil.knowledge" style="margin-top: -15px; padding-left: 5%;
+                            <mat-list-item *ngFor="let knowledge of miPerfil.knowledges" style="margin-top: -15px; padding-left: 5%;
                             ">
                                 <mat-icon mat-list-icon>school</mat-icon>
 

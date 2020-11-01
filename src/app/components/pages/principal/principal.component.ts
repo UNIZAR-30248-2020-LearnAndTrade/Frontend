@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ComplementaryUsersService } from '../../../services/complementary-users.service';
+import { GetUserService } from '../../../services/get-user.service';
 import { user } from 'src/app/models/user';
 
 
@@ -12,10 +14,21 @@ export class PrincipalComponent implements OnInit {
   public usuarios: user[];
   public miPerfil: user;
   public knowledgeList: String[];
+  public status: string; // Status del sistema
 
-  constructor() { }
+
+  constructor(private ComplementaryUsersService: ComplementaryUsersService, private UserService: GetUserService) { }
 
   ngOnInit(): void {
+    this.miPerfil = {
+      username: '',
+      email: '',
+      interests: [],
+      knowledges: [],
+      name: '',
+      surname: '',
+      birthdate: new Date
+    };
     let compatibles = new Array;
     let knowList = ['Deporte', 'Tecnologia', 'Musica', 'Cocina', 'Literatura'];
     this.knowledgeList = knowList;
@@ -68,19 +81,43 @@ export class PrincipalComponent implements OnInit {
     };
     compatibles[6] = usuario1;
 
-    this.usuarios = compatibles
+    this.usuarios = compatibles;
 
-    let miPerfil = {
-      username: 'ferbercedo',
-      email: 'fernando@gmail.com',
-      interests: ['Música', 'Literatura', 'gestión'],
-      knowledge: ['Deporte', 'Programación'],
-      name: 'Fernando',
-      surname: 'Bercedo',
-      birthdate: new Date
-    };
+    this.getMyProfile();
+  }
 
-    this.miPerfil = miPerfil
+  getComplementary(usuario){
+
+    this.ComplementaryUsersService.getComplementaryUsers(usuario).subscribe(
+      response => {
+        console.log(response);
+      },
+      error => {
+        var errorMessage = <any>error;
+        console.log(errorMessage);
+        if (errorMessage != null) {
+          this.status = 'error';
+        }
+      }
+    );
+  }
+
+  getMyProfile(){
+
+    this.UserService.getUser('fernando').subscribe(
+      response => {
+        this.miPerfil = response;
+        this.getComplementary(this.miPerfil);
+      },
+      error => {
+        var errorMessage = <any>error;
+        console.log(errorMessage);
+        if (errorMessage != null) {
+          this.status = 'error';
+        }
+      }
+    );
+
   }
 
 }
