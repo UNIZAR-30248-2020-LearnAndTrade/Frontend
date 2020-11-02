@@ -13,8 +13,10 @@ export class PrincipalComponent implements OnInit {
 
   public usuarios: user[];
   public miPerfil: user;
-  public knowledgeList: String[];
+  public knowledgeList: string[];
+  public elegidos: string[];
   public status: string; // Status del sistema
+  public selected: string;
 
 
   constructor(private ComplementaryUsersService: ComplementaryUsersService, private UserService: GetUserService) { }
@@ -91,6 +93,7 @@ export class PrincipalComponent implements OnInit {
     this.ComplementaryUsersService.getComplementaryUsers(usuario).subscribe(
       response => {
         console.log(response);
+        this.usuarios = response
       },
       error => {
         var errorMessage = <any>error;
@@ -107,7 +110,9 @@ export class PrincipalComponent implements OnInit {
     this.UserService.getUser('fernando').subscribe(
       response => {
         this.miPerfil = response;
-        this.getComplementary(this.miPerfil);
+        this.elegidos = this.miPerfil.interests;
+        console.log(response);
+        this.getComplementary(this.miPerfil.username);
       },
       error => {
         var errorMessage = <any>error;
@@ -118,6 +123,27 @@ export class PrincipalComponent implements OnInit {
       }
     );
 
+  }
+
+  addInterest(interest){
+    let esRepetido = false;
+    if(interest){
+      for(let i=0; i<this.elegidos.length; i++){
+        if(interest == this.elegidos[i]){
+          esRepetido = true;
+        }
+      }
+      if(!esRepetido){
+        console.log("Es nuevo, añadir");
+        this.elegidos.push(interest);
+      }
+      console.log("DESPUES")
+      console.log(this.elegidos);
+    }
+    else{
+      console.log("ANTES:");
+      console.log(interest);
+    }
   }
 
 }

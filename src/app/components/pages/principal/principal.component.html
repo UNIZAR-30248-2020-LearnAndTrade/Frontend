@@ -31,15 +31,18 @@
                             <img src="assets/img/perfil.jpg" id="imagenTarjeta">
                             <div id="infoTarjeta">
                                 <div id="tituloCard">
-                                    <b>{{usuario.name}}</b>
+                                    <b><u>{{usuario.name}}</u></b>
                                 </div>
-                                <div id="ContenidoCard">
-                                    Interés en 
-                                    <a href="#" class="alert-link">{{usuario.interests[0]}}</a>
+                                Interés en:
+                                <div *ngFor="let interest of usuario.interests" id="ContenidoCard">
+
+                                     
+                                    <a href="#" class="alert-link">- {{interest}}</a>
                                 </div>
-                                <div id="ContenidoCard">
-                                    Conocimiento en 
-                                    <a href="#" class="alert-link">{{usuario.knowledge[0]}}</a>
+                                Conocimiento en: 
+                                <div id="ContenidoCard" *ngFor="let knowledge of usuario.knowledges">
+                                    
+                                    <a href="#" class="alert-link">- {{knowledge}}</a>
                                 </div>
                             </div>
                             <mat-card-actions style="margin: 0px;">
@@ -83,14 +86,15 @@
                             <mat-form-field appearance="fill" >
                                 <mat-label>Lista de intereses</mat-label>
                                 
-                                    <mat-select>
+                                    <mat-select [(value)]="selected">
+                                        <!-- CAMBIAR LA LISTA POR UNA DISTINTA, QUE CADA DROPDOWN TENGA SU ID -->
                                         <mat-option *ngFor="let knowledgeItem of knowledgeList" [value]="knowledgeItem">
                                         {{knowledgeItem}}
                                         </mat-option>
                                     </mat-select>
                             </mat-form-field>
                             <div class="boton">
-                                <button mat-mini-fab style="background-color: lightskyblue; color: black;">
+                                <button mat-mini-fab style="background-color: lightskyblue; color: black;" (click)="addInterest(selected)">
                                     <mat-icon>add</mat-icon>
                                 </button>
                             </div>
@@ -108,12 +112,31 @@
                                 {{knowledge}}
                             </mat-list-item>
                           </mat-list>
+                          <h4>Añadir conocimiento</h4>
+                        <div class="row" style="align-items: center; padding-left: 10%; ">
+                            <mat-form-field appearance="fill" >
+                                <mat-label>Lista de conocimientos</mat-label>
+                                
+                                    <mat-select>
+                                        <mat-option *ngFor="let knowledgeItem of knowledgeList" [value]="knowledgeItem">
+                                        {{knowledgeItem}}
+                                        </mat-option>
+                                    </mat-select>
+                            </mat-form-field>
+                            <div class="boton">
+                                <button mat-mini-fab style="background-color: lightskyblue; color: black;">
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                    
-                
-                
-                
+                <div class="botonCentral">
+                    <button mat-raised-button style="background-color: lightgreen;">
+                        Guardar cambios
+                    </button>
+                </div>
+
             </mat-card-content>
         </mat-card>
     </div>

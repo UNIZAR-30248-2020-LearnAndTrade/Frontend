@@ -12,10 +12,10 @@ export class ComplementaryUsersService {
     this.urlGetComplementaryUsers = 'https://learn-and-trade-backend.herokuapp.com/user/getcomplementaryusers';
    }
 
-   getComplementaryUsers(usuario): Observable<any> {
-    let headers = new HttpHeaders().set('Content-Type', 'application/json');
-    let user = JSON.stringify({ usuario });
-    let body = new HttpParams;
-    return this.http.get(this.urlGetComplementaryUsers + encodeURIComponent(user));
+   getComplementaryUsers(username): Observable<any> {
+    console.log("En get Complementary");
+    let params = new HttpParams().set("username",username); //Create new HttpParams
+    
+    return this.http.get(this.urlGetComplementaryUsers, { params:params });
   }
 }
