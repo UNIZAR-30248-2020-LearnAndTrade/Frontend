@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ComplementaryUsersService } from '../../../services/complementary-users.service';
 import { GetUserService } from '../../../services/get-user.service';
+import { EditProfileService } from '../../../services/edit-profile.service';
 import { user } from 'src/app/models/user';
 
 
@@ -19,7 +20,7 @@ export class PrincipalComponent implements OnInit {
   public selected: string;
 
 
-  constructor(private ComplementaryUsersService: ComplementaryUsersService, private UserService: GetUserService) { }
+  constructor(private ComplementaryUsersService: ComplementaryUsersService, private UserService: GetUserService, private EditProfile: EditProfileService) { }
 
   ngOnInit(): void {
     this.miPerfil = {
@@ -136,6 +137,7 @@ export class PrincipalComponent implements OnInit {
       if(!esRepetido){
         console.log("Es nuevo, añadir");
         this.elegidos.push(interest);
+        this.miPerfil.interests = this.elegidos;
       }
       console.log("DESPUES")
       console.log(this.elegidos);
@@ -144,6 +146,21 @@ export class PrincipalComponent implements OnInit {
       console.log("ANTES:");
       console.log(interest);
     }
+  }
+
+  editProfile(){
+    this.EditProfile.editProfile(this.miPerfil).subscribe(
+      response => {
+        // Si el proceso es satisfactorio, redirige a la ventana de gestion-encuestas-admin.
+        window.location.href = "principal";
+      },
+      error => {
+        var errorMessage = <any>error;
+        if (errorMessage != null) {
+          this.status = 'error';
+        }
+      }
+    );
   }
 
 }
