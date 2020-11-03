@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 //Componentes de páginas web
 import { PrincipalComponent } from '../components/pages/principal/principal.component';
+import { LoginComponent } from '../components/pages/login/login.component';
 
 //Servicios (API)
 
@@ -18,7 +19,8 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   { path: 'principal', component: PrincipalComponent },
-  { path: '**', redirectTo: 'principal'}
+  { path: 'login', component: LoginComponent},
+  { path: '**', redirectTo: 'principal'},
 ];
 
 @NgModule({
