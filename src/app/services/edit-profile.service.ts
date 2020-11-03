@@ -15,6 +15,7 @@ export class EditProfileService {
   editProfile(user): Observable<any> {
 
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    console.log(headers);
     return this.http.post(this.url, JSON.stringify(user), {headers: headers});
   }
 }

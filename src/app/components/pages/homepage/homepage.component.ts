@@ -6,11 +6,11 @@ import { user } from 'src/app/models/user';
 
 
 @Component({
-  selector: 'app-principal',
-  templateUrl: './principal.component.html',
-  styleUrls: ['./principal.component.css']
+  selector: 'app-homepage',
+  templateUrl: './homepage.component.html',
+  styleUrls: ['./homepage.component.css']
 })
-export class PrincipalComponent implements OnInit {
+export class homepageComponent implements OnInit {
 
   public usuarios: user[];
   public miPerfil: user;
@@ -152,7 +152,7 @@ export class PrincipalComponent implements OnInit {
     this.EditProfile.editProfile(this.miPerfil).subscribe(
       response => {
         // Si el proceso es satisfactorio, redirige a la ventana de gestion-encuestas-admin.
-        window.location.href = "principal";
+        window.location.href = "homepage";
       },
       error => {
         var errorMessage = <any>error;

@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 import { AppRoutingModule } from './router/app.routing';
-import { PrincipalComponent } from './components/pages/principal/principal.component';
+import { homepageComponent } from './components/pages/homepage/homepage.component';
 import { HeaderComponent } from './components/shared/header/header.component';
 import { RootComponent } from './root/root.component';
 
@@ -34,7 +34,7 @@ import { MatButtonModule } from '@angular/material/button';
   declarations: [
     RootComponent,
     HeaderComponent,
-    PrincipalComponent
+    homepageComponent
   ],
   imports: [
     BrowserModule,

@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 //Componentes de páginas web
-import { PrincipalComponent } from '../components/pages/principal/principal.component';
+import { homepageComponent } from '../components/pages/homepage/homepage.component';
 
 //Servicios (API)
 
@@ -14,11 +14,11 @@ import { PrincipalComponent } from '../components/pages/principal/principal.comp
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'principal',
+    redirectTo: 'homepage',
     pathMatch: 'full',
   },
-  { path: 'principal', component: PrincipalComponent },
-  { path: '**', redirectTo: 'principal'}
+  { path: 'homepage', component: homepageComponent },
+  { path: '**', redirectTo: 'homepage'}
 ];
 
 @NgModule({
