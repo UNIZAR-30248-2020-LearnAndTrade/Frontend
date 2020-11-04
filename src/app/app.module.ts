@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './router/app.routing';
 import { PrincipalComponent } from './components/pages/principal/principal.component';
 import { HeaderComponent } from './components/shared/header/header.component';
+import { LoginComponent } from './components/pages/login/login.component';
 import { ProfileComponent } from './components/pages/profile/profile.component';
 import { RootComponent } from './root/root.component';
 
@@ -23,6 +24,7 @@ import { MatIconModule } from "@angular/material/icon";
     RootComponent,
     HeaderComponent,
     PrincipalComponent,
+    LoginComponent,
     ProfileComponent
   ],
   imports: [
