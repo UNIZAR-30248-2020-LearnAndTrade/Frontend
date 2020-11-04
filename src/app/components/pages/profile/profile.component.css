@@ -1,0 +1,33 @@
+ngb-rating {
+    color: rgb(18, 143, 202);
+    font-size: 80px;
+}
+
+#info-cont{
+    padding: 40px;
+}
+
+#info{
+    height: inherit;
+    width: inherit;
+    padding: 20px;
+    border: solid 3px rgb(18,143,202);
+}
+
+#knowledge-row{
+    margin: 20px -15px;
+}
+
+#chat-button-col{
+    justify-content: right;
+    display: inline-flex;
+}
+
+#opinion-col{
+    align-content: center;
+    justify-content: center;
+}    
+
+#opinion-heading{
+    margin: 0px 25% 30px;
+}
