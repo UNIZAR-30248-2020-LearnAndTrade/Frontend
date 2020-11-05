@@ -17,7 +17,9 @@ export class homepageComponent implements OnInit {
   public knowledgeList: string[];
   public elegidos: string[];
   public status: string; // Status del sistema
-  public selected: string;
+  public selectedInterest: string;
+  public selectedKnowledge: string;
+
 
 
   constructor(private ComplementaryUsersService: ComplementaryUsersService, private UserService: GetUserService, private EditProfile: EditProfileService) { }
@@ -129,15 +131,14 @@ export class homepageComponent implements OnInit {
   addInterest(interest){
     let esRepetido = false;
     if(interest){
-      for(let i=0; i<this.elegidos.length; i++){
-        if(interest == this.elegidos[i]){
+      for(let i=0; i<this.miPerfil.interests.length; i++){
+        if(interest == this.miPerfil.interests[i]){
           esRepetido = true;
         }
       }
       if(!esRepetido){
         console.log("Es nuevo, añadir");
-        this.elegidos.push(interest);
-        this.miPerfil.interests = this.elegidos;
+        this.miPerfil.interests.push(interest);
       }
       console.log("DESPUES")
       console.log(this.elegidos);
@@ -145,6 +146,27 @@ export class homepageComponent implements OnInit {
     else{
       console.log("ANTES:");
       console.log(interest);
+    }
+  }
+
+  addKnowledge(knowledge){
+    let esRepetido = false;
+    if(knowledge){
+      for(let i=0; i<this.miPerfil.knowledges.length; i++){
+        if(knowledge == this.miPerfil.knowledges[i]){
+          esRepetido = true;
+        }
+      }
+      if(!esRepetido){
+        console.log("Es nuevo, añadir");
+        this.miPerfil.knowledges.push(knowledge);
+      }
+      console.log("DESPUES")
+      console.log(this.miPerfil.knowledges);
+    }
+    else{
+      console.log("ANTES:");
+      console.log(knowledge);
     }
   }
 

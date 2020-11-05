@@ -86,7 +86,7 @@
                             <mat-form-field appearance="fill" >
                                 <mat-label>Lista de intereses</mat-label>
                                 
-                                    <mat-select [(value)]="selected">
+                                    <mat-select [(value)]="selectedInterest">
                                         <!-- CAMBIAR LA LISTA POR UNA DISTINTA, QUE CADA DROPDOWN TENGA SU ID -->
                                         <mat-option *ngFor="let knowledgeItem of knowledgeList" [value]="knowledgeItem">
                                         {{knowledgeItem}}
@@ -94,7 +94,7 @@
                                     </mat-select>
                             </mat-form-field>
                             <div class="boton">
-                                <button mat-mini-fab style="background-color: lightskyblue; color: black;" (click)="addInterest(selected)">
+                                <button mat-mini-fab style="background-color: lightskyblue; color: black;" (click)="addInterest(selectedInterest)">
                                     <mat-icon>add</mat-icon>
                                 </button>
                             </div>
@@ -117,14 +117,14 @@
                             <mat-form-field appearance="fill" >
                                 <mat-label>Lista de conocimientos</mat-label>
                                 
-                                    <mat-select>
+                                    <mat-select [(value)]="selectedKnowledge">
                                         <mat-option *ngFor="let knowledgeItem of knowledgeList" [value]="knowledgeItem">
                                         {{knowledgeItem}}
                                         </mat-option>
                                     </mat-select>
                             </mat-form-field>
                             <div class="boton">
-                                <button mat-mini-fab style="background-color: lightskyblue; color: black;">
+                                <button mat-mini-fab style="background-color: lightskyblue; color: black;" (click)="addKnowledge(selectedKnowledge)">
                                     <mat-icon>add</mat-icon>
                                 </button>
                             </div>
