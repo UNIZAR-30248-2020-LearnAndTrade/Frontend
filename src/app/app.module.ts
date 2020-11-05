@@ -1,6 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
+
 
 
 import { AppRoutingModule } from './router/app.routing';
@@ -33,7 +37,10 @@ import { MatIconModule } from "@angular/material/icon";
     RouterModule,
     NgbModule,
     NoopAnimationsModule,
-    MatIconModule
+    MatIconModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   exports: [
     MatIconModule
