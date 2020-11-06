@@ -1,0 +1,103 @@
+.contenedor{
+   
+    background-color: #fafafa;
+
+  }
+
+  #infoIzq{
+    padding: 10px;
+    float: left;
+    width: 50%;
+    text-align: justify;
+}
+#imagenTarjeta{
+    padding: 10px;
+    max-width: 20%;
+    border-radius: 50%
+
+}
+#infoTarjeta{
+    padding: 10px;
+    float: left;
+    width: 60%;
+    text-align: justify;
+}
+#infoDcha{
+    padding: 10px;
+    float: left;
+    width: 50%;
+    text-align: justify;
+}
+#cuadro{
+    border: ridge black 1px;
+    padding: 10px;
+}
+
+#tituloCard{
+    width: 100%;
+    text-align: left;
+}
+#ContenidoCard{
+    text-align: left;
+    padding-left: 15%;
+}
+
+#misDatos{
+    width: 40%;
+    float: left;
+    text-align: justify;
+    padding: 2px;
+}
+
+#miFoto{
+    width: 40%;
+    float: left;
+    text-align: justify;
+    padding: 2px;
+    border-radius: 50%;
+
+}
+
+#miPerfil{
+    float: left;
+    padding: 0px;
+    width: 30%;
+    height: 150px;
+    border-radius: 50%;
+
+}
+.botonCentral{
+align-content: center;
+align-items: center;
+text-align: center;
+}
+
+.boton{
+    padding-left: 5%;
+    padding-bottom: 5%;
+}
+
+.avatarPerfil {
+    float: left;
+    width: 45%;
+    padding: 10px;
+  }
+.columnPerfil{
+    float: left;
+    width: 45%;
+    padding: 4%;
+    padding-left: 0px;
+    align-items: center;
+
+}
+.red-icon {
+    color: red;
+}
+
+.example-viewport {
+    height: 400px;
+    width: 100%;
+    border: 1px solid black;
+  }
+  
+ 
