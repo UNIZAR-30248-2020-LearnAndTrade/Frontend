@@ -3,14 +3,28 @@
     <div class="col" id="form-col" style="padding: 0px;">
         <div class="form-group" id="login-form">
             <div class="row d-xl-flex align-items-xl-center" id="mail-row">
-                <div class="col col-5" id="mail-label-col"><label class="col-form-label" id="mail-label" for="mail">Correo o nombre de usuario:</label></div>
-                <div class="col" id="mail-input-col"><input type="text" id="mail-input"></div>
+                <div class="col col-5" id="mail-label-col">
+                    <label class="col-form-label" id="mail-label" for="mail">Correo o nombre de usuario:</label>
+                </div>
+                <div class="col" id="mail-input-col"><input type="text" [formControl]="email" id="mail-input"></div>
             </div>
             <div class="row d-xl-flex align-items-xl-center" id="pass-row">
-                <div class="col col-5" id="pass-label-col"><label class="col-form-label" id="pass-label" for="pass-input">Contraseña:</label></div>
-                <div class="col" id="pass-input-col"><input type="text" id="pass-input"></div>
+                <div class="col col-5" id="pass-label-col">
+                    <label class="col-form-label" id="pass-label" for="pass-input">
+                        Contraseña:
+                    </label>
+                </div>
+                <div class="col" id="pass-input-col">
+                    <input type="password" [formControl]="password" id="pass-input">
+                    <p class="col" style="color: red;" *ngIf="error">Contraseña o correo incorrectos.</p>
+
+                </div>
             </div>
-            <div id="button-div"><button class="btn btn-primary d-xl-flex" id="access-button" type="button">¡Acceder!</button></div>
+            <div id="button-div">
+                <button class="btn btn-primary d-xl-flex" id="access-button" type="button" (click)="login()">
+                    ¡Acceder!
+                </button>
+            </div>
         </div>
     </div>
 </div>
