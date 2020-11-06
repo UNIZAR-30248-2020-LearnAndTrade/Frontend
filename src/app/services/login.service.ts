@@ -19,4 +19,14 @@ export class LoginService {
     console.log(params);
     return this.http.get(this.urlLogin, {params: params});
   }
+
+  //Almacena localmente la información del usuario que se le pasa como parámetro
+  public setUserInfo(user){
+    console.log("START function setUserInfo");
+    console.log(user);
+
+    localStorage.setItem('userJSON', JSON.stringify(user));
+   
+    console.log(user);
+  }
 }
