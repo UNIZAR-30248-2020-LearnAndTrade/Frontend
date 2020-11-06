@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
         console.log(response);
         //window.location.href = "/home";
         console.log("respuesta de LOGIN: ");
-        this.loginService.setUserInfo({ 'user': response });
+        this.loginService.setUserInfo(response);
         window.location.href = "/home";
 
       },

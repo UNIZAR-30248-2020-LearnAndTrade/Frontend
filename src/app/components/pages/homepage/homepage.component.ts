@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ComplementaryUsersService } from '../../../services/complementary-users.service';
 import { GetUserService } from '../../../services/get-user.service';
 import { EditProfileService } from '../../../services/edit-profile.service';
+import { LoginService } from '../../../services/login.service';
 import { user } from 'src/app/models/user';
 
 
@@ -19,10 +20,12 @@ export class homepageComponent implements OnInit {
   public status: string; // Status del sistema
   public selectedInterest: string;
   public selectedKnowledge: string;
+  public autenticado: boolean;
 
 
 
-  constructor(private ComplementaryUsersService: ComplementaryUsersService, private UserService: GetUserService, private EditProfile: EditProfileService) { }
+  constructor(private ComplementaryUsersService: ComplementaryUsersService, private UserService: GetUserService,
+    private EditProfile: EditProfileService, private loginService: LoginService) { }
 
   ngOnInit(): void {
     this.miPerfil = {
@@ -34,61 +37,13 @@ export class homepageComponent implements OnInit {
       surname: '',
       birthdate: new Date
     };
-    let compatibles = new Array;
-    let knowList = ['Deporte', 'Tecnologia', 'Musica', 'Cocina', 'Literatura'];
-    this.knowledgeList = knowList;
-    let usuario1 = {
-      name: 'Fernando',
-      interests: ['Música'],
-      knowledge: ['Deporte']
-    };
-    compatibles[0] = usuario1;
+    this.knowledgeList = ['Tecnología', 'Música', 'Bases de datos', 'Angular', 'Piano', 'Edición de video', 'Cocina'];
+    this.autenticado = this.loginService.isAuthenticated(); // Comprobar si está autentificado
+    if(this.autenticado){
+      this.getMyProfile();
+    }
 
-    usuario1 = {
-      name: 'Bea',
-      interests: ['Programación'],
-      knowledge: ['Deporte']
-    };
-    compatibles[1] = usuario1;
 
-    usuario1 = {
-      name: 'Ruth',
-      interests: ['Tecnología'],
-      knowledge: ['Literatura']
-    };
-    compatibles[2] = usuario1;
-
-    usuario1 = {
-      name: 'Luis',
-      interests: ['Deporte'],
-      knowledge: ['Cocina']
-    };
-    compatibles[3] = usuario1;
-
-    usuario1 = {
-      name: 'Fernando',
-      interests: ['Música'],
-      knowledge: ['Deporte']
-    };
-    compatibles[4] = usuario1;
-
-    usuario1 = {
-      name: 'Bea',
-      interests: ['Programación'],
-      knowledge: ['Deporte']
-    };
-    compatibles[5] = usuario1;
-
-    usuario1 = {
-      name: 'Ruth',
-      interests: ['Tecnología'],
-      knowledge: ['Literatura']
-    };
-    compatibles[6] = usuario1;
-
-    this.usuarios = compatibles;
-
-    this.getMyProfile();
   }
 
   getComplementary(usuario){
@@ -109,8 +64,9 @@ export class homepageComponent implements OnInit {
   }
 
   getMyProfile(){
-
-    this.UserService.getUser('fernando').subscribe(
+    this.miPerfil = JSON.parse(localStorage.getItem('userJSON'));
+    console.log(this.miPerfil);
+    this.UserService.getUser(this.miPerfil.username).subscribe(
       response => {
         this.miPerfil = response;
         this.elegidos = this.miPerfil.interests;

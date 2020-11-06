@@ -15,7 +15,7 @@ export class LoginService {
 
   validate(email, password){
     console.log("EN SERVICIO");
-    let params = new HttpParams().set("name",email).append("password", password);
+    let params = new HttpParams().set("username",email).append("password", password);
     console.log(params);
     return this.http.get(this.urlLogin, {params: params});
   }
@@ -28,5 +28,21 @@ export class LoginService {
     localStorage.setItem('userJSON', JSON.stringify(user));
    
     console.log(user);
+  }
+
+  //Devuelve true sii hay un usuario en sesión
+  public isAuthenticated() : boolean {
+
+    let userData = localStorage.getItem('userJSON');
+
+    let aux = JSON.parse(userData);
+
+    if(userData && JSON.parse(userData)){
+      return true;
+    }
+    else{
+      return false;
+    }
+    
   }
 }
