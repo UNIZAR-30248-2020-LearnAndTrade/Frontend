@@ -8,6 +8,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './router/app.routing';
 import { homepageComponent } from './components/pages/homepage/homepage.component';
 import { HeaderComponent } from './components/shared/header/header.component';
+import { LoginComponent } from './components/pages/login/login.component';
+import { ProfileComponent } from './components/pages/profile/profile.component';
 import { RootComponent } from './root/root.component';
 
 import { ScrollingModule} from '@angular/cdk/scrolling';
@@ -30,11 +32,14 @@ import { MatButtonModule } from '@angular/material/button';
 
 
 
+
 @NgModule({
   declarations: [
     RootComponent,
     HeaderComponent,
-    homepageComponent
+    homepageComponent,
+    LoginComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
