@@ -19,4 +19,11 @@ export class HeaderComponent implements OnInit {
     this.autenticado = this.loginService.isAuthenticated();
   }
 
+  cerrarsesion(){
+    console.log("ENTRA A CERRAR")
+    this.loginService.cerrarSesion();
+    
+    //window.location.href = "homepage";
+  }
+
 }

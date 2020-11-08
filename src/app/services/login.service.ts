@@ -45,4 +45,10 @@ export class LoginService {
     }
     
   }
+
+  public cerrarSesion(){
+    localStorage.removeItem('userJSON');
+    console.log(localStorage.getItem('userJSON'));
+    window.location.href = "/login";
+  }
 }

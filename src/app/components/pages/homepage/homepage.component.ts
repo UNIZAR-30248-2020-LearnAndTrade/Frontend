@@ -42,6 +42,9 @@ export class homepageComponent implements OnInit {
     if(this.autenticado){
       this.getMyProfile();
     }
+    else{
+      window.location.href = "/login";
+    }
 
 
   }
