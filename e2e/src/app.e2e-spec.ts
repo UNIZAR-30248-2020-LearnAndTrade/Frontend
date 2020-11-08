@@ -1,16 +1,17 @@
 import { AppPage } from './app.po';
-import { browser, logging } from 'protractor';
+import {browser, by, element, logging} from 'protractor';
 
-describe('workspace-project App', () => {
+describe('Protractor Test Front-End', () => {
   let page: AppPage;
 
   beforeEach(() => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
-    page.navigateTo();
-    expect(page.getTitleText()).toEqual('LearnTrade app is running!');
+  it('Load the page', () => {
+    browser.get('https://learn-and-trade.herokuapp.com');
+
+    expect(element(by.id('loginTitle')).getText).toEqual('Login');
   });
 
   afterEach(async () => {
