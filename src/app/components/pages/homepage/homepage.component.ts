@@ -126,6 +126,16 @@ export class homepageComponent implements OnInit {
     }
   }
 
+  deleteInterest(interest){
+    let indice = this.miPerfil.interests.indexOf(interest);
+    this.miPerfil.interests.splice(indice,1);
+  }
+
+  deleteKnowledge(knowledge){
+    let indice = this.miPerfil.knowledges.indexOf(knowledge);
+    this.miPerfil.knowledges.splice(indice,1);
+  }
+
   editProfile(){
     this.EditProfile.editProfile(this.miPerfil).subscribe(
       response => {
