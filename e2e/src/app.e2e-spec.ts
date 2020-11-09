@@ -3,15 +3,29 @@ import {browser, by, element, logging} from 'protractor';
 
 describe('Protractor Test Front-End', () => {
   let page: AppPage;
+  const pointer = element(by.id('test-pointer'));
 
   beforeEach(() => {
     page = new AppPage();
   });
 
-  it('Load the page', () => {
-    browser.get('https://learn-and-trade.herokuapp.com');
+  it('Load the page', function() {
+    // browser.get('https://learn-and-trade.herokuapp.com');
+    browser.get('http://localhost:4200/login');
+    const title = browser.getTitle();
+    expect(title).toEqual('LearnTrade');
+  });
 
-    expect(element(by.id('loginTitle')).getText).toEqual('Login');
+
+  it('Check login page', function() {
+    expect(pointer.getText()).toEqual('Login');
+  });
+
+  it('Log in with user', function() {
+    element(by.id('mail-input')).sendKeys('jorge');
+    element(by.id('pass-input')).sendKeys('12345678');
+    element(by.id('access-button')).click();
+    expect(pointer.getText()).toEqual('Mi Perfil');
   });
 
   afterEach(async () => {
