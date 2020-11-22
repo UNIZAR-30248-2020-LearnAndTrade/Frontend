@@ -51,7 +51,7 @@
                                     href="#"
                                     class="alert-link"
                                 >
-                                    - {{interest}}
+                                    - {{interest.name}}
                                 </a>
                             </div>
                             Conocimiento en:
@@ -64,7 +64,7 @@
                                     href="#"
                                     class="alert-link"
                                 >
-                                    - {{knowledge}}
+                                    - {{knowledge.name}}
                                 </a>
                             </div>
                         </div>
@@ -123,7 +123,7 @@
                             >
                                 favorite
                             </mat-icon>
-                            {{interest}}
+                            {{interest.name}}
                             <button mat-icon-button color="primary" style="color: red;" (click)="deleteInterest(interest)">
                                 <mat-icon>clear</mat-icon>
                               </button>
@@ -142,7 +142,7 @@
                                     *ngFor="let knowledgeItem of knowledgeList"
                                     [value]="knowledgeItem"
                                 >
-                                    {{knowledgeItem}}
+                                    {{knowledgeItem.name}}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -172,7 +172,7 @@
                             "
                         >
                             <mat-icon mat-list-icon>school</mat-icon>
-                            {{knowledge}}
+                            {{knowledge.name}}
                             <button mat-icon-button color="primary" style="color: red;" (click)="deleteKnowledge(knowledge)">
                                 <mat-icon>clear</mat-icon>
                               </button>
@@ -191,7 +191,7 @@
                                     *ngFor="let knowledgeItem of knowledgeList"
                                     [value]="knowledgeItem"
                                 >
-                                    {{knowledgeItem}}
+                                    {{knowledgeItem.name}}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
