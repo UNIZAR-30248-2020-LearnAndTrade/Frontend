@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject} from '@angular/core';
 import { ComplementaryUsersService } from '../../../services/complementary-users.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog} from '@angular/material/dialog';
 import { GetUserService } from '../../../services/get-user.service';
 import { EditProfileService } from '../../../services/edit-profile.service';
 import { LoginService } from '../../../services/login.service';
@@ -163,11 +163,10 @@ export class homepageComponent implements OnInit {
   editProfile(){
     this.EditProfile.editProfile(this.miPerfil).subscribe(
       response => {
-        //this.dialog.open(DialogElementsExampleDialog);
-        window.location.href = "homepage";
+        this.dialog.open(DialogConfirmDialog);
       },
       error => {
-        this.dialog.open(DialogElementsExampleDialog);
+        this.dialog.open(DialogErrorEdit);
         var errorMessage = <any>error;
         if (errorMessage != null) {
           this.status = 'error';
@@ -182,4 +181,20 @@ export class homepageComponent implements OnInit {
   selector: 'app-dialogConfirmEdit',
   templateUrl: 'dialogConfirmEdit.html',
 })
-export class DialogElementsExampleDialog {}
+export class DialogConfirmDialog {
+  redirectHome(){
+    window.location.href = "homepage";
+  }
+  
+}
+
+@Component({
+  selector: 'app-dialogErrorEdit',
+  templateUrl: 'dialogErrorEdit.html',
+})
+export class DialogErrorEdit {
+
+  redirectHome(){
+    window.location.href = "homepage";
+  }
+}

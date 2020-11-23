@@ -13,6 +13,7 @@ import { HeaderComponent } from './components/shared/header/header.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { ProfileComponent } from './components/pages/profile/profile.component';
 import { RootComponent } from './root/root.component';
+import { DialogConfirmDialog, DialogErrorEdit } from './components/pages/homepage/homepage.component';
 
 import { ScrollingModule} from '@angular/cdk/scrolling';
 
@@ -27,12 +28,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
-import {MatDialogModule} from '@angular/material/dialog';
-
-
-
-
-
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 
@@ -42,7 +38,9 @@ import {MatDialogModule} from '@angular/material/dialog';
     HeaderComponent,
     homepageComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    DialogConfirmDialog,
+    DialogErrorEdit
   ],
   imports: [
     BrowserModule,
