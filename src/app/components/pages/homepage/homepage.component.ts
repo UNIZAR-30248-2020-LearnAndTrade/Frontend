@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject} from '@angular/core';
 import { ComplementaryUsersService } from '../../../services/complementary-users.service';
+import { MatDialog} from '@angular/material/dialog';
 import { GetUserService } from '../../../services/get-user.service';
 import { EditProfileService } from '../../../services/edit-profile.service';
 import { LoginService } from '../../../services/login.service';
+import { GetThemeService } from '../../../services/get-theme.service';
 import { user } from 'src/app/models/user';
+import { theme } from 'src/app/models/theme';
+
 
 
 @Component({
@@ -15,17 +19,17 @@ export class homepageComponent implements OnInit {
 
   public usuarios: user[];
   public miPerfil: user;
-  public knowledgeList: string[];
-  public elegidos: string[];
+  public knowledgeList: theme[];
+  public elegidos: theme[];
   public status: string; // Status del sistema
-  public selectedInterest: string;
-  public selectedKnowledge: string;
+  public selectedInterest: theme;
+  public selectedKnowledge: theme;
   public autenticado: boolean;
 
 
 
   constructor(private ComplementaryUsersService: ComplementaryUsersService, private UserService: GetUserService,
-    private EditProfile: EditProfileService, private loginService: LoginService) { }
+    private EditProfile: EditProfileService, private loginService: LoginService, private ThemeService: GetThemeService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.miPerfil = {
@@ -37,9 +41,10 @@ export class homepageComponent implements OnInit {
       surname: '',
       birthdate: new Date
     };
-    this.knowledgeList = ['Tecnología', 'Música', 'Bases de datos', 'Angular', 'Piano', 'Edición de video', 'Cocina'];
+    
     this.autenticado = this.loginService.isAuthenticated(); // Comprobar si está autentificado
     if(this.autenticado){
+      this.getThemes();
       this.getMyProfile();
     }
     else{
@@ -55,6 +60,22 @@ export class homepageComponent implements OnInit {
       response => {
         console.log(response);
         this.usuarios = response
+      },
+      error => {
+        var errorMessage = <any>error;
+        console.log(errorMessage);
+        if (errorMessage != null) {
+          this.status = 'error';
+        }
+      }
+    );
+  }
+
+  getThemes(){
+    this.ThemeService.getTheme().subscribe(
+      response => {
+        this.knowledgeList = response;
+        console.log(this.knowledgeList);
       },
       error => {
         var errorMessage = <any>error;
@@ -91,7 +112,7 @@ export class homepageComponent implements OnInit {
     let esRepetido = false;
     if(interest){
       for(let i=0; i<this.miPerfil.interests.length; i++){
-        if(interest == this.miPerfil.interests[i]){
+        if(interest.name == this.miPerfil.interests[i].name){
           esRepetido = true;
         }
       }
@@ -142,10 +163,10 @@ export class homepageComponent implements OnInit {
   editProfile(){
     this.EditProfile.editProfile(this.miPerfil).subscribe(
       response => {
-        // Si el proceso es satisfactorio, redirige a la ventana de gestion-encuestas-admin.
-        window.location.href = "homepage";
+        this.dialog.open(DialogConfirmDialog);
       },
       error => {
+        this.dialog.open(DialogErrorEdit);
         var errorMessage = <any>error;
         if (errorMessage != null) {
           this.status = 'error';
@@ -154,4 +175,26 @@ export class homepageComponent implements OnInit {
     );
   }
 
+}
+
+@Component({
+  selector: 'app-dialogConfirmEdit',
+  templateUrl: 'dialogConfirmEdit.html',
+})
+export class DialogConfirmDialog {
+  redirectHome(){
+    window.location.href = "homepage";
+  }
+  
+}
+
+@Component({
+  selector: 'app-dialogErrorEdit',
+  templateUrl: 'dialogErrorEdit.html',
+})
+export class DialogErrorEdit {
+
+  redirectHome(){
+    window.location.href = "homepage";
+  }
 }
