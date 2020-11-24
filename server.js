@@ -3,7 +3,7 @@ const path = require('path');
 
 const app = express();
 
-app.use(express.static('/app/dist/learn-trade'));
+app.use(express.static('/app/dist/LearnTrade'));
 app.get('/*',function(req,res){
   res.sendFile(path.join('/app/dist/LearnTrade/index.html'));
 });
