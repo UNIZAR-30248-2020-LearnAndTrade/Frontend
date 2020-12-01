@@ -1,0 +1,114 @@
+<div class="row" style="margin: auto">
+  <h1 style="text-align: center; margin: auto;" mat-dialog-title>
+    Haz una nueva reserva con *name* (*username*)
+  </h1>
+  <div class="avatarPerfil">
+    <img
+      mat-card-sm-image
+      src="assets/img/perfil.jpg"
+    >
+  </div>
+</div>
+<div class="row">
+  <div class="col-6" style="border-right: 1px solid;">
+    <h2 style="text-align: center">Tu enseñas</h2>
+    <div class="row">
+      <div class="col" style="text-align: left; margin-top: auto;">
+        <h4>Elegir tema:</h4>
+        <mat-form-field style="width: inherit" appearance="fill">
+          <mat-label>Tema:</mat-label>
+          <mat-select [(value)]="selectedKnowledge">
+            <mat-option>
+              Tema 1
+            </mat-option>
+            <mat-option>
+              Tema 2
+            </mat-option>
+            <mat-option>
+              Tema 3
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col" style="text-align: left; margin-top: auto;">
+        <label for="inputDateTeach">Fecha</label>
+        <input #dateTeach type="date" class="form-control" id="inputDateTeach">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6" style="text-align: left; margin-top: auto;">
+        <label for="inputStartHourTeach">Hora de inicio</label>
+        <input #startHourTeach type="time" step="3600000"  class="form-control" id="inputStartHourTeach">
+      </div>
+      <div class="col-6" style="text-align: left; margin-top: auto;">
+        <label for="inputEndHourTeach">Hora de final</label>
+        <input #EndHourTeach type="time" step="3600000"  class="form-control" id="inputEndHourTeach">
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <h2 style="text-align: center">Tu aprendes</h2>
+    <div class="row">
+      <div class="col" style="text-align: left; margin-top: auto;">
+        <h4>Elegir tema:</h4>
+        <mat-form-field style="width: inherit" appearance="fill">
+          <mat-label>Tema:</mat-label>
+          <mat-select [(value)]="selectedInterest">
+            <mat-option>
+              Tema 1
+            </mat-option>
+            <mat-option>
+              Tema 2
+            </mat-option>
+            <mat-option>
+              Tema 3
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col" style="text-align: left; margin-top: auto;">
+        <label for="inputDateLearn">Fecha</label>
+        <input #dateLearn type="date" class="form-control" id="inputDateLearn">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6" style="text-align: left; margin-top: auto;">
+        <label for="inputStartHourLearn">Hora de inicio</label>
+        <input #startHourLearn type="time" step="3600000"  class="form-control" id="inputStartHourLearn">
+      </div>
+      <div class="col-6" style="text-align: left; margin-top: auto;">
+        <label for="inputEndHourLearn">Hora de final</label>
+        <input #EndHourLearn type="time" step="3600000"  class="form-control" id="inputEndHourLearn">
+      </div>
+    </div>
+  </div>
+  <br>
+</div>
+
+<div mat-dialog-actions style="height: 20%">
+  <div class="col" style="text-align: center">
+    <button mat-raised-button
+            style="background-color: lightgreen;"
+            (click)="onCancelClick()">
+      Ver disponibilidad común
+    </button>
+  </div>
+  <div class="col" style="text-align: center">
+    <button mat-raised-button
+            style="background-color: salmon; color: white"
+            (click)="onCancelClick()">
+      Cancelar
+    </button>
+  </div>
+  <div class="col" style="text-align: center">
+  <button mat-raised-button
+    style="background-color: lightskyblue;"
+    (click)="onCancelClick()">
+    Reservar
+  </button>
+  </div>
+</div>

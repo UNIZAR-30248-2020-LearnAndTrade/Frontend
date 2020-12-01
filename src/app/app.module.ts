@@ -29,6 +29,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ReservationModalComponent } from './components/shared/reservation-modal/reservation-modal.component';
 
 
 
@@ -40,7 +41,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     LoginComponent,
     ProfileComponent,
     DialogConfirmDialog,
-    DialogErrorEdit
+    DialogErrorEdit,
+    ReservationModalComponent
   ],
   imports: [
     BrowserModule,
