@@ -18,7 +18,7 @@ const routes: Routes = [
     redirectTo: 'principal',
     pathMatch: 'full',
   },
-  { path: 'profile', component: ProfileComponent }, 
+  { path: 'profile/:username', component: ProfileComponent }, 
   { path: 'principal', component: PrincipalComponent },
   { path: '**', redirectTo: 'principal'}, 
 ];
