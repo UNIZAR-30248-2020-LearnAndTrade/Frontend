@@ -4,8 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 //Componentes de páginas web
-import { PrincipalComponent } from '../components/pages/principal/principal.component';
+import { homepageComponent } from '../components/pages/homepage/homepage.component';
+
+import { LoginComponent } from '../components/pages/login/login.component';
+
 import { ProfileComponent } from '../components/pages/profile/profile.component';
+
 
 //Servicios (API)
 
@@ -15,12 +19,16 @@ import { ProfileComponent } from '../components/pages/profile/profile.component'
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'principal',
+    redirectTo: 'homepage',
     pathMatch: 'full',
   },
+  
+  { path: 'homepage', component: homepageComponent },
   { path: 'profile/:username', component: ProfileComponent }, 
-  { path: 'principal', component: PrincipalComponent },
-  { path: '**', redirectTo: 'principal'}, 
+  { path: 'login', component: LoginComponent},
+  { path: '**', redirectTo: 'homepage'}
+
+
 ];
 
 @NgModule({

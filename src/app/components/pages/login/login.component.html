@@ -1,0 +1,102 @@
+<div
+    class="d-xl-flex align-self-center m-auto content"
+    id="content"
+>
+
+    <div
+        class="col"
+        id="logo-col"
+        style="padding: 0px;"
+    >
+        <img src="../../../../assets/logo/LT_logo.png">
+    </div>
+    <div
+        class="col"
+        id="form-col"
+        style="padding: 0px;"
+    >
+        <mat-card style="width:100%;">
+            <mat-card-title id="test-pointer" style="text-align: center;">Login</mat-card-title>
+            <mat-card-content>
+                <div
+                    class="form-group"
+                    id="login-form"
+                >
+                    <div
+                        class="row d-xl-flex align-items-xl-center"
+                        id="mail-row"
+                    >
+                        <div
+                            class="col col-5"
+                            id="mail-label-col"
+                        >
+                            <label
+                                class="col-form-label"
+                                id="mail-label"
+                                for="mail"
+                            >
+                                Correo o nombre de usuario:
+                            </label>
+                        </div>
+                        <div
+                            class="col"
+                            id="mail-input-col"
+                        >
+                            <input
+                                type="text"
+                                [formControl]="email"
+                                id="mail-input"
+                            >
+                        </div>
+                    </div>
+                    <div
+                        class="row d-xl-flex align-items-xl-center"
+                        id="pass-row"
+                    >
+                        <div
+                            class="col col-5"
+                            id="pass-label-col"
+                        >
+                            <label
+                                class="col-form-label"
+                                id="pass-label"
+                                for="pass-input"
+                            >
+                                Contraseña:
+                            </label>
+                        </div>
+                        <div
+                            class="col"
+                            id="pass-input-col"
+                        >
+                            <input
+                                type="password"
+                                [formControl]="password"
+                                id="pass-input"
+                            >
+                            <p
+                                class="col"
+                                style="color: red;"
+                                *ngIf="error"
+                            >
+                                Contraseña o correo incorrectos.
+                            </p>
+
+                        </div>
+                    </div>
+                    <div id="button-div">
+                        <button
+                            class="btn btn-primary d-xl-flex"
+                            id="access-button"
+                            type="button"
+                            (click)="login()"
+                        >
+                            ¡Acceder!
+                        </button>
+                    </div>
+                </div>
+
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
