@@ -5,6 +5,7 @@ import { GetUserService } from '../../../services/get-user.service';
 import { EditProfileService } from '../../../services/edit-profile.service';
 import { LoginService } from '../../../services/login.service';
 import { GetThemeService } from '../../../services/get-theme.service';
+import { ReservationService } from "../../../services/reservation.service";
 import { user } from 'src/app/models/user';
 import { theme } from 'src/app/models/theme';
 import { ReservationModalComponent } from "../../shared/reservation-modal/reservation-modal.component";
@@ -29,7 +30,7 @@ export class homepageComponent implements OnInit {
 
   constructor(private ComplementaryUsersService: ComplementaryUsersService, private UserService: GetUserService,
     private EditProfile: EditProfileService, private loginService: LoginService, private ThemeService: GetThemeService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog, private reservationService: ReservationService) { }
 
   ngOnInit(): void {
     this.miPerfil = {
@@ -175,7 +176,8 @@ export class homepageComponent implements OnInit {
     );
   }
 
-  openModal() {
+  openModalNewReservation(user) {
+    this.reservationService.setComplementaryUser(user);
     this.dialog.open(ReservationModalComponent,{
       width: '70%',
       height: '85%'

@@ -18,14 +18,11 @@
         <mat-form-field style="width: inherit" appearance="fill">
           <mat-label>Tema:</mat-label>
           <mat-select [(value)]="selectedKnowledge">
-            <mat-option>
-              Tema 1
-            </mat-option>
-            <mat-option>
-              Tema 2
-            </mat-option>
-            <mat-option>
-              Tema 3
+            <mat-option
+              *ngFor="let themeItem of themeTeachList"
+              [value]="themeItem"
+            >
+              {{themeItem.name}}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -56,14 +53,11 @@
         <mat-form-field style="width: inherit" appearance="fill">
           <mat-label>Tema:</mat-label>
           <mat-select [(value)]="selectedInterest">
-            <mat-option>
-              Tema 1
-            </mat-option>
-            <mat-option>
-              Tema 2
-            </mat-option>
-            <mat-option>
-              Tema 3
+            <mat-option
+              *ngFor="let themeItem of themeLearnList"
+              [value]="themeItem"
+            >
+              {{themeItem.name}}
             </mat-option>
           </mat-select>
         </mat-form-field>

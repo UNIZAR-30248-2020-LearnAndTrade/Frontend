@@ -75,6 +75,13 @@
                             >
                                 CHAT
                             </button>
+                          <button
+                            mat-raised-button
+                            style="background-color: lightskyblue;"
+                            (click)="openModalNewReservation(usuario)"
+                          >
+                            Modal
+                          </button>
                         </mat-card-actions>
                     </li>
 
@@ -101,13 +108,6 @@
                     </h2>
                     <h3 style="margin: 0px;">Username: {{miPerfil.username}}</h3>
                     <h3 style="margin: 0px;">{{miPerfil.email}}</h3>
-                    <button
-                      mat-raised-button
-                      style="background-color: lightskyblue;"
-                      (click)="openModal()"
-                    >
-                      Modal
-                    </button>
                   <button
                     mat-raised-button
                     style="background-color: lightskyblue;"
