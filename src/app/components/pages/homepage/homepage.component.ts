@@ -8,6 +8,7 @@ import { GetThemeService } from '../../../services/get-theme.service';
 import { user } from 'src/app/models/user';
 import { theme } from 'src/app/models/theme';
 import { ReservationModalComponent } from "../../shared/reservation-modal/reservation-modal.component";
+import { GetReservationModalComponent } from "../../shared/get-reservation-modal/get-reservation-modal.component";
 
 
 @Component({
@@ -176,6 +177,13 @@ export class homepageComponent implements OnInit {
 
   openModal() {
     this.dialog.open(ReservationModalComponent,{
+      width: '70%',
+      height: '85%'
+    });
+  }
+
+  openModal2() {
+    this.dialog.open(GetReservationModalComponent,{
       width: '70%',
       height: '85%'
     });

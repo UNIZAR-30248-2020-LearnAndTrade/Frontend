@@ -1,0 +1,69 @@
+<div class="row" style="text-align: center;">
+  <div class="col-3" style="margin-top: 3%">
+    <div class="icon">
+      <mat-icon [inline]="true" style="vertical-align: middle;">arrow_back</mat-icon>
+    </div>
+    <mat-form-field style="width: inherit" appearance="fill">
+      <mat-label>Mes:</mat-label>
+      <mat-select [(value)]="month">
+        <mat-option>
+          Tema 1
+        </mat-option>
+        <mat-option>
+          Tema 2
+        </mat-option>
+        <mat-option>
+          Tema 3
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field style="width: inherit" appearance="fill">
+      <mat-label>Año:</mat-label>
+      <mat-select [(value)]="year">
+        <mat-option>
+          Tema 1
+        </mat-option>
+        <mat-option>
+          Tema 2
+        </mat-option>
+        <mat-option>
+          Tema 3
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="icon">
+      <mat-icon [inline]="true" style="vertical-align: middle;">arrow_forward</mat-icon>
+    </div>
+  </div>
+  <div class="col-9">
+    <div class="row" *ngFor="let nFila of numberReturnSemanas(); index as indexRow;">
+      <div class="col" *ngFor="let nCol of numberReturn(7); index as index;"
+           style="margin: auto; display: inherit">
+        <div *ngIf="31 > ((indexRow * 7) + index)">
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">Lunes</th>
+            </tr>
+            <tr>
+              <th scope="col">{{index + (indexRow * 7) + 1}}/1/2020</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let nHora of numberReturn(12); index as hora;">
+              <div style="background-color: #db271a" class="row">
+                <div class="col-6">
+                  {{hora * 2}}
+                </div>
+                <div class="col-6">
+                  {{hora * 2 + 1}}
+                </div>
+              </div>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

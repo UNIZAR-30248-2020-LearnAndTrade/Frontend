@@ -22,8 +22,12 @@ export class HeaderComponent implements OnInit {
   cerrarsesion(){
     console.log("ENTRA A CERRAR")
     this.loginService.cerrarSesion();
-    
+
     //window.location.href = "homepage";
+  }
+
+  goToCalendar() {
+    window.location.href = "/calendar";
   }
 
 }
