@@ -14,6 +14,7 @@ import { LoginComponent } from './components/pages/login/login.component';
 import { ProfileComponent } from './components/pages/profile/profile.component';
 import { RootComponent } from './root/root.component';
 import { DialogConfirmDialog, DialogErrorEdit } from './components/pages/homepage/homepage.component';
+import { DialogCheckReservation, DialogReservationDone, DialogReservationFail } from "./components/shared/reservation-modal/reservation-modal.component";
 
 import { ScrollingModule} from '@angular/cdk/scrolling';
 
@@ -44,6 +45,9 @@ import { GetReservationModalComponent } from './components/shared/get-reservatio
     ProfileComponent,
     DialogConfirmDialog,
     DialogErrorEdit,
+    DialogCheckReservation,
+    DialogReservationDone,
+    DialogReservationFail,
     ReservationModalComponent,
     CalendarComponent,
     GetReservationModalComponent

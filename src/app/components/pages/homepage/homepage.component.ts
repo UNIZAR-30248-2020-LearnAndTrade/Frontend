@@ -184,13 +184,6 @@ export class homepageComponent implements OnInit {
     });
   }
 
-  openModal2() {
-    this.dialog.open(GetReservationModalComponent,{
-      width: '70%',
-      height: '85%'
-    });
-  }
-
 }
 
 @Component({

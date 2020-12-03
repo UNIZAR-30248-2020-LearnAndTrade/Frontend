@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Component, Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import {reservation} from "../models/reservation";
 import {user} from "../models/user";
@@ -9,6 +9,8 @@ import {user} from "../models/user";
 export class ReservationService {
 
   public complementaryUser: user;
+  private doubleCheck: boolean = false;
+  public checkReservation: reservation;
   public urlReservation: string;
 
   constructor(private http: HttpClient) {
@@ -23,8 +25,36 @@ export class ReservationService {
     return this.complementaryUser;
   }
 
-  public crearReserva(reservation: reservation) {
+  public complementaryUserAvailable() {
+    console.log(this.doubleCheck);
+    return this.doubleCheck;
+  }
+
+  public setComplementaryUserAvailable() {
+    this.doubleCheck = true;
+  }
+
+  public setComplementaryUserUnavailable() {
+    this.doubleCheck = false;
+  }
+
+
+  public setReservationToCheck(reservation) {
+    this.checkReservation = reservation;
+  }
+
+  public getReservationToCheck() {
+    return this.checkReservation;
+  }
+
+  public createReservation(reservation: reservation) {
     return this.http.post<reservation>(this.urlReservation + '/create', reservation);
   }
+
+  public getReservationsForCalendar(username) {
+    let params = new HttpParams().set("username",username); //Create new HttpParams
+    return this.http.get(this.urlReservation + '/getAll', { params:params });
+  }
+
 
 }

@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { reservation } from "../../../models/reservation";
 import {theme} from "../../../models/theme";
@@ -21,6 +22,12 @@ export class ReservationModalComponent implements OnInit {
 
   public selectedInterest: theme;
   public selectedKnowledge: theme;
+  public selectedDateTeach: Date;
+  public selectedStartHourTeach: number;
+  public selectedEndHourTeach: number;
+  public selectedDateLearn: Date;
+  public selectedStartHourLearn: number;
+  public selectedEndHourLearn: number;
   public themeTeachList: theme[] = [];
   public themeLearnList: theme[] = [];
   reservationTeach: reservation;
@@ -28,7 +35,7 @@ export class ReservationModalComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<ReservationModalComponent>, private loginService: LoginService,
               private themeService: GetThemeService, private UserService: GetUserService,
-              private reservationService: ReservationService) { }
+              private reservationService: ReservationService, public dialog: MatDialog, public router: Router) { }
 
   ngOnInit(): void {
     this.user = {
@@ -92,6 +99,94 @@ export class ReservationModalComponent implements OnInit {
         }
       ));
 
+  }
+
+  makeReservation() {
+    if (this.selectedInterest == undefined || this.selectedKnowledge == undefined ||
+        this.selectedDateTeach == undefined || this.selectedStartHourTeach == undefined ||
+        this.selectedEndHourTeach == undefined || this.selectedDateLearn == undefined ||
+        this.selectedStartHourLearn == undefined || this.selectedEndHourLearn == undefined) {
+          this.dialog.open(DialogCheckReservation);
+    } else {
+      this.reservationTeach = {
+        id: "id",
+        startTime: this.selectedStartHourTeach,
+        finishTime: this.selectedEndHourTeach,
+        date: this.selectedDateTeach,
+        theme: this.selectedKnowledge,
+        teacherUsername: this.user.username,
+        studentUsername: this.complementaryUser.username
+      }
+      this.reservationLearn = {
+        id: "id",
+        startTime: this.selectedStartHourLearn,
+        finishTime: this.selectedEndHourLearn,
+        date: this.selectedDateLearn,
+        theme: this.selectedInterest,
+        teacherUsername: this.complementaryUser.username,
+        studentUsername: this.user.username
+      }
+      this.reservationService.createReservation(this.reservationTeach).subscribe(response => {
+        console.log(response);
+        this.reservationService.createReservation(this.reservationLearn).subscribe(response => {
+          console.log(response);
+          this.dialog.open(DialogReservationDone);
+        }, error => {
+          this.dialog.open(DialogReservationFail);
+        });
+      }, error => {
+        this.dialog.open(DialogReservationFail);
+      });
+    }
+  }
+
+  checkAvailabilityCalendar() {
+    this.reservationService.setComplementaryUserAvailable();
+    this.dialogRef.close();
+    this.router.navigate(["/calendar"]);
+  }
+
+}
+
+
+@Component({
+  selector: 'app-dialogCheckReservation',
+  templateUrl: 'dialogCheckReservation.html',
+})
+export class DialogCheckReservation {
+
+  constructor(public dialogRef: MatDialogRef<DialogCheckReservation>) { }
+
+  close(){
+    this.dialogRef.close();
+  }
+
+}
+
+@Component({
+  selector: 'app-dialogReservationDone',
+  templateUrl: 'dialogReservationDone.html',
+})
+export class DialogReservationDone {
+
+  constructor(public dialogRef: MatDialogRef<DialogReservationDone>) { }
+
+  redirectHome(){
+    window.location.href = "homepage";
+  }
+
+}
+
+@Component({
+  selector: 'app-dialogReservationFail',
+  templateUrl: 'dialogReservationFail.html',
+})
+export class DialogReservationFail {
+
+  constructor(public dialogRef: MatDialogRef<DialogReservationFail>) { }
+
+  close(){
+    this.dialogRef.close();
   }
 
 }

@@ -68,20 +68,25 @@
                                 </a>
                             </div>
                         </div>
-                        <mat-card-actions style="margin: 0px;">
+                        <mat-card-actions style="margin: auto">
+                          <div class="row">
                             <button
                                 mat-raised-button
                                 style="background-color: lightskyblue;"
                             >
                                 CHAT
                             </button>
-                          <button
-                            mat-raised-button
-                            style="background-color: lightskyblue;"
-                            (click)="openModalNewReservation(usuario)"
-                          >
-                            Modal
-                          </button>
+                          </div>
+                          <br>
+                          <div class="row">
+                            <button
+                              mat-raised-button
+                              style="background-color: lightskyblue;"
+                              (click)="openModalNewReservation(usuario)"
+                            >
+                              RESERVA
+                            </button>
+                          </div>
                         </mat-card-actions>
                     </li>
 
@@ -108,13 +113,6 @@
                     </h2>
                     <h3 style="margin: 0px;">Username: {{miPerfil.username}}</h3>
                     <h3 style="margin: 0px;">{{miPerfil.email}}</h3>
-                  <button
-                    mat-raised-button
-                    style="background-color: lightskyblue;"
-                    (click)="openModal2()"
-                  >
-                    Modal2
-                  </button>
                 </div>
             </div>
             <div class="row">

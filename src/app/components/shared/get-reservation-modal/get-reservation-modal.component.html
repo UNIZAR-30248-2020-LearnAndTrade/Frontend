@@ -1,58 +1,29 @@
 <div class="row" style="margin: auto">
   <h1 style="text-align: center; margin: auto;" mat-dialog-title>
-    Haz una nueva reserva con *name* (*username*)
+    Información de la reserva
   </h1>
-  <div class="avatarPerfil">
-    <img
-      mat-card-sm-image
-      src="assets/img/perfil.jpg"
-    >
-  </div>
 </div>
-<div class="row">
-  <div class="col-6" style="border-right: 1px solid;">
-    <h2 style="text-align: center">Tu enseñas</h2>
-    <div class="row">
-      <div class="col" style="text-align: left; margin-top: auto;">
-        <h4>Tema: {{reservationTeach.theme}}</h4>
+<br>
+<div class="row" style="text-align: center">
+  <div class="col">
+      <div>
+        <h4>Usuario profesor: {{reservation.teacherUsername}}</h4>
       </div>
-    </div>
-    <div class="row">
-      <div class="col" style="text-align: left; margin-top: auto;">
-        <h4>Fecha: {{reservationTeach.date.getDay()}}/{{reservationTeach.date.getMonth()}}/
-          {{reservationTeach.date.getFullYear()}}</h4>
+      <div>
+        <h4>Usuario estudiante: {{reservation.studentUsername}}</h4>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-6" style="text-align: left; margin-top: auto;">
-        <h4>Hora de inicio: {{reservationTeach.startTime}}</h4>
+      <div>
+        <h4>Tema: {{reservation.theme.name}}</h4>
       </div>
-      <div class="col-6" style="text-align: left; margin-top: auto;">
-        <h4>Hora de final: {{reservationTeach.finishTime + 1}}</h4>
+      <div>
+        <h4>Fecha: {{dateReservation.getDate()}}/{{dateReservation.getMonth() + 1}}/{{dateReservation.getFullYear()}}</h4>
       </div>
-    </div>
-  </div>
-  <div class="col-6">
-    <h2 style="text-align: center">Tu aprendes</h2>
-    <div class="row">
-      <div class="col" style="text-align: left; margin-top: auto;">
-        <h4>Tema: {{reservationLearn.theme}}</h4>
+      <div>
+        <h4>Hora de inicio: {{reservation.startTime}}</h4>
       </div>
-    </div>
-    <div class="row">
-      <div class="col" style="text-align: left; margin-top: auto;">
-        <h4>Fecha: {{reservationLearn.date.getDay()}}/{{reservationLearn.date.getMonth()}}/
-          {{reservationLearn.date.getFullYear()}}</h4>
+      <div>
+        <h4>Hora de final: {{reservation.finishTime}}</h4>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-6" style="text-align: left; margin-top: auto;">
-        <h4>Hora de inicio: {{reservationLearn.startTime}}</h4>
-      </div>
-      <div class="col-6" style="text-align: left; margin-top: auto;">
-        <h4>Hora de final: {{reservationLearn.finishTime + 1}}</h4>
-      </div>
-    </div>
   </div>
   <br>
 </div>
