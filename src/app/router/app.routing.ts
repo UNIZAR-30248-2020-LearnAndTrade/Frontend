@@ -26,7 +26,7 @@ const routes: Routes = [
   },
 
   { path: 'homepage', component: homepageComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'profile/:username', component: ProfileComponent },
   { path: 'login', component: LoginComponent},
   { path: 'calendar', component: CalendarComponent},
   { path: '**', redirectTo: 'homepage'}
