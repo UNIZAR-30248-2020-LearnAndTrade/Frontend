@@ -10,6 +10,8 @@ import { LoginComponent } from '../components/pages/login/login.component';
 
 import { ProfileComponent } from '../components/pages/profile/profile.component';
 
+import { CalendarComponent } from "../components/pages/calendar/calendar.component";
+
 
 //Servicios (API)
 
@@ -24,8 +26,9 @@ const routes: Routes = [
   },
 
   { path: 'homepage', component: homepageComponent },
-  { path: 'profile', component: ProfileComponent }, 
+  { path: 'profile', component: ProfileComponent },
   { path: 'login', component: LoginComponent},
+  { path: 'calendar', component: CalendarComponent},
   { path: '**', redirectTo: 'homepage'}
 
 

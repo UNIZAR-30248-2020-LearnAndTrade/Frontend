@@ -1,13 +1,15 @@
-import { Component, OnInit, Inject} from '@angular/core';
+import {Component, OnInit, Inject} from '@angular/core';
 import { ComplementaryUsersService } from '../../../services/complementary-users.service';
-import { MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { GetUserService } from '../../../services/get-user.service';
 import { EditProfileService } from '../../../services/edit-profile.service';
 import { LoginService } from '../../../services/login.service';
 import { GetThemeService } from '../../../services/get-theme.service';
+import { ReservationService } from "../../../services/reservation.service";
 import { user } from 'src/app/models/user';
 import { theme } from 'src/app/models/theme';
-
+import { ReservationModalComponent } from "../../shared/reservation-modal/reservation-modal.component";
+import { GetReservationModalComponent } from "../../shared/get-reservation-modal/get-reservation-modal.component";
 
 
 @Component({
@@ -26,10 +28,9 @@ export class homepageComponent implements OnInit {
   public selectedKnowledge: theme;
   public autenticado: boolean;
 
-
-
   constructor(private ComplementaryUsersService: ComplementaryUsersService, private UserService: GetUserService,
-    private EditProfile: EditProfileService, private loginService: LoginService, private ThemeService: GetThemeService, public dialog: MatDialog) { }
+    private EditProfile: EditProfileService, private loginService: LoginService, private ThemeService: GetThemeService,
+    public dialog: MatDialog, private reservationService: ReservationService) { }
 
   ngOnInit(): void {
     this.miPerfil = {
@@ -41,7 +42,7 @@ export class homepageComponent implements OnInit {
       surname: '',
       birthdate: new Date
     };
-    
+
     this.autenticado = this.loginService.isAuthenticated(); // Comprobar si está autentificado
     if(this.autenticado){
       this.getThemes();
@@ -175,6 +176,14 @@ export class homepageComponent implements OnInit {
     );
   }
 
+  openModalNewReservation(user) {
+    this.reservationService.setComplementaryUser(user);
+    this.dialog.open(ReservationModalComponent,{
+      width: '70%',
+      height: '85%'
+    });
+  }
+
 }
 
 @Component({
@@ -185,7 +194,7 @@ export class DialogConfirmDialog {
   redirectHome(){
     window.location.href = "homepage";
   }
-  
+
 }
 
 @Component({
