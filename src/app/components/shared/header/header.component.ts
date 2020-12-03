@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
 import { LoginService } from '../../../services/login.service';
+import {user} from "../../../models/user";
+import {GetUserService} from "../../../services/get-user.service";
 
 
 @Component({
@@ -10,13 +13,34 @@ import { LoginService } from '../../../services/login.service';
 
 export class HeaderComponent implements OnInit {
 
+  public user: user;
   public autenticado:boolean;
 
-  constructor(private loginService: LoginService){
+  constructor(private loginService: LoginService, private UserService: GetUserService, private router: Router){
   }
 
   ngOnInit(): void {
+    this.user = {
+      username: '',
+      email: '',
+      interests: [],
+      knowledges: [],
+      name: '',
+      surname: '',
+      birthdate: new Date
+    };
     this.autenticado = this.loginService.isAuthenticated();
+    if (this.autenticado) {
+      this.getMyProfile();
+    }
+  }
+
+  getMyProfile(){
+    this.user = JSON.parse(localStorage.getItem('userJSON'));
+    this.UserService.getUser(this.user.username).subscribe(
+      response => {
+        this.user = response;
+      });
   }
 
   cerrarsesion(){
@@ -27,7 +51,11 @@ export class HeaderComponent implements OnInit {
   }
 
   goToCalendar() {
-    window.location.href = "/calendar";
+    this.router.navigate(["/calendar"]);
+  }
+
+  goToPerfil() {
+    this.router.navigate(["/profile/" + this.user.username]);
   }
 
 }

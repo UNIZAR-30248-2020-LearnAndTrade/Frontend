@@ -1,4 +1,5 @@
 import {Component, OnInit, Inject} from '@angular/core';
+import {Router} from "@angular/router";
 import { ComplementaryUsersService } from '../../../services/complementary-users.service';
 import { MatDialog } from '@angular/material/dialog';
 import { GetUserService } from '../../../services/get-user.service';
@@ -30,7 +31,7 @@ export class homepageComponent implements OnInit {
 
   constructor(private ComplementaryUsersService: ComplementaryUsersService, private UserService: GetUserService,
     private EditProfile: EditProfileService, private loginService: LoginService, private ThemeService: GetThemeService,
-    public dialog: MatDialog, private reservationService: ReservationService) { }
+    public dialog: MatDialog, private reservationService: ReservationService, private router: Router) { }
 
   ngOnInit(): void {
     this.miPerfil = {
@@ -182,6 +183,10 @@ export class homepageComponent implements OnInit {
       width: '70%',
       height: '85%'
     });
+  }
+
+  goToProfile(username) {
+    this.router.navigate(["/profile/" + username]);
   }
 
 }

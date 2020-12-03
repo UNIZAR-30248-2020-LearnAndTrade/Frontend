@@ -34,11 +34,12 @@
                         <img
                             src="assets/img/perfil.jpg"
                             id="imagenTarjeta"
+                            (click)="goToProfile(usuario.username)"
                         >
                         <div id="infoTarjeta">
                             <div id="tituloCard">
                                 <b>
-                                    <u>{{usuario.name}}</u>
+                                    <u (click)="goToProfile(usuario.username)">{{usuario.name}}</u>
                                 </b>
                             </div>
                             Interés en:
