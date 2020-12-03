@@ -51,6 +51,10 @@
             </li>
         </ul>
         <div *ngIf="autenticado">
+          <button class="btn btn-outline-secondary" (click)="goToCalendar()">
+            <mat-icon style="vertical-align: middle;">calendar_today</mat-icon>
+                Ver calendario
+          </button>
             <button class="btn btn-outline-primary">
                 <mat-icon style="vertical-align: middle;">account_circle</mat-icon>
                 Mi perfil
