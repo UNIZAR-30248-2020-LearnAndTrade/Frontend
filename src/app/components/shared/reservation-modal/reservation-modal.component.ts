@@ -63,14 +63,12 @@ export class ReservationModalComponent implements OnInit {
 
   getMyProfile(){
     this.user = JSON.parse(localStorage.getItem('userJSON'));
-    console.log(this.user);
     this.UserService.getUser(this.user.username).subscribe(
       response => {
         this.user = response;
       },
       error => {
         var errorMessage = <any>error;
-        console.log(errorMessage);
         if (errorMessage != null) {
           //this.status = 'error';
         }
