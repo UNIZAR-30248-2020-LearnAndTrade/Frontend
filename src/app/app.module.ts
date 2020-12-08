@@ -14,6 +14,7 @@ import { LoginComponent } from './components/pages/login/login.component';
 import { ProfileComponent } from './components/pages/profile/profile.component';
 import { RootComponent } from './root/root.component';
 import { DialogConfirmDialog, DialogErrorEdit } from './components/pages/homepage/homepage.component';
+import { DialogCheckReservation, DialogReservationDone, DialogReservationFail } from "./components/shared/reservation-modal/reservation-modal.component";
 
 import { ScrollingModule} from '@angular/cdk/scrolling';
 
@@ -29,6 +30,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ReservationModalComponent } from './components/shared/reservation-modal/reservation-modal.component';
+import { CalendarComponent } from './components/pages/calendar/calendar.component';
+import { GetReservationModalComponent } from './components/shared/get-reservation-modal/get-reservation-modal.component';
 
 
 
@@ -40,7 +44,13 @@ import { MatDialogModule } from '@angular/material/dialog';
     LoginComponent,
     ProfileComponent,
     DialogConfirmDialog,
-    DialogErrorEdit
+    DialogErrorEdit,
+    DialogCheckReservation,
+    DialogReservationDone,
+    DialogReservationFail,
+    ReservationModalComponent,
+    CalendarComponent,
+    GetReservationModalComponent
   ],
   imports: [
     BrowserModule,

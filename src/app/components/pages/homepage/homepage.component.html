@@ -34,11 +34,12 @@
                         <img
                             src="assets/img/perfil.jpg"
                             id="imagenTarjeta"
+                            (click)="goToProfile(usuario.username)"
                         >
                         <div id="infoTarjeta">
                             <div id="tituloCard">
                                 <b>
-                                    <u>{{usuario.name}}</u>
+                                    <u (click)="goToProfile(usuario.username)">{{usuario.name}}</u>
                                 </b>
                             </div>
                             Interés en:
@@ -68,13 +69,25 @@
                                 </a>
                             </div>
                         </div>
-                        <mat-card-actions style="margin: 0px;">
+                        <mat-card-actions style="margin: auto">
+                          <div class="row">
                             <button
                                 mat-raised-button
                                 style="background-color: lightskyblue;"
                             >
                                 CHAT
                             </button>
+                          </div>
+                          <br>
+                          <div class="row">
+                            <button
+                              mat-raised-button
+                              style="background-color: lightskyblue;"
+                              (click)="openModalNewReservation(usuario)"
+                            >
+                              RESERVA
+                            </button>
+                          </div>
                         </mat-card-actions>
                     </li>
 
