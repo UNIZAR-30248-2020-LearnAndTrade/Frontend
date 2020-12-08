@@ -3,17 +3,17 @@ import { CommonModule, } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
-//Componentes de páginas web
+// Componentes de páginas web
 import { homepageComponent } from '../components/pages/homepage/homepage.component';
 
 import { LoginComponent } from '../components/pages/login/login.component';
 
 import { ProfileComponent } from '../components/pages/profile/profile.component';
 
-import { CalendarComponent } from "../components/pages/calendar/calendar.component";
+import { CalendarComponent } from '../components/pages/calendar/calendar.component';
 
 
-//Servicios (API)
+// Servicios (API)
 
 
 

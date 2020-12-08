@@ -39,11 +39,12 @@
             <mat-icon style="vertical-align: middle;">calendar_today</mat-icon>
                 Ver calendario
           </button>
-            <button (click)="goToPerfil()" class="btn btn-outline-primary">
+            <button (click)="goToPerfil()" id="goToProfileBtn" class="btn btn-outline-primary">
                 <mat-icon style="vertical-align: middle;">account_circle</mat-icon>
                 Mi perfil
             </button>
             <button
+                id="closeSessionBtn"
                 class="btn btn-outline-primary"
                 (click)="cerrarsesion()"
             >
