@@ -16,7 +16,6 @@ export class ChatComponent implements OnInit {
   constructor(private chatService: ChatService) { }
 
   ngOnInit(): void {
-    this.chatService.connect();
   } 
 
   }

@@ -1,14 +1,19 @@
 import { Component, OnInit, Inject} from '@angular/core';
 import { ComplementaryUsersService } from '../../../services/complementary-users.service';
-import { MatDialog} from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { GetUserService } from '../../../services/get-user.service';
 import { EditProfileService } from '../../../services/edit-profile.service';
 import { LoginService } from '../../../services/login.service';
 import { GetThemeService } from '../../../services/get-theme.service';
+import { ChatService } from '../../../services/chat.service';
 import { user } from 'src/app/models/user';
 import { theme } from 'src/app/models/theme';
+import { WebSocketAPI } from '../chat/WebsocketApi';
 
 
+export interface DialogData {
+  user: string;
+}
 
 @Component({
   selector: 'app-homepage',
@@ -25,11 +30,15 @@ export class homepageComponent implements OnInit {
   public selectedInterest: theme;
   public selectedKnowledge: theme;
   public autenticado: boolean;
+  webSocketAPI: WebSocketAPI;
 
-
+  closeResult: string;
 
   constructor(private ComplementaryUsersService: ComplementaryUsersService, private UserService: GetUserService,
-    private EditProfile: EditProfileService, private loginService: LoginService, private ThemeService: GetThemeService, public dialog: MatDialog) { }
+    private EditProfile: EditProfileService, private loginService: LoginService, private ThemeService: GetThemeService,
+    public dialog: MatDialog) { 
+      
+    }
 
   ngOnInit(): void {
     this.miPerfil = {
@@ -46,6 +55,8 @@ export class homepageComponent implements OnInit {
     if(this.autenticado){
       this.getThemes();
       this.getMyProfile();
+      this.webSocketAPI = new WebSocketAPI(this);
+      this.webSocketAPI._connect();
     }
     else{
       window.location.href = "/login";
@@ -174,6 +185,18 @@ export class homepageComponent implements OnInit {
       }
     );
   }
+  handleMessage(message){
+    var notification = message;
+    console.log("OBJETO MENSAJE")
+    this.dialog.open(chatNotificationDialog,{
+      data: {
+        user: notification.senderName
+      }
+    });
+    console.log("HE RECIBIDO UN MESAJE:");
+    console.log(notification);
+    
+  }
 
 }
 
@@ -197,4 +220,19 @@ export class DialogErrorEdit {
   redirectHome(){
     window.location.href = "homepage";
   }
+}
+
+@Component({
+  selector: 'app-dialogChatNotification',
+  templateUrl: 'chatNotification.html',
+})
+export class chatNotificationDialog {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData){
+    
+  }
+  redirectHome(){
+    
+    window.location.href = "chat";
+  }
+  
 }
