@@ -35,10 +35,14 @@
             </li>
         </ul>
         <div *ngIf="autenticado">
-          <button class="btn btn-outline-secondary" (click)="goToCalendar()">
-            <mat-icon style="vertical-align: middle;">calendar_today</mat-icon>
+            <button class="btn btn-outline-secondary" (click)="goToSearch()">
+              <mat-icon style="vertical-align: middle;">search</mat-icon>
+                Buscar usuarios
+            </button>
+            <button class="btn btn-outline-secondary" (click)="goToCalendar()">
+              <mat-icon style="vertical-align: middle;">calendar_today</mat-icon>
                 Ver calendario
-          </button>
+            </button>
             <button (click)="goToPerfil()" id="goToProfileBtn" class="btn btn-outline-primary">
                 <mat-icon style="vertical-align: middle;">account_circle</mat-icon>
                 Mi perfil

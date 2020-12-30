@@ -12,6 +12,8 @@ import { ProfileComponent } from '../components/pages/profile/profile.component'
 
 import { CalendarComponent } from '../components/pages/calendar/calendar.component';
 
+import { SearchComponent } from "../components/pages/search/search.component";
+
 
 // Servicios (API)
 
@@ -29,6 +31,7 @@ const routes: Routes = [
   { path: 'profile/:username', component: ProfileComponent },
   { path: 'login', component: LoginComponent},
   { path: 'calendar', component: CalendarComponent},
+  { path: 'search', component: SearchComponent},
   { path: '**', redirectTo: 'homepage'}
 
 

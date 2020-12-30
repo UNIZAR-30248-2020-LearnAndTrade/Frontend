@@ -33,6 +33,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ReservationModalComponent } from './components/shared/reservation-modal/reservation-modal.component';
 import { CalendarComponent } from './components/pages/calendar/calendar.component';
 import { GetReservationModalComponent } from './components/shared/get-reservation-modal/get-reservation-modal.component';
+import { SearchComponent } from './components/pages/search/search.component';
 
 
 
@@ -50,7 +51,8 @@ import { GetReservationModalComponent } from './components/shared/get-reservatio
     DialogReservationFail,
     ReservationModalComponent,
     CalendarComponent,
-    GetReservationModalComponent
+    GetReservationModalComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
