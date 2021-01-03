@@ -10,7 +10,7 @@ export class LoginService {
   public urlLogin: string;
 
   constructor(private http: HttpClient) {
-    this.urlLogin = 'http://localhost:8080/user/login';
+    this.urlLogin = 'https://learn-and-trade-backend.herokuapp.com/user/login';
    }
 
   validate(email, password){

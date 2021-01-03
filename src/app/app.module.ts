@@ -53,7 +53,7 @@ import { SearchComponent } from './components/pages/search/search.component';
     ReservationModalComponent,
     CalendarComponent,
     GetReservationModalComponent,
-    SearchComponent
+    SearchComponent,
     DialogErrorEdit,
     ChatComponent
   ],

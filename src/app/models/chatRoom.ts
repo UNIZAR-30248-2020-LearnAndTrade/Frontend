@@ -3,4 +3,5 @@ export interface chatRoom {
     chatId: string;
     senderId: string;
     recipientId: string;
+    messagesToRead: number;
 }

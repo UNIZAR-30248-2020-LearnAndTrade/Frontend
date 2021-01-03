@@ -45,7 +45,8 @@ export class ReservationModalComponent implements OnInit {
       knowledges: [],
       name: '',
       surname: '',
-      birthdate: new Date
+      birthdate: new Date,
+      imageUrl: ''
     };
 
     this.autenticado = this.loginService.isAuthenticated(); // Comprobar si está autentificado

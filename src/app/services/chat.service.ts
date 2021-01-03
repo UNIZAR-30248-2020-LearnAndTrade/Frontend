@@ -7,28 +7,31 @@ import { chatNotification } from 'src/app/models/chatNotification';
 import { chatRoom } from 'src/app/models/chatRoom';
 import { homepageComponent } from '../components/pages/homepage/homepage.component';
 import { ChatComponent } from '../components/pages/chat/chat.component';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
-  webSocketEndPoint: string = 'https://learn-and-trade.herokuapp.com/ws';
-  topic: string = "/user/pr2/queue/messages";
+  webSocketEndPoint: string = 'https://learn-and-trade-backend.herokuapp.com/';
+  topic: string = "/user/prD1/queue/messages";
+  globalUsername = '';
   stompClient: any;
   newMensaje: chatMessage;
 
-  constructor(){
+  constructor(private http: HttpClient){
 
   }
 
-  _connect() {
+  _connect(username) {
     console.log("Initialize WebSocket Connection");
-    let ws = new SockJS(this.webSocketEndPoint);
+    this.globalUsername = username;
+    let ws = new SockJS(this.webSocketEndPoint + "ws");
     this.stompClient = Stomp.over(ws);
     const _this = this;
     _this.stompClient.connect({}, function (frame) {
-      _this.stompClient.subscribe(_this.topic, function (sdkEvent) {
+      _this.stompClient.subscribe("/user/" + username + "/queue/messages", function (sdkEvent) {
         console.log("SDK EVENT:");
         console.log(sdkEvent);
         _this.onMessageReceived(sdkEvent);
@@ -48,7 +51,7 @@ export class ChatService {
   errorCallBack(error) {
     console.log("errorCallBack -> " + error)
     setTimeout(() => {
-      this._connect();
+      this._connect(this.globalUsername);
     }, 5000);
   }
 
@@ -57,22 +60,32 @@ export class ChatService {
    * @param {*} message
    */
   _send(message) {
-    let newMensaje2 = {
-      senderId: 'prueba1',
-      recipientId: 'pr2',
-      senderName: 'PRUEBA 1',
-      recipientName: 'PR 2',
-      content: message,
-      timestamp: new Date()
-    }
-
-
-    this.stompClient.send("/app/chat", {}, JSON.stringify(newMensaje2));
+    this.stompClient.send("/app/chat", {}, JSON.stringify(message));
   }
 
   onMessageReceived(message) {
     console.log("Message Recieved from Server :: " + message);
     console.log(JSON.stringify(message.body));
+  }
+
+  countMessages(senderId, recipientId) {
+    return this.http.get(this.webSocketEndPoint + "messages/" + senderId + "/" + recipientId + "/count");
+
+  }
+
+  seeMessages(senderId, recipientId) {
+    return this.http.get(this.webSocketEndPoint + "messages/" + senderId + "/" + recipientId);
+
+  }
+
+  createRoom(senderId, recipientId) {
+    return this.http.get(this.webSocketEndPoint + "rooms/" + senderId + "/" + recipientId);
+
+  }
+
+  getRooms(senderId) {
+    return this.http.get(this.webSocketEndPoint + "rooms/" + senderId );
+
   }
 
 }

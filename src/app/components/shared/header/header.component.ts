@@ -27,7 +27,8 @@ export class HeaderComponent implements OnInit {
       knowledges: [],
       name: '',
       surname: '',
-      birthdate: new Date
+      birthdate: new Date,
+      imageUrl: ''
     };
     this.autenticado = this.loginService.isAuthenticated();
     if (this.autenticado) {
@@ -60,6 +61,10 @@ export class HeaderComponent implements OnInit {
 
   goToSearch() {
     this.router.navigate(["/search"]);
+  }
+
+  goToChat() {
+    this.router.navigate(["/chat"]);
   }
 
 }

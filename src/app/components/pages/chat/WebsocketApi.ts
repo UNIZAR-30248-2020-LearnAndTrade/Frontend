@@ -45,7 +45,7 @@ export class WebSocketAPI {
 
  /**
   * Send message to sever via web socket
-  * @param {*} message 
+  * @param {*} message
   */
     _send(message) {
         let newMensaje2 = {
@@ -56,14 +56,13 @@ export class WebSocketAPI {
             content: 'Hola. Mensaje de prueba',
             timestamp: new Date()
         }
-        
+
 
         this.stompClient.send("/app/chat", {}, JSON.stringify(newMensaje2));
     }
 
     onMessageReceived(message) {
         console.log("Mensaje recibido");
-        console.log(message);
-        this.homepageComponent.handleMessage(JSON.parse(message.body));
+        console.log(JSON.parse(message.body));
     }
 }

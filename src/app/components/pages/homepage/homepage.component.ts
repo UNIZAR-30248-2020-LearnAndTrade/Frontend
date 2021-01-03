@@ -11,6 +11,7 @@ import { user } from 'src/app/models/user';
 import { theme } from 'src/app/models/theme';
 import { ReservationModalComponent } from "../../shared/reservation-modal/reservation-modal.component";
 import { SearchUsersService } from "../../../services/search-users.service";
+import {ChatService} from "../../../services/chat.service";
 
 @Component({
   selector: 'app-homepage',
@@ -30,7 +31,8 @@ export class homepageComponent implements OnInit {
 
   constructor(private ComplementaryUsersService: ComplementaryUsersService, private UserService: GetUserService,
     private EditProfile: EditProfileService, private loginService: LoginService, private ThemeService: GetThemeService,
-    public dialog: MatDialog, private reservationService: ReservationService, private router: Router) { }
+    public dialog: MatDialog, private reservationService: ReservationService, private router: Router,
+              private chatService: ChatService) { }
 
   ngOnInit(): void {
     this.miPerfil = {
@@ -40,7 +42,8 @@ export class homepageComponent implements OnInit {
       knowledges: [],
       name: '',
       surname: '',
-      birthdate: new Date
+      birthdate: new Date,
+      imageUrl: ''
     };
 
     this.autenticado = this.loginService.isAuthenticated(); // Comprobar si está autentificado
@@ -196,6 +199,17 @@ export class homepageComponent implements OnInit {
         this.usuarios.splice(i,1);
       }
     }
+  }
+
+  newChat(usuario: user) {
+    this.chatService.createRoom(this.miPerfil.username, usuario.username).subscribe( result => {
+      console.log(result);
+      this.goToChat();
+    })
+  }
+
+  goToChat() {
+    this.router.navigate(["/chat"]);
   }
 
 }

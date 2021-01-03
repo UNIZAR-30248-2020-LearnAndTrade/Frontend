@@ -9,6 +9,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {ReservationService} from "../../../services/reservation.service";
 import {Router} from "@angular/router";
 import {GetUserService} from "../../../services/get-user.service";
+import {ChatService} from "../../../services/chat.service";
 
 @Component({
   selector: 'app-search',
@@ -33,7 +34,7 @@ export class SearchComponent implements OnInit {
   constructor(private loginService: LoginService, private ThemeService: GetThemeService,
               private searchUsersService: SearchUsersService, public dialog: MatDialog,
               private reservationService: ReservationService, private router: Router,
-              private UserService: GetUserService) { }
+              private UserService: GetUserService, private chatService: ChatService) { }
 
   ngOnInit(): void {
     this.miPerfil = {
@@ -43,7 +44,8 @@ export class SearchComponent implements OnInit {
       knowledges: [],
       name: '',
       surname: '',
-      birthdate: new Date
+      birthdate: new Date,
+      imageUrl: ''
     };
 
     this.autenticado = this.loginService.isAuthenticated(); // Comprobar si está autentificado
@@ -155,6 +157,17 @@ export class SearchComponent implements OnInit {
       width: '70%',
       height: '85%'
     });
+  }
+
+  newChat(usuario: user) {
+    this.chatService.createRoom(this.miPerfil.username, usuario.username).subscribe( result => {
+      console.log(result);
+      this.goToChat();
+    })
+  }
+
+  goToChat() {
+    this.router.navigate(["/chat"]);
   }
 
 }
