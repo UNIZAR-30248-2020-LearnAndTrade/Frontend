@@ -36,8 +36,8 @@ export class homepageComponent implements OnInit {
 
   constructor(private ComplementaryUsersService: ComplementaryUsersService, private UserService: GetUserService,
     private EditProfile: EditProfileService, private loginService: LoginService, private ThemeService: GetThemeService,
-    public dialog: MatDialog) { 
-      
+    public dialog: MatDialog) {
+
     }
 
   ngOnInit(): void {
@@ -48,9 +48,10 @@ export class homepageComponent implements OnInit {
       knowledges: [],
       name: '',
       surname: '',
-      birthdate: new Date
+      birthdate: new Date,
+      imageUrl: ''
     };
-    
+
     this.autenticado = this.loginService.isAuthenticated(); // Comprobar si está autentificado
     if(this.autenticado){
       this.getThemes();
@@ -195,7 +196,7 @@ export class homepageComponent implements OnInit {
     });
     console.log("HE RECIBIDO UN MESAJE:");
     console.log(notification);
-    
+
   }
 
 }
@@ -208,7 +209,7 @@ export class DialogConfirmDialog {
   redirectHome(){
     window.location.href = "homepage";
   }
-  
+
 }
 
 @Component({
@@ -228,11 +229,11 @@ export class DialogErrorEdit {
 })
 export class chatNotificationDialog {
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData){
-    
+
   }
   redirectHome(){
-    
+
     window.location.href = "chat";
   }
-  
+
 }

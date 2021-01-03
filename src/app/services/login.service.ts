@@ -10,7 +10,7 @@ export class LoginService {
   public urlLogin: string;
 
   constructor(private http: HttpClient) {
-    this.urlLogin = 'https://learn-and-trade-backend.herokuapp.com/user/login';
+    this.urlLogin = 'http://localhost:8080/user/login';
    }
 
   validate(email, password){
@@ -26,7 +26,7 @@ export class LoginService {
     console.log(user);
 
     localStorage.setItem('userJSON', JSON.stringify(user));
-   
+
     console.log(user);
   }
 
@@ -43,7 +43,7 @@ export class LoginService {
     else{
       return false;
     }
-    
+
   }
 
   public cerrarSesion(){
