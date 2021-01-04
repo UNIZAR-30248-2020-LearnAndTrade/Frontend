@@ -48,7 +48,9 @@ export class homepageComponent implements OnInit {
       knowledges: [],
       name: '',
       surname: '',
-      birthdate: new Date
+      birthDate: new Date,
+      password:'',
+      imageUrl:''
     };
     
     this.autenticado = this.loginService.isAuthenticated(); // Comprobar si está autentificado

@@ -13,6 +13,7 @@ import { HeaderComponent } from './components/shared/header/header.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { ProfileComponent } from './components/pages/profile/profile.component';
 import { ChatComponent } from './components/pages/chat/chat.component';
+import { SignupComponent } from './components/pages/signup/signup.component';
 import { RootComponent } from './root/root.component';
 
 import { DialogConfirmDialog, DialogErrorEdit } from './components/pages/homepage/homepage.component';
@@ -24,6 +25,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 // Import Angular Material
+import {MatNativeDateModule} from '@angular/material/core';
 import { MatIconModule } from "@angular/material/icon";
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -31,6 +33,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
+
 
 
 
@@ -44,7 +50,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     ProfileComponent,
     DialogConfirmDialog,
     DialogErrorEdit,
-    ChatComponent
+    ChatComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +69,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSelectModule,
     MatButtonModule,
     HttpClientModule,
-    MatDialogModule
+    MatDialogModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   exports: [
     MatIconModule,
@@ -71,7 +81,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatListModule,
     MatSelectModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [RootComponent]
