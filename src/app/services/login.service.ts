@@ -26,7 +26,7 @@ export class LoginService {
     console.log(user);
 
     localStorage.setItem('userJSON', JSON.stringify(user));
-   
+
     console.log(user);
   }
 
@@ -43,7 +43,7 @@ export class LoginService {
     else{
       return false;
     }
-    
+
   }
 
   public cerrarSesion(){

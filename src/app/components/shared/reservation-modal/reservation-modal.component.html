@@ -17,7 +17,7 @@
         <h4>Elegir tema:</h4>
         <mat-form-field style="width: inherit" appearance="fill">
           <mat-label>Tema:</mat-label>
-          <mat-select [(value)]="selectedKnowledge">
+          <mat-select id="chooseThemeTeach" [(value)]="selectedKnowledge">
             <mat-option
               *ngFor="let themeItem of themeTeachList"
               [value]="themeItem"
@@ -52,7 +52,7 @@
         <h4>Elegir tema:</h4>
         <mat-form-field style="width: inherit" appearance="fill">
           <mat-label>Tema:</mat-label>
-          <mat-select [(value)]="selectedInterest">
+          <mat-select id="chooseThemeLearn" [(value)]="selectedInterest">
             <mat-option
               *ngFor="let themeItem of themeLearnList"
               [value]="themeItem"
@@ -101,7 +101,8 @@
   <div class="col" style="text-align: center">
   <button mat-raised-button
     style="background-color: lightskyblue;"
-    (click)="makeReservation()">
+    (click)="makeReservation()"
+    id="makeReservation">
     Reservar
   </button>
   </div>
