@@ -30,8 +30,9 @@ export class ProfileComponent implements OnInit {
       knowledges: [],
       name: '',
       surname: '',
-      birthdate: new Date,
-      imageUrl: ''
+      birthDate: new Date,
+      imageUrl: '',
+      password: ''
     };
 
     this.userProfile = JSON.parse(localStorage.getItem('userJSON'));
