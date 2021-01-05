@@ -32,7 +32,7 @@
                         </div>
                         <div *ngIf="authenticated" class="row" id="chat-button-row">
                             <div class="col" id="chat-button-col">
-                                <button class="btn btn-primary">CHAT</button>
+                                <button class="btn btn-primary" (click)="newChat()">CHAT</button>
                             </div>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
             <div class="row">
                 <div class="col">
                     <h1 id="opinion-heading">Valoraciones</h1>
-                    
+
                     <div id="rating-stars">
                         <ng-template #t let-fill="fill">
                             <span class="star" [class.full]="fill === 100">
