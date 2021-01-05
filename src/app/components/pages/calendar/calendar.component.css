@@ -21,29 +21,44 @@
 }
 
 .blocked-hour{
-  background-color: #db271a; 
-  color: white;
+  border-radius: 50%;
+  border: 1.5px solid #db271a;
+  text-align: center;
+  padding: 0px 10px;
 }
 
 .pending-finishing{
-  background-color: yellow;
-  color: black;
+  border-radius: 50%;
+  border: 1.5px solid #dbdb1a;
+  text-align: center;
+  padding: 0px 10px;
 }
 
 .pending-rating{
-  background-color: orange;
-  color: white;
+  border-radius: 50%;
+  border: 1.5px solid #db8f1a;
+  text-align: center;
+  padding: 0px 10px;
 }
 
 .finished{
-  background-color: rgb(18, 143, 202);;
+  border-radius: 50%;
+  border: 1.5px solid rgb(18, 143, 202);
+  text-align: center;
+  padding: 0px 10px;
 }
 
 .complementary-blocked-hour{
-  background-color: cornflowerblue;
-  color: white;
+  border-radius: 50%;
+  border: 1.5px solid cornflowerblue;
+  text-align: center;
+  padding: 0px 10px;
 }
 
 #quick-form{
   margin-top: 25px;
+}
+
+#current-month{
+  margin: 0px 10% 30px;
 }

@@ -1,8 +1,11 @@
 <div class="row" style="text-align: center;">
   <div class="col-3" style="margin-top: 3%; padding-left: 5%">
     <div class="row">
-      <h1>{{ monthName }} del {{ year }}</h1> 
-      <h4>Tus reservas: <span class="blocked-hour"> HORA </span> </h4>
+      <h1 id="current-month">{{ monthName }} del {{ year }}</h1> 
+      <h4>Tus reservas: <span class="blocked-hour"> HORA LECCIÓN</span> </h4>
+      <h4>Marcar impartida: <span class="pending-finishing"> HORA</span> </h4>
+      <h4>Valoración pendiente: <span class="pending-rating"> HORA</span> </h4>
+      <h4>Terminada: <span class="finished"> HORA</span> </h4>
       <h4 *ngIf="complementaryUserAvailable">Reservas de {{complementaryUser.name}}:
         <span class="complementary-blocked-hour"> HORA </span> </h4>
     </div>
@@ -108,49 +111,67 @@
             <tr *ngFor="let nHour of numberReturn(12); index as hour;">
               <div class="row">
 
-                <div *ngIf="isReserved(hour * 2, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek]) == 1; then thenBlock11 else elseBlock11"></div>
-                <ng-template #thenBlock11>
-                  <div (click)="openModalReservation(hour * 2, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek])"
-                      class="col-6 blocked-hour">
-                  {{hour * 2}}
-                  </div>
-                </ng-template>
-                <ng-template #elseBlock11>
-                  <div *ngIf="isReserved(hour * 2, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek]) == 2; then thenBlock12 else elseBlock12"></div>
-                  <ng-template #thenBlock12>
-                    <div class="col-6 complementary-blocked-hour">
-                      {{hour * 2}}
-                    </div>
-                  </ng-template>
-                  <ng-template #elseBlock12>
-                    <div class="col-6">
-                      {{hour * 2}}
-                    </div>
-                  </ng-template>
-                </ng-template>
+                <div [ngSwitch]="isReserved(hour * 2, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek])" class="col-6">
+                  
+                  <span *ngSwitchCase="1" (click)="openModalReservation(hour * 2, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek])"
+                    class="blocked-hour">
+                  {{hour * 2}}:00
+                  </span>
 
-                <div *ngIf="isReserved(hour * 2 + 1, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek]) == 1; then thenBlock21 else elseBlock21"></div>
-                <ng-template #thenBlock21>
-                  <div (click)="openModalReservation(hour * 2 + 1, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek])"
+                  <span *ngSwitchCase="2" class="complementary-blocked-hour">
+                    {{hour * 2}}:00
+                  </span>
+                  
+                  <span *ngSwitchCase="3" class="pending-finishing">
+                    <!-- Click open Finish Modal -->
+                    {{hour * 2}}:00
+                  </span>
+
+                  <span *ngSwitchCase="4" class="pending-rating">
+                    <!-- Click open Rating Modal-->
+                    {{hour * 2}}:00
+                  </span>
+
+                  <span *ngSwitchCase="5" class="finished">
+                    <!-- Click open Rating Modal-->
+                    {{hour * 2}}:00
+                  </span>
+                  
+                  <span *ngSwitchDefault>
+                    {{hour * 2}}:00
+                  </span>
+                
+                </div>
+
+                <div [ngSwitch]="isReserved(hour * 2 + 1, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek])" class="col-6">
+                  
+                  <span *ngSwitchCase="1" (click)="openModalReservation(hour * 2 + 1, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek])"
                         class="col-6 blocked-hour">
-                    {{hour * 2 + 1}}
-                  </div>
-                </ng-template>
-                <ng-template #elseBlock21>
-                  <div *ngIf="isReserved(hour * 2 + 1, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek]) == 2;
-                   then thenBlock22 else elseBlock22"></div>
-                  <ng-template #thenBlock22>
-                    <div class="col-6 complementary-blocked-hour">
-                      {{hour * 2 + 1}}
-                    </div>
-                  </ng-template>
-                  <ng-template #elseBlock22>
-                    <div class="col-6">
-                      {{hour * 2 + 1}}
-                    </div>
-                  </ng-template>
-                </ng-template>
+                    {{hour * 2 + 1}}:00
+                  </span>
 
+                  <span *ngSwitchCase="2" class="complementary-blocked-hour">
+                    {{hour * 2 + 1}}:00
+                  </span>
+
+                  <span *ngSwitchCase="3" class="pending-finishing">
+                    {{hour * 2 + 1}}:00
+                  </span>
+
+                  <span *ngSwitchCase="4" class="pending-rating">
+                    {{hour * 2 + 1}}:00
+                  </span>
+
+                  <span *ngSwitchCase="5" class="finished">
+                    <!-- Click open Rating Modal-->
+                    {{hour * 2 + 1}}:00
+                  </span>
+                  
+                  <span *ngSwitchDefault>
+                    {{hour * 2 + 1}}:00
+                  </span>
+                
+                </div>
               </div>
             </tr>
             </tbody>

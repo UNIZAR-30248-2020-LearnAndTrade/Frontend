@@ -79,6 +79,7 @@ export class CalendarComponent implements OnInit {
   }
 
   getReservations() {
+    
     this.reservationService.getReservationsForCalendar(this.user.username).subscribe(response => {
       for (let index in response) {
         let r: reservation = {
@@ -88,9 +89,12 @@ export class CalendarComponent implements OnInit {
           date: response[index].date,
           theme: response[index].theme,
           teacherUsername: response[index].teacherUsername,
-          studentUsername: response[index].studentUsername
+          studentUsername: response[index].studentUsername,
+          studentFinished: response[index].studentFinished,
+          teacherFinished: response[index].teacherFinished,
+          rating: response[index].rating,
         }
-        this.reservationsUser.push(r);
+        this.reservationsUser.push(r);    
       }
     });
   }
@@ -105,7 +109,10 @@ export class CalendarComponent implements OnInit {
           date: response[index].date,
           theme: response[index].theme,
           teacherUsername: response[index].teacherUsername,
-          studentUsername: response[index].studentUsername
+          studentUsername: response[index].studentUsername,
+          studentFinished: response[index].studentFinished,
+          teacherFinished: response[index].teacherFinished,
+          rating: response[index].rating,
         }
         this.reservationsComplementaryUser.push(r);
       }
@@ -135,6 +142,7 @@ export class CalendarComponent implements OnInit {
     for (let i = 0; i < days.length; i++) {
       this.daysOfMonth.push(days[i]);
     }
+    this.setMonthName();
     this.startDayOfMonth();
   }
 
@@ -177,15 +185,50 @@ export class CalendarComponent implements OnInit {
     this.setMonthName();
     this.getDaysInMonth();
   }
-
-  isReserved(hour: number, date: Date) {
+  
+  /**
+   * 
+   * @param hour hour of meeting
+   * @param date date of meeting
+   * @returns 0 -> not reserved
+   *          1 -> user reservation
+   *          2 -> complementary reservation
+   *          3 -> pending of finished
+   *          4 -> pending of rating
+   *          5 -> nothing to do
+   */
+  public isReserved(hour: number, date: Date) : number {
+    let today = new Date();
+    let today_day = today.getDate();
+    let today_month = today.getMonth();
+    let today_year = today.getFullYear();
     for (let i = 0; i < this.reservationsUser.length; i++) {
+      // Loop for searching reservation
       let dateReservation = new Date(this.reservationsUser[i].date);
       if (dateReservation.getMonth() == date.getMonth() &&
         dateReservation.getDate() == date.getDate() &&
         this.reservationsUser[i].startTime <= hour &&
         this.reservationsUser[i].finishTime > hour) {
-        return 1;
+        
+          if (dateReservation.getFullYear() > today_year ||
+            dateReservation.getMonth() > today_month ||
+            dateReservation.getDate() >= today_day ) {
+            // Future meetings -> further years, further months, further days
+            return 1;
+          }
+          // Also rated -> finished
+          else if (this.reservationsUser[i].rating > -1){
+            return 5;
+          }
+          // Not future meeting
+          else if (this.reservationsUser[i].studentFinished && this.reservationsUser[i].teacherFinished){
+            // Lesson gived/received
+            return 4;
+          }
+          else{
+            // Lesson not gived/received nor rated
+            return 3;
+          }
       }
     }
     if (this.complementaryUserAvailable) {
@@ -225,11 +268,10 @@ export class CalendarComponent implements OnInit {
     }
   }
 
-  setMonthName(){
+  private setMonthName(){
     var months = [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
   "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
     this.monthName = months[this.month-1];
-
   }
 
 }
