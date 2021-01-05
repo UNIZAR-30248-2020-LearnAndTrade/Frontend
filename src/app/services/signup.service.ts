@@ -5,15 +5,14 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class EditProfileService {
+export class SignupService {
   public url: string;
   constructor(private http: HttpClient) {
-    this.url = 'https://learn-and-trade-backend.herokuapp.com/user/updateuser';
+    this.url = 'https://learn-and-trade-backend.herokuapp.com/user/signin';
 
   }
 
-  editProfile(user): Observable<any> {
-
+  createUser(user): Observable<any> {
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post(this.url, JSON.stringify(user), {headers: headers});
   }
