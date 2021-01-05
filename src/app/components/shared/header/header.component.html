@@ -36,7 +36,8 @@
         </ul>
         <div *ngIf="autenticado">
             <button class="btn btn-outline-primary" (click)="goToChat()">
-              <mat-icon style="vertical-align: middle;">chat</mat-icon>
+              <mat-icon *ngIf="newMessages" style="vertical-align: middle; color: green">mark_chat_unread</mat-icon>
+              <mat-icon *ngIf="!newMessages" style="vertical-align: middle;">chat</mat-icon>
               Chat
             </button>
             <button class="btn btn-outline-primary" (click)="goToSearch()">
