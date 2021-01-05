@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import {Router} from "@angular/router";
 import { LoginService } from '../../../services/login.service';
 import {user} from "../../../models/user";
 import {GetUserService} from "../../../services/get-user.service";
+import {RateModalComponent} from "../../shared/rate-modal/rate-modal.component";
 
 
 @Component({
@@ -16,7 +18,8 @@ export class HeaderComponent implements OnInit {
   public user: user;
   public autenticado:boolean;
 
-  constructor(private loginService: LoginService, private UserService: GetUserService, private router: Router){
+  constructor(private loginService: LoginService, private UserService: GetUserService, private router: Router,
+    public dialog: MatDialog){
   }
 
   ngOnInit(): void {
@@ -58,4 +61,7 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(["/profile/" + this.user.username]);
   }
 
+  goToRating() {
+    this.dialog.open(RateModalComponent);
+  }
 }

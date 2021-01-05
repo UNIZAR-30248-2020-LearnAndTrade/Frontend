@@ -35,6 +35,10 @@
             </li>
         </ul>
         <div *ngIf="autenticado">
+            <button class="btn btn-outline-secondary" (click)="goToRating()">
+                <mat-icon style="vertical-align: middle;">rate_review</mat-icon>
+                Valorar lección
+            </button>
           <button class="btn btn-outline-secondary" (click)="goToCalendar()">
             <mat-icon style="vertical-align: middle;">calendar_today</mat-icon>
                 Ver calendario

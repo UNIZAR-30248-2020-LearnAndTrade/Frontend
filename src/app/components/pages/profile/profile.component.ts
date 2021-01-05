@@ -9,7 +9,7 @@ import { user } from 'src/app/models/user';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  public starRating = 3;
+  public starRating = 1.5;
   public userProfile: user;
   public authenticated: boolean;
   public status: string;

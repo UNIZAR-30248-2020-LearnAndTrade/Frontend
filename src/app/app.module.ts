@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -30,9 +31,11 @@ import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ReservationModalComponent } from './components/shared/reservation-modal/reservation-modal.component';
 import { CalendarComponent } from './components/pages/calendar/calendar.component';
 import { GetReservationModalComponent } from './components/shared/get-reservation-modal/get-reservation-modal.component';
+import { RateModalComponent } from './components/shared/rate-modal/rate-modal.component';
 
 
 
@@ -50,13 +53,15 @@ import { GetReservationModalComponent } from './components/shared/get-reservatio
     DialogReservationFail,
     ReservationModalComponent,
     CalendarComponent,
-    GetReservationModalComponent
+    GetReservationModalComponent,
+    RateModalComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule,
     NgbModule,
+    CommonModule,
     NoopAnimationsModule,
     MatIconModule,
     FormsModule,
@@ -68,7 +73,8 @@ import { GetReservationModalComponent } from './components/shared/get-reservatio
     MatSelectModule,
     MatButtonModule,
     HttpClientModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSnackBarModule,
   ],
   exports: [
     MatIconModule,
