@@ -39,17 +39,24 @@
                 </div>
             </div>
         </div>
-        <!--div class="col d-xl-flex justify-content-xl-center" id="opinion-col">
+
+        <div class="col d-xl-flex justify-content-xl-center" id="opinion-col">
             <div class="row">
                 <div class="col">
                     <h1 id="opinion-heading">Valoraciones</h1>
-                    <div class="row" id="rating-row">
-                        <div class="col" id="rating-col">
-                            <ngb-rating [max]="5" [(rate)]="starRating" [readonly]="false"></ngb-rating>
-                        </div>
+                    
+                    <div id="rating-stars">
+                        <ng-template #t let-fill="fill">
+                            <span class="star" [class.full]="fill === 100">
+                                <span class="half" [style.width.%]="fill">&#9733;</span>
+                                &#9733;
+                            </span>
+                        </ng-template>
+                        <ngb-rating [(rate)]="starRating" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
                     </div>
+                    <span id="rating-val"><b id="bold-rate">{{ starRating }}</b>/5</span>
                 </div>
             </div>
-        </div-->
+        </div>
     </div>
 </div>

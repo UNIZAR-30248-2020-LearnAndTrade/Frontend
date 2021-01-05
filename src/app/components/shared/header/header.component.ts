@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import {Router} from "@angular/router";
 import { LoginService } from '../../../services/login.service';
 import {user} from "../../../models/user";
@@ -6,6 +7,7 @@ import {GetUserService} from "../../../services/get-user.service";
 import {ChatService} from "../../../services/chat.service";
 import {Observable, Subscriber} from "rxjs";
 import {chatMessage} from "../../../models/chatMessage";
+import {RateModalComponent} from "../../shared/rate-modal/rate-modal.component";
 
 
 @Component({
@@ -24,7 +26,7 @@ export class HeaderComponent implements OnInit {
   messageObservable: Observable<chatMessage> = undefined;
 
   constructor(private loginService: LoginService, private UserService: GetUserService,
-              private router: Router, private chatService: ChatService) {
+              private router: Router, private chatService: ChatService, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
