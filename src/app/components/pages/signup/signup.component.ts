@@ -82,8 +82,7 @@ export class SignupComponent implements OnInit {
     }
     this.SignupService.createUser(newUser).subscribe(
       response => {
-        console.log("CREADO");
-        console.log(response);
+        window.location.href = "/home";
       },
       error => {
         console.log("ERROR")
