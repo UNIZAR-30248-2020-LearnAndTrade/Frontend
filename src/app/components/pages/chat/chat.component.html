@@ -20,7 +20,7 @@
         <div id="chat-message-list" style="padding-top: 2%">
           <div *ngFor="let message of listaMessages">
 
-            <div *ngIf="message.senderId == 'gonzalo'" class="message-row you-message">
+            <div *ngIf="message.senderId == this.user.username" class="message-row you-message">
                 <div class="message-content">
                     <div class="message-text">{{message.content}}</div>
                     <div class="message-time">{{message.timestamp.getDate()}}
@@ -28,7 +28,7 @@
                 </div>
             </div>
 
-            <div *ngIf="message.senderId != 'gonzalo'" class="message-row other-message">
+            <div *ngIf="message.senderId != this.user.username" class="message-row other-message">
               <div class="message-content">
                 <div class="message-text">{{message.content}}</div>
                 <div class="message-time">{{message.timestamp.getDate()}}
