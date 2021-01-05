@@ -47,6 +47,7 @@ import { CalendarComponent } from './components/pages/calendar/calendar.componen
 import { GetReservationModalComponent } from './components/shared/get-reservation-modal/get-reservation-modal.component';
 import { RateModalComponent } from './components/shared/rate-modal/rate-modal.component';
 import { SearchComponent } from './components/pages/search/search.component';
+import { ConfirmImpartedLessonModalComponent } from './components/shared/confirm-imparted-lesson-modal/confirm-imparted-lesson-modal.component';
 
 
 
@@ -71,7 +72,8 @@ import { SearchComponent } from './components/pages/search/search.component';
     GetReservationModalComponent,
     RateModalComponent,
     SearchComponent,
-    DialogErrorEdit
+    DialogErrorEdit,
+    ConfirmImpartedLessonModalComponent
 
   ],
   imports: [

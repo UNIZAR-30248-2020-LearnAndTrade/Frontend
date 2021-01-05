@@ -127,13 +127,11 @@
                     {{hour * 2}}:00
                   </span>
 
-                  <span *ngSwitchCase="4" class="pending-rating">
-                    <!-- Click open Rating Modal-->
+                  <span *ngSwitchCase="4" (click)="openRatingModal()" class="pending-rating">
                     {{hour * 2}}:00
                   </span>
 
                   <span *ngSwitchCase="5" class="finished">
-                    <!-- Click open Rating Modal-->
                     {{hour * 2}}:00
                   </span>
                   
@@ -145,8 +143,9 @@
 
                 <div [ngSwitch]="isReserved(hour * 2 + 1, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek])" class="col-6">
                   
-                  <span *ngSwitchCase="1" (click)="openModalReservation(hour * 2 + 1, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek])"
+                  <span *ngSwitchCase="1" (click)="openRatingModal()"
                         class="col-6 blocked-hour">
+                        <!-- (click)="openModalReservation(hour * 2 + 1, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek])" -->
                     {{hour * 2 + 1}}:00
                   </span>
 
@@ -158,7 +157,7 @@
                     {{hour * 2 + 1}}:00
                   </span>
 
-                  <span *ngSwitchCase="4" class="pending-rating">
+                  <span *ngSwitchCase="4" (click)="openRatingModal()" class="pending-rating">
                     {{hour * 2 + 1}}:00
                   </span>
 

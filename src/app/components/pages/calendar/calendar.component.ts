@@ -6,6 +6,7 @@ import {GetUserService} from "../../../services/get-user.service";
 import {LoginService} from "../../../services/login.service";
 import {MatDialog} from "@angular/material/dialog";
 import {GetReservationModalComponent} from "../../shared/get-reservation-modal/get-reservation-modal.component";
+import {RateModalComponent} from "../../shared/rate-modal/rate-modal.component";
 
 @Component({
   selector: 'app-calendar',
@@ -258,6 +259,10 @@ export class CalendarComponent implements OnInit {
         this.dialog.open(GetReservationModalComponent);
       }
     }
+  }
+
+  openRatingModal(){
+    this.dialog.open(RateModalComponent);
   }
 
   checkComplementaryUser(){
