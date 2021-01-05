@@ -1,19 +1,17 @@
-import { Component, OnInit, Inject} from '@angular/core';
+import {Component, OnInit, Inject} from '@angular/core';
+import {Router} from "@angular/router";
 import { ComplementaryUsersService } from '../../../services/complementary-users.service';
-import { MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { GetUserService } from '../../../services/get-user.service';
 import { EditProfileService } from '../../../services/edit-profile.service';
 import { LoginService } from '../../../services/login.service';
 import { GetThemeService } from '../../../services/get-theme.service';
-import { ChatService } from '../../../services/chat.service';
+import { ReservationService } from "../../../services/reservation.service";
 import { user } from 'src/app/models/user';
 import { theme } from 'src/app/models/theme';
-import { WebSocketAPI } from '../chat/WebsocketApi';
-
-
-export interface DialogData {
-  user: string;
-}
+import { ReservationModalComponent } from "../../shared/reservation-modal/reservation-modal.component";
+import { SearchUsersService } from "../../../services/search-users.service";
+import {ChatService} from "../../../services/chat.service";
 
 @Component({
   selector: 'app-homepage',
@@ -30,15 +28,11 @@ export class homepageComponent implements OnInit {
   public selectedInterest: theme;
   public selectedKnowledge: theme;
   public autenticado: boolean;
-  webSocketAPI: WebSocketAPI;
-
-  closeResult: string;
 
   constructor(private ComplementaryUsersService: ComplementaryUsersService, private UserService: GetUserService,
     private EditProfile: EditProfileService, private loginService: LoginService, private ThemeService: GetThemeService,
-    public dialog: MatDialog) { 
-      
-    }
+    public dialog: MatDialog, private reservationService: ReservationService, private router: Router,
+              private chatService: ChatService) { }
 
   ngOnInit(): void {
     this.miPerfil = {
@@ -51,19 +45,17 @@ export class homepageComponent implements OnInit {
       birthDate: new Date,
       password:'',
       imageUrl:''
+
     };
-    
+
     this.autenticado = this.loginService.isAuthenticated(); // Comprobar si está autentificado
     if(this.autenticado){
       this.getThemes();
       this.getMyProfile();
-      this.webSocketAPI = new WebSocketAPI(this);
-      this.webSocketAPI._connect();
     }
     else{
       window.location.href = "/login";
     }
-
 
   }
 
@@ -72,7 +64,8 @@ export class homepageComponent implements OnInit {
     this.ComplementaryUsersService.getComplementaryUsers(usuario).subscribe(
       response => {
         console.log(response);
-        this.usuarios = response
+        this.usuarios = response;
+        this.filtrarMismoUsuario();
       },
       error => {
         var errorMessage = <any>error;
@@ -176,9 +169,11 @@ export class homepageComponent implements OnInit {
   editProfile(){
     this.EditProfile.editProfile(this.miPerfil).subscribe(
       response => {
+        console.log(response);
         this.dialog.open(DialogConfirmDialog);
       },
       error => {
+        console.log(error);
         this.dialog.open(DialogErrorEdit);
         var errorMessage = <any>error;
         if (errorMessage != null) {
@@ -187,17 +182,36 @@ export class homepageComponent implements OnInit {
       }
     );
   }
-  handleMessage(message){
-    var notification = message;
-    console.log("OBJETO MENSAJE")
-    this.dialog.open(chatNotificationDialog,{
-      data: {
-        user: notification.senderName
-      }
+
+  openModalNewReservation(user) {
+    this.reservationService.setComplementaryUser(user);
+    this.dialog.open(ReservationModalComponent,{
+      width: '70%',
+      height: '85%'
     });
-    console.log("HE RECIBIDO UN MESAJE:");
-    console.log(notification);
-    
+  }
+
+  goToProfile(username) {
+    this.router.navigate(["/profile/" + username]);
+  }
+
+  filtrarMismoUsuario() {
+    for (let i = 0; i < this.usuarios.length; i++) {
+      if (this.usuarios[i].name == this.miPerfil.name) {
+        this.usuarios.splice(i,1);
+      }
+    }
+  }
+
+  newChat(usuario: user) {
+    this.chatService.createRoom(this.miPerfil.username, usuario.username).subscribe( result => {
+      console.log(result);
+      this.goToChat();
+    })
+  }
+
+  goToChat() {
+    this.router.navigate(["/chat"]);
   }
 
 }
@@ -210,7 +224,7 @@ export class DialogConfirmDialog {
   redirectHome(){
     window.location.href = "homepage";
   }
-  
+
 }
 
 @Component({
@@ -222,19 +236,4 @@ export class DialogErrorEdit {
   redirectHome(){
     window.location.href = "homepage";
   }
-}
-
-@Component({
-  selector: 'app-dialogChatNotification',
-  templateUrl: 'chatNotification.html',
-})
-export class chatNotificationDialog {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData){
-    
-  }
-  redirectHome(){
-    
-    window.location.href = "chat";
-  }
-  
 }

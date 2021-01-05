@@ -1,0 +1,109 @@
+<div class="row" style="margin: auto">
+  <h1 style="text-align: center; margin: auto;" mat-dialog-title>
+    Haz una nueva reserva con {{complementaryUser.name}} {{complementaryUser.surname}} ({{complementaryUser.username}})
+  </h1>
+  <div class="avatarPerfil">
+    <img
+      mat-card-sm-image
+      src="assets/img/perfil.jpg"
+    >
+  </div>
+</div>
+<div class="row">
+  <div class="col-6" style="border-right: 1px solid;">
+    <h2 style="text-align: center">Tu enseñas</h2>
+    <div class="row">
+      <div class="col" style="text-align: left; margin-top: auto;">
+        <h4>Elegir tema:</h4>
+        <mat-form-field style="width: inherit" appearance="fill">
+          <mat-label>Tema:</mat-label>
+          <mat-select id="chooseThemeTeach" [(value)]="selectedKnowledge">
+            <mat-option
+              *ngFor="let themeItem of themeTeachList"
+              [value]="themeItem"
+            >
+              {{themeItem.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col" style="text-align: left; margin-top: auto;">
+        <label for="inputDateTeach">Fecha</label>
+        <input [(ngModel)]="selectedDateTeach" type="date" class="form-control" id="inputDateTeach">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6" style="text-align: left; margin-top: auto;">
+        <label for="inputStartHourTeach">Hora de inicio (0-23)</label>
+        <input [(ngModel)]="selectedStartHourTeach" type="number" min="0" max="23" class="form-control" id="inputStartHourTeach">
+      </div>
+      <div class="col-6" style="text-align: left; margin-top: auto;">
+        <label for="inputEndHourTeach">Hora de final (1-24)</label>
+        <input [(ngModel)]="selectedEndHourTeach" type="number" min="1" max="24" class="form-control" id="inputEndHourTeach">
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <h2 style="text-align: center">Tu aprendes</h2>
+    <div class="row">
+      <div class="col" style="text-align: left; margin-top: auto;">
+        <h4>Elegir tema:</h4>
+        <mat-form-field style="width: inherit" appearance="fill">
+          <mat-label>Tema:</mat-label>
+          <mat-select id="chooseThemeLearn" [(value)]="selectedInterest">
+            <mat-option
+              *ngFor="let themeItem of themeLearnList"
+              [value]="themeItem"
+            >
+              {{themeItem.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col" style="text-align: left; margin-top: auto;">
+        <label for="inputDateLearn">Fecha</label>
+        <input [(ngModel)]="selectedDateLearn" type="date" class="form-control" id="inputDateLearn">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6" style="text-align: left; margin-top: auto;">
+        <label for="inputStartHourLearn">Hora de inicio (0-23) </label>
+        <input [(ngModel)]="selectedStartHourLearn" type="number" min="0" max="23" class="form-control" id="inputStartHourLearn">
+      </div>
+      <div class="col-6" style="text-align: left; margin-top: auto;">
+        <label for="inputEndHourLearn">Hora de final (1-24)</label>
+        <input [(ngModel)]="selectedEndHourLearn" type="number" min="1" max="24" class="form-control" id="inputEndHourLearn">
+      </div>
+    </div>
+  </div>
+  <br>
+</div>
+
+<div mat-dialog-actions style="height: 20%">
+  <div class="col" style="text-align: center">
+    <button mat-raised-button
+            style="background-color: lightgreen;"
+            (click)="checkAvailabilityCalendar()">
+      Ver disponibilidad común
+    </button>
+  </div>
+  <div class="col" style="text-align: center">
+    <button mat-raised-button
+            style="background-color: salmon; color: white"
+            (click)="onCancelClick()">
+      Cancelar
+    </button>
+  </div>
+  <div class="col" style="text-align: center">
+  <button mat-raised-button
+    style="background-color: lightskyblue;"
+    (click)="makeReservation()"
+    id="makeReservation">
+    Reservar
+  </button>
+  </div>
+</div>

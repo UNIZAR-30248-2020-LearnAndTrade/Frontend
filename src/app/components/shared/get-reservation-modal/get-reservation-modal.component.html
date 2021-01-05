@@ -1,0 +1,39 @@
+<div class="row" style="margin: auto">
+  <h1 style="text-align: center; margin: auto;" mat-dialog-title>
+    Información de la reserva
+  </h1>
+</div>
+<br>
+<div class="row" style="text-align: center">
+  <div class="col">
+      <div>
+        <h4>Usuario profesor: {{reservation.teacherUsername}}</h4>
+      </div>
+      <div>
+        <h4>Usuario estudiante: {{reservation.studentUsername}}</h4>
+      </div>
+      <div>
+        <h4>Tema: {{reservation.theme.name}}</h4>
+      </div>
+      <div>
+        <h4>Fecha: {{dateReservation.getDate()}}/{{dateReservation.getMonth() + 1}}/{{dateReservation.getFullYear()}}</h4>
+      </div>
+      <div>
+        <h4>Hora de inicio: {{reservation.startTime}}</h4>
+      </div>
+      <div>
+        <h4>Hora de final: {{reservation.finishTime}}</h4>
+      </div>
+  </div>
+  <br>
+</div>
+
+<div mat-dialog-actions style="height: 20%">
+  <div class="col" style="text-align: center">
+    <button mat-raised-button
+            style="background-color: salmon; color: white"
+            (click)="onCancelClick()">
+      Salir
+    </button>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="row" style="margin: auto">
+  <h1 style="text-align: center; margin: auto;" mat-dialog-title>
+    Valorar lección de TEMA
+  </h1>
+</div>
+<br>
+<div class="row" style="text-align: center">
+  <div class="col">
+    <div>
+      <p>Valorar la lección de USERNAME del día DATE DD/MM/AAAA</p>
+        <div class="form-group">
+          <ngb-rating [max]="5" [formControl] = "RatingForm"></ngb-rating>
+        </div>
+        <div *ngIf="RatingForm.valid">Puntuación: {{ RatingForm.value }}/5</div>
+        <div *ngIf="RatingForm.invalid">Puntuación: 0/5</div>
+    </div>
+  </div>
+</div>
+  
+<div class="row">
+  <div class="col">
+    <div mat-dialog-actions style="height: 20%">
+      <div class="col" style="text-align: center">
+        <button mat-raised-button
+                style="background-color: mediumaquamarine; color: white"
+                (click)="onRateClick()">
+          Puntuar
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div mat-dialog-actions style="height: 20%">
+      <div class="col" style="text-align: center">
+        <button mat-raised-button
+                style="background-color: salmon; color: white"
+                (click)="onCancelClick()">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
