@@ -62,8 +62,7 @@ import { SearchComponent } from './components/pages/search/search.component';
     DialogErrorEdit,
 
     ChatComponent,
-    SignupComponent
-
+    SignupComponent,
     DialogCheckReservation,
     DialogReservationDone,
     DialogReservationFail,
@@ -96,7 +95,7 @@ import { SearchComponent } from './components/pages/search/search.component';
 
     MatInputModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
 
     MatSnackBarModule,
 

@@ -77,7 +77,7 @@ export class SignupComponent implements OnInit {
       name:this.signupForm.controls['name'].value,
       imageUrl: this.miPerfil.imageUrl,
       surname: this.signupForm.controls['surname'].value,
-      birthdate: this.signupForm.controls['date'].value,
+      birthDate: this.signupForm.controls['date'].value,
       password: MD5(this.signupForm.controls['pass'].value)
     }
     this.SignupService.createUser(newUser).subscribe(

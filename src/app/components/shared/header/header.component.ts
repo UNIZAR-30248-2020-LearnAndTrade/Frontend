@@ -37,8 +37,9 @@ export class HeaderComponent implements OnInit {
       knowledges: [],
       name: '',
       surname: '',
-      birthdate: new Date,
-      imageUrl: ''
+      birthDate: new Date,
+      imageUrl: '',
+      password:''
     };
     this.autenticado = this.loginService.isAuthenticated();
     if (this.autenticado) {
