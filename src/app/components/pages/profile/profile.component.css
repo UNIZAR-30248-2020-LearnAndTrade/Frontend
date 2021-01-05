@@ -1,6 +1,19 @@
-ngb-rating {
+.star {
+    position: relative;
+    display: inline-block;
+    font-size: 2rem;
+    color: #d3d3d3;
+}
+
+.full {
     color: rgb(18, 143, 202);
-    font-size: 80px;
+}
+
+.half {
+    position: absolute;
+    display: inline-block;
+    overflow: hidden;
+    color: rgb(18, 143, 202);
 }
 
 #info-cont{
@@ -22,12 +35,20 @@ ngb-rating {
     justify-content: right;
     display: inline-flex;
 }
-
-#opinion-col{
-    align-content: center;
-    justify-content: center;
-}    
+    
 
 #opinion-heading{
+    margin: 0px 25% 30px;
+}
+
+#rating-val{
+    margin: 0px 55% 30px;
+}
+
+#bold-rate{
+    font-size: 200%;
+}
+
+#rating-stars{
     margin: 0px 25% 30px;
 }
