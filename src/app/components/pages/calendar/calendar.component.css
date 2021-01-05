@@ -1,5 +1,49 @@
 .icon {
-  font-size: 100px;
+  font-size: 80px;
   line-height: initial;
-  margin-bottom: 5%;
+}
+
+.tag-icon{
+  margin-bottom: 20%;
+}
+
+.load-button{
+  background-color: lightskyblue;
+  margin: 0px 35% 30px;
+}
+
+.month-selector{
+  width: 100%;
+}
+
+.year-selector{
+  width: 100%;
+}
+
+.blocked-hour{
+  background-color: #db271a; 
+  color: white;
+}
+
+.pending-finishing{
+  background-color: yellow;
+  color: black;
+}
+
+.pending-rating{
+  background-color: orange;
+  color: white;
+}
+
+.finished{
+  background-color: rgb(18, 143, 202);;
+}
+
+.complementary-blocked-hour{
+  background-color: cornflowerblue;
+  color: white;
+}
+
+#quick-form{
+  margin-top: 25px;
 }

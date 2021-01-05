@@ -25,6 +25,7 @@ export class CalendarComponent implements OnInit {
   public year: number;
   public daysOfMonth: Date[] = [];
   public numberOfDayOnAWeek: number = 0;
+  public monthName: string;
 
 
   constructor(public reservationService: ReservationService, private UserService: GetUserService,
@@ -52,7 +53,7 @@ export class CalendarComponent implements OnInit {
       this.month = day.getMonth() + 1;
       this.year = day.getFullYear();
 
-
+      this.setMonthName();
       this.getDaysInMonth();
 
     } else {
@@ -138,14 +139,7 @@ export class CalendarComponent implements OnInit {
   }
 
   getDayOfWeek(number: number) {
-    var weekday = [];
-    weekday[0] = "Domingo";
-    weekday[1] = "Lunes";
-    weekday[2] = "Martes";
-    weekday[3] = "Miercoles";
-    weekday[4] = "Jueves";
-    weekday[5] = "Viernes";
-    weekday[6] = "Sábado";
+    var weekday = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
     return weekday[number];
   }
 
@@ -167,6 +161,7 @@ export class CalendarComponent implements OnInit {
     } else {
       this.month--;
     }
+    this.setMonthName();
     this.getDaysInMonth();
   }
 
@@ -179,6 +174,7 @@ export class CalendarComponent implements OnInit {
     } else {
       this.month++;
     }
+    this.setMonthName();
     this.getDaysInMonth();
   }
 
@@ -227,6 +223,13 @@ export class CalendarComponent implements OnInit {
       this.getReservationsComplementaryUser();
       this.reservationService.setComplementaryUserUnavailable();
     }
+  }
+
+  setMonthName(){
+    var months = [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+  "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    this.monthName = months[this.month-1];
+
   }
 
 }
