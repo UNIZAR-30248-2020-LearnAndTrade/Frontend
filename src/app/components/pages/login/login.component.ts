@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { LoginService } from '../../../services/login.service';
+import * as MD5 from 'md5';
+
 
 
 @Component({
@@ -24,7 +26,7 @@ export class LoginComponent implements OnInit {
   login(){
     console.log(this.email.value);
     console.log(this.password.value);
-    this.loginService.validate(this.email.value, this.password.value)
+    this.loginService.validate(this.email.value, MD5(this.password.value))
       .subscribe((response) => {
         this.error = false;
         // this.usuario = response[0];

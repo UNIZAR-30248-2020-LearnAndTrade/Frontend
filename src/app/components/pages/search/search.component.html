@@ -1,0 +1,171 @@
+<div id="BoxIzq" class="infoIzq">
+  <mat-card style="width:100%;">
+    <mat-card-title id="test-pointer-2">Temas de búsqueda</mat-card-title>
+    <mat-card-content>
+
+      <div class="row" style="margin: auto">
+        <div *ngIf="selectingInterest" class="col" style="text-align: center; padding: 5% 0">
+          <button mat-raised-button (click)="changeSelected(true)"
+                  style="padding: 2% 9%; border-radius: 35px 0 0 35px; background-color: lightskyblue; color: black">
+            Intereses
+          </button>
+
+          <button mat-stroked-button (click)="changeSelected(false)"
+                  style="padding: 2% 4%; border-radius: 0 35px 35px 0; background-color: white; color: cornflowerblue">
+            Conocimientos
+          </button>
+        </div>
+
+        <div *ngIf="!selectingInterest" class="col" style="text-align: center; padding: 5% 0">
+          <button mat-stroked-button (click)="changeSelected(true)"
+                  style="padding: 2% 9%; border-radius: 35px 0 0 35px; background-color: white; color: cornflowerblue">
+            Intereses
+          </button>
+
+          <button mat-raised-button (click)="changeSelected(false)"
+                  style="padding: 2% 4%; border-radius: 0 35px 35px 0; background-color: lightskyblue; color: black">
+            Conocimientos
+          </button>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div *ngIf="selectingInterest" class="infoCentral" style="text-align: center">
+
+          <mat-list role="list">
+            <mat-list-item *ngFor="let interest of interestsList" style="margin-top: -15px; padding-left: 5%">
+              <mat-icon mat-list-icon class="red-icon">favorite</mat-icon>
+              {{interest.name}}
+              <button mat-icon-button id="delete-interest" color="primary" style="color: red;" (click)="deleteInterest(interest)">
+                <mat-icon>clear</mat-icon>
+              </button>
+            </mat-list-item>
+          </mat-list>
+
+          <h4 style="margin-bottom: -10px">Añadir interés</h4>
+
+          <div class="row" style="align-items: center; padding-left: 10%">
+            <mat-form-field appearance="fill" style="padding-top: 5%">
+              <mat-label>Lista de intereses</mat-label>
+
+              <mat-select id="interest-option" [(value)]="selectedInterest">
+                <mat-option *ngFor="let theme of themesList" [value]="theme">
+                  {{theme.name}}
+                </mat-option>
+              </mat-select>
+
+            </mat-form-field>
+            <div class="boton" style="padding: inherit">
+              <button id="add-interest-button" mat-mini-fab
+                      style="background-color: lightskyblue; color: black" (click)="addInterest(selectedInterest)">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <div class="row" style="align-items: center; padding-left: 18%">
+            <div class="boton" style="padding: inherit">
+              <button mat-flat-button (click)="buscar()"
+                      style="padding: 2% 60%; border-radius: 35px 35px 35px 35px; background-color: lightskyblue; color: black">
+                Buscar
+              </button>
+            </div>
+          </div>
+
+        </div>
+        <div *ngIf="!selectingInterest" class="infoCentral" style="text-align: center;">
+
+          <mat-list role="list"><mat-list-item *ngFor="let knowledge of knowledgesList" style="margin-top: -15px; padding-left: 5%;
+                            ">
+              <mat-icon mat-list-icon>school</mat-icon>
+              {{knowledge.name}}
+              <button mat-icon-button color="primary" style="color: red;" (click)="deleteKnowledge(knowledge)">
+                <mat-icon>clear</mat-icon>
+              </button>
+            </mat-list-item>
+          </mat-list>
+
+          <h4 style="margin-bottom: -10px">Añadir conocimiento</h4>
+
+          <div class="row" style="align-items: center; padding-left: 10%; ">
+            <mat-form-field appearance="fill" style="padding-top: 5%">
+              <mat-label>Lista de conocimientos</mat-label>
+
+              <mat-select id="knowledge-option" [(value)]="selectedKnowledge">
+                <mat-option *ngFor="let theme of themesList" [value]="theme">
+                  {{theme.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="boton" style="padding: inherit">
+              <button id="add-knowledge-button" mat-mini-fab style="background-color: lightskyblue; color: black;" (click)="addKnowledge(selectedKnowledge)">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          </div>
+          <div class="row" style="align-items: center; padding-left: 18%">
+            <div class="boton" style="padding: inherit">
+              <button mat-flat-button (click)="buscar()"
+                      style="padding: 2% 60%; border-radius: 35px 35px 35px 35px; background-color: lightskyblue; color: black">
+                Buscar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </mat-card-content>
+
+  </mat-card>
+</div>
+
+<div id="BoxDcha" class="infoDcha">
+  <mat-card style="width:100%;">
+    <mat-card-title id="test-pointer">Usuarios</mat-card-title>
+    <mat-card-content>
+
+      <ul class="list-group" *ngFor="let usuario of usuarios">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <img src="assets/img/perfil.jpg" class="imagenTarjeta" (click)="goToProfile(usuario.username)">
+          <div class="infoTarjeta">
+            <div class="tituloCard">
+              <b>
+                <u (click)="goToProfile(usuario.username)">{{usuario.name}}</u>
+              </b>
+            </div>
+            Interés en:
+            <div *ngFor="let interest of usuario.interests" class="ContenidoCard">
+              <a href="#" class="alert-link">
+                - {{interest.name}}
+              </a>
+            </div>
+            Conocimiento en:
+            <div class="ContenidoCard" *ngFor="let knowledge of usuario.knowledges">
+              <a href="#" class="alert-link">
+                - {{knowledge.name}}
+              </a>
+            </div>
+          </div>
+          <mat-card-actions style="margin: auto">
+            <div class="row">
+              <button mat-raised-button style="background-color: lightskyblue" (click)="newChat(usuario)">
+                CHAT
+              </button>
+            </div>
+            <br>
+            <div class="row">
+              <button id="reservationBtn" mat-raised-button style="background-color: lightskyblue;" (click)="openModalNewReservation(usuario)">
+                RESERVA
+              </button>
+            </div>
+          </mat-card-actions>
+        </li>
+
+      </ul>
+
+    </mat-card-content>
+  </mat-card>
+</div>
+

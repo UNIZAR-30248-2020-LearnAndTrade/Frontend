@@ -40,7 +40,9 @@ export class CalendarComponent implements OnInit {
       knowledges: [],
       name: '',
       surname: '',
-      birthdate: new Date
+      birthDate: new Date,
+      imageUrl: '',
+      password:''
     };
 
     this.autenticado = this.loginService.isAuthenticated(); // Comprobar si está autentificado

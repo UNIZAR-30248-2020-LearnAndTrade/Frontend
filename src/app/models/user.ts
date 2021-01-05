@@ -7,5 +7,8 @@ export interface user {
     knowledges: theme[];
     name: string;
     surname: string;
-    birthdate: Date;
+    imageUrl: string;
+    birthDate: Date;
+    password: string;
 }
+
