@@ -11,16 +11,17 @@ import {ReservationService} from "../../../services/reservation.service";
   styleUrls: ['./rate-modal.component.css']
 })
 export class RateModalComponent implements OnInit {
-  // Username class
-  // Date of lesson
+  reservation: reservation;
+  dateReservation: Date;
   // Rating form
   RatingForm = new FormControl(null, Validators.required);
-  duration = 1500;    //Snack-bar duration in ms
+  private duration = 1500;    //Snack-bar duration in ms
 
   constructor(public dialogRef: MatDialogRef<RateModalComponent>,
-              public reservationService: ReservationService,
-              private _snackBar: MatSnackBar) {
-
+              private _snackBar: MatSnackBar, 
+              public reservationService: ReservationService) {
+    this.reservation = reservationService.getReservationToCheck();
+    this.dateReservation = new Date(this.reservation.date);
   }
 
   ngOnInit(): void {
@@ -44,10 +45,20 @@ export class RateModalComponent implements OnInit {
   }
 
   onRateClick():void {
-    //console.log(this.RatingForm.value);
-    this.dialogRef.close();
-    //this.openSnackBar();
-    this.openErrorSnackBar();
+    console.log("From " + this.reservation.rating + " to " + this.RatingForm.value );
+    this.reservation.rating = this.RatingForm.value;
+    this.reservationService.updateReservation(this.reservation).subscribe(
+      response => {
+        this.dialogRef.close();
+        this.openSnackBar();
+      },
+      error => {
+        this.dialogRef.close();
+        this.openErrorSnackBar;
+        console.log(error);
+      }
+    );
+    
   }
 
 }

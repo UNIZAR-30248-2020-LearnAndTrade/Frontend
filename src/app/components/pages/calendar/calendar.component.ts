@@ -7,6 +7,7 @@ import {LoginService} from "../../../services/login.service";
 import {MatDialog} from "@angular/material/dialog";
 import {GetReservationModalComponent} from "../../shared/get-reservation-modal/get-reservation-modal.component";
 import {RateModalComponent} from "../../shared/rate-modal/rate-modal.component";
+import {ConfirmImpartedLessonModalComponent} from "../../shared/confirm-imparted-lesson-modal/confirm-imparted-lesson-modal.component";
 
 @Component({
   selector: 'app-calendar',
@@ -205,6 +206,7 @@ export class CalendarComponent implements OnInit {
     let today_day = today.getDate();
     let today_month = today.getMonth();
     let today_year = today.getFullYear();
+    let username = JSON.parse(localStorage.getItem('userJSON')).username;
     for (let i = 0; i < this.reservationsUser.length; i++) {
       // Loop for searching reservation
       let dateReservation = new Date(this.reservationsUser[i].date);
@@ -219,13 +221,18 @@ export class CalendarComponent implements OnInit {
             // Future meetings -> further years, further months, further days
             return 1;
           }
-          // Also rated -> finished
-          else if (this.reservationsUser[i].rating > -1){
+          // Also rated -> finished OR lesson finished and teacher
+          else if (this.reservationsUser[i].rating > -1 || 
+                  (this.reservationsUser[i].studentFinished && 
+                    this.reservationsUser[i].teacherFinished &&
+                    username == this.reservationsUser[i].teacherUsername)){
             return 5;
           }
           // Not future meeting
-          else if (this.reservationsUser[i].studentFinished && this.reservationsUser[i].teacherFinished){
-            // Lesson gived/received
+          else if ( this.reservationsUser[i].studentFinished && 
+                    this.reservationsUser[i].teacherFinished &&
+                    username == this.reservationsUser[i].studentUsername){
+            // Lesson imparted and should be rated
             return 4;
           }
           else{
@@ -261,8 +268,30 @@ export class CalendarComponent implements OnInit {
     }
   }
 
-  openRatingModal(){
-    this.dialog.open(RateModalComponent);
+  openRatingModal(hour: number, date: Date){
+    for (let i = 0; i < this.reservationsUser.length; i++) {
+      let dateReservation = new Date(this.reservationsUser[i].date);
+      if (dateReservation.getMonth() == date.getMonth() &&
+        dateReservation.getDate() == date.getDate() &&
+        this.reservationsUser[i].startTime <= hour &&
+        this.reservationsUser[i].finishTime > hour) {
+          this.reservationService.setReservationToCheck(this.reservationsUser[i]);
+          this.dialog.open(RateModalComponent);
+      }
+    }
+  }
+
+  openConfirmImpartedModal(hour: number, date: Date){
+    for (let i = 0; i < this.reservationsUser.length; i++) {
+      let dateReservation = new Date(this.reservationsUser[i].date);
+      if (dateReservation.getMonth() == date.getMonth() &&
+        dateReservation.getDate() == date.getDate() &&
+        this.reservationsUser[i].startTime <= hour &&
+        this.reservationsUser[i].finishTime > hour) {
+          this.reservationService.setReservationToCheck(this.reservationsUser[i]);
+          this.dialog.open(ConfirmImpartedLessonModalComponent);
+      }
+    }
   }
 
   checkComplementaryUser(){
