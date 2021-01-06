@@ -1,0 +1,153 @@
+<div id="infoTarjeta">
+    <mat-card style="width:100%;">
+        <mat-card-title id="test-pointer">Registrate en Learn & Trade</mat-card-title>
+        <mat-card-content>
+            Completa los siguientes campos.
+            <form class="signup-form" [formGroup]="signupForm" >
+                    <mat-form-field class="signup-full-width">
+                    <mat-label>Usuario</mat-label>
+                    <input matInput formControlName="user" id="user">
+                    </mat-form-field>
+                <table class="signup-full-width" cellspacing="0"><tr>
+                    <td><mat-form-field class="signup-full-width">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput formControlName="name" id="name">
+                    </mat-form-field></td>
+                    <td><mat-form-field class="signup-full-width">
+                    <mat-label>Apellido</mat-label>
+                    <input matInput formControlName="surname" id="surname">
+                    </mat-form-field></td>
+                </tr>
+                <tr>
+                    
+                    
+                </tr></table>
+                <mat-form-field class="signup-full-width">
+                    <mat-label>Contraseña</mat-label>
+                    <input type="password" matInput formControlName="pass" id="pass">
+                </mat-form-field>
+                <mat-form-field class="signup-full-width">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" id="email">
+                </mat-form-field>
+                <mat-form-field color="accent" appearance="fill">
+                    <mat-label>Fecha de nacimiento</mat-label>
+                    <input matInput [matDatepicker]="picker1" formControlName="date" id="date ">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field>
+                  <br>
+                <p>Selecciona una imagen de perfil:</p>
+                <br>
+
+                
+                    <ng-container *ngFor="let image of listImages" >
+                        
+                        <input type="image" src={{image}} Alt="Imagen" class="imagenRegistro" (click)="imageSelected(image)"/>
+                    </ng-container>
+                
+                
+                <div class="row">
+                    <div id="infoIzq">
+                        <h2 style="padding-left: 10%;">
+                            <u>Mis intereses</u>
+                        </h2>
+                        <mat-list role="list">
+                            <mat-list-item *ngFor="let interest of miPerfil.interests" style="margin-top: -15px; padding-left: 5%;">
+                            <mat-icon mat-list-icon class="red-icon">
+                                favorite
+                            </mat-icon>
+                            {{interest.name}}
+                            <button mat-icon-button color="primary" style="color: red;" (click)="deleteInterest(interest)">
+                                <mat-icon>clear</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        </mat-list>
+                        <div class="row" style="align-items: center; padding-left: 10%; ">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Lista de intereses</mat-label>
+                                <mat-select [(value)]="selectedInterest">
+                                    <mat-option
+                                        *ngFor="let knowledgeItem of knowledgeList"
+                                        [value]="knowledgeItem"
+                                    >
+                                        {{knowledgeItem.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <div class="boton">
+                                <button
+                                    mat-mini-fab
+                                    style="background-color: lightskyblue; color: black;"
+                                    (click)="addInterest(selectedInterest)"
+                                >
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                    id="infoDcha"
+                    
+                    >
+                        <h2 style="padding-left: 10%;">
+                            <u>Mis conocimientos</u>
+                        </h2>
+                        <mat-list role="list">
+                            <mat-list-item
+                                *ngFor="let knowledge of miPerfil.knowledges"
+                                style="margin-top: -15px; padding-left: 5%;
+                                "
+                            >
+                                <mat-icon mat-list-icon>school</mat-icon>
+                                {{knowledge.name}}
+                                <button mat-icon-button color="primary" style="color: red;" (click)="deleteKnowledge(knowledge)">
+                                    <mat-icon>clear</mat-icon>
+                                </button>
+                            </mat-list-item>
+                        </mat-list>
+                        
+                        <div
+                            class="row"
+                            style="align-items: center; padding-left: 10%; "
+                        >
+                            <mat-form-field appearance="fill">
+                                <mat-label>Lista de conocimientos</mat-label>
+
+                                <mat-select [(value)]="selectedKnowledge">
+                                    <mat-option
+                                        *ngFor="let knowledgeItem of knowledgeList"
+                                        [value]="knowledgeItem"
+                                    >
+                                        {{knowledgeItem.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <div class="boton">
+                                <button
+                                    mat-mini-fab
+                                    style="background-color: lightskyblue; color: black;"
+                                    (click)="addKnowledge(selectedKnowledge)"
+                                >
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </form>
+            <div class="botonCentral">
+                <button
+                    (click)="signup()"
+                    mat-raised-button
+                    style="background-color: lightgreen;"
+                >
+                    Aceptar
+                </button>
+            </div>
+
+        </mat-card-content>
+    </mat-card>
+</div>

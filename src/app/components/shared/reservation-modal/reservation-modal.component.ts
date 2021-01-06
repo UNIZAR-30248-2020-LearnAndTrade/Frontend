@@ -8,6 +8,7 @@ import {LoginService} from "../../../services/login.service";
 import {user} from "../../../models/user";
 import {GetUserService} from "../../../services/get-user.service";
 import {ReservationService} from "../../../services/reservation.service";
+import { getMatIconFailedToSanitizeUrlError } from '@angular/material/icon';
 
 @Component({
   selector: 'app-reservation-modal',
@@ -45,7 +46,9 @@ export class ReservationModalComponent implements OnInit {
       knowledges: [],
       name: '',
       surname: '',
-      birthdate: new Date
+      birthDate: new Date,
+      imageUrl: '',
+      password: ''
     };
 
     this.autenticado = this.loginService.isAuthenticated(); // Comprobar si está autentificado
@@ -113,7 +116,10 @@ export class ReservationModalComponent implements OnInit {
         date: this.selectedDateTeach,
         theme: this.selectedKnowledge,
         teacherUsername: this.user.username,
-        studentUsername: this.complementaryUser.username
+        studentUsername: this.complementaryUser.username,
+        studentFinished: false,
+        teacherFinished: false,
+        rating: -1,
       }
       this.reservationLearn = {
         id: "id",
@@ -122,7 +128,10 @@ export class ReservationModalComponent implements OnInit {
         date: this.selectedDateLearn,
         theme: this.selectedInterest,
         teacherUsername: this.complementaryUser.username,
-        studentUsername: this.user.username
+        studentUsername: this.user.username,
+        studentFinished: false,
+        teacherFinished: false,
+        rating: -1,
       }
       this.reservationService.createReservation(this.reservationTeach).subscribe(response => {
         console.log(response);

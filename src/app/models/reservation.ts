@@ -7,5 +7,8 @@ export interface reservation {
     date: Date;
     theme: theme;
     teacherUsername: string;
+    teacherFinished: boolean;
     studentUsername: string;
+    studentFinished: boolean;
+    rating: number;
 }

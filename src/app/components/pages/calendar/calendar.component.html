@@ -1,72 +1,93 @@
 <div class="row" style="text-align: center;">
   <div class="col-3" style="margin-top: 3%; padding-left: 5%">
     <div class="row">
-      <h4>Tus reservas: <span style="background-color: #db271a; color: white"> HORA </span> </h4>
+      <h1 id="current-month">{{ monthName }} del {{ year }}</h1> 
+      <h4>Tus reservas: <span class="blocked-hour"> HORA LECCIÓN</span> </h4>
+      <h4>Marcar impartida: <span class="pending-finishing"> HORA</span> </h4>
+      <h4>Valoración pendiente: <span class="pending-rating"> HORA</span> </h4>
+      <h4>Terminada: <span class="finished"> HORA</span> </h4>
       <h4 *ngIf="complementaryUserAvailable">Reservas de {{complementaryUser.name}}:
-        <span style="background-color: cornflowerblue; color: white"> HORA </span> </h4>
+        <span class="complementary-blocked-hour"> HORA </span> </h4>
     </div>
-    <div class="icon" (click)="backMonth()">
-      <mat-icon [inline]="true" style="vertical-align: middle;">arrow_back</mat-icon>
+    <div class="row">
+      
+      <div class="col" (click)="backMonth()">
+        <mat-icon class="icon" [inline]="true" style="vertical-align: middle;">arrow_back</mat-icon>
+        <span class="tag-icon">Mes anterior</span>
+      </div>
+
+      <div class="col" (click)="forwardMonth()">
+        <mat-icon class="icon" [inline]="true" style="vertical-align: middle;">arrow_forward</mat-icon>
+        <span class="tag-icon">Mes siguiente</span>
+      </div>
     </div>
-    <mat-form-field style="width: inherit" appearance="fill">
-      <mat-label>Mes:</mat-label>
-      <mat-select [(value)]="month">
-        <mat-option value="1">
-          Enero
-        </mat-option>
-        <mat-option value="2">
-          Febrero
-        </mat-option>
-        <mat-option value="3">
-          Marzo
-        </mat-option>
-        <mat-option value="4">
-          Abril
-        </mat-option>
-        <mat-option value="5">
-          Mayo
-        </mat-option>
-        <mat-option value="6">
-          Junio
-        </mat-option>
-        <mat-option value="7">
-          Julio
-        </mat-option>
-        <mat-option value="8">
-          Agosto
-        </mat-option>
-        <mat-option value="9">
-          Septiembre
-        </mat-option>
-        <mat-option value="10">
-          Octubre
-        </mat-option>
-        <mat-option value="11">
-          Noviembre
-        </mat-option>
-        <mat-option value="12">
-          Diciembre
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field style="width: inherit" appearance="fill">
-      <mat-label>Año:</mat-label>
-      <mat-select [(value)]="year">
-        <mat-option value="2020">
-          2020
-        </mat-option>
-        <mat-option value="2021">
-          2021
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <button mat-raised-button style="background-color: lightskyblue;" (click)="getDaysInMonth()">
-      CARGAR
-    </button>
-    <div class="icon" (click)="forwardMonth()">
-      <mat-icon [inline]="true" style="vertical-align: middle;">arrow_forward</mat-icon>
+    
+    <div id="quick-form" class="row">
+      <div class="col-sm-6">
+        <mat-form-field class="month-selector" appearance="fill">
+          <mat-label>Mes:</mat-label>
+          <mat-select [(value)]="month">
+            <mat-option value="1">
+              Enero
+            </mat-option>
+            <mat-option value="2">
+              Febrero
+            </mat-option>
+            <mat-option value="3">
+              Marzo
+            </mat-option>
+            <mat-option value="4">
+              Abril
+            </mat-option>
+            <mat-option value="5">
+              Mayo
+            </mat-option>
+            <mat-option value="6">
+              Junio
+            </mat-option>
+            <mat-option value="7">
+              Julio
+            </mat-option>
+            <mat-option value="8">
+              Agosto
+            </mat-option>
+            <mat-option value="9">
+              Septiembre
+            </mat-option>
+            <mat-option value="10">
+              Octubre
+            </mat-option>
+            <mat-option value="11">
+              Noviembre
+            </mat-option>
+            <mat-option value="12">
+              Diciembre
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-5">
+        <mat-form-field class="year-selector" appearance="fill">
+          <mat-label>Año:</mat-label>
+          <mat-select [(value)]="year">
+            <mat-option value="2020">
+              2020
+            </mat-option>
+            <mat-option value="2021">
+              2021
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      
+      <button mat-raised-button class="load-button" (click)="getDaysInMonth()">
+        CARGAR
+      </button>
+
     </div>
   </div>
+
+  
   <div class="col-9">
     <div class="row" *ngFor="let nFila of numberReturnSemanas(); index as indexRow;">
       <div class="col" *ngFor="let nCol of numberReturn(7); index as index;"
@@ -90,49 +111,66 @@
             <tr *ngFor="let nHour of numberReturn(12); index as hour;">
               <div class="row">
 
-                <div *ngIf="isReserved(hour * 2, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek]) == 1; then thenBlock11 else elseBlock11"></div>
-                <ng-template #thenBlock11>
-                  <div (click)="openModalReservation(hour * 2, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek])"
-                       style="background-color: #db271a; color: white" class="col-6">
-                  {{hour * 2}}
-                  </div>
-                </ng-template>
-                <ng-template #elseBlock11>
-                  <div *ngIf="isReserved(hour * 2, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek]) == 2; then thenBlock12 else elseBlock12"></div>
-                  <ng-template #thenBlock12>
-                    <div style="background-color: cornflowerblue; color: white" class="col-6">
-                      {{hour * 2}}
-                    </div>
-                  </ng-template>
-                  <ng-template #elseBlock12>
-                    <div class="col-6">
-                      {{hour * 2}}
-                    </div>
-                  </ng-template>
-                </ng-template>
+                <div [ngSwitch]="isReserved(hour * 2, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek])" class="col-6">
+                  
+                  <span *ngSwitchCase="1" (click)="openModalReservation(hour * 2, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek])"
+                    class="blocked-hour">
+                  {{hour * 2}}:00
+                  </span>
 
-                <div *ngIf="isReserved(hour * 2 + 1, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek]) == 1; then thenBlock21 else elseBlock21"></div>
-                <ng-template #thenBlock21>
-                  <div (click)="openModalReservation(hour * 2 + 1, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek])"
-                       style="background-color: #db271a; color: white" class="col-6">
-                    {{hour * 2 + 1}}
-                  </div>
-                </ng-template>
-                <ng-template #elseBlock21>
-                  <div *ngIf="isReserved(hour * 2 + 1, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek]) == 2;
-                   then thenBlock22 else elseBlock22"></div>
-                  <ng-template #thenBlock22>
-                    <div style="background-color: cornflowerblue; color: white" class="col-6">
-                      {{hour * 2 + 1}}
-                    </div>
-                  </ng-template>
-                  <ng-template #elseBlock22>
-                    <div class="col-6">
-                      {{hour * 2 + 1}}
-                    </div>
-                  </ng-template>
-                </ng-template>
+                  <span *ngSwitchCase="2" class="complementary-blocked-hour">
+                    {{hour * 2}}:00
+                  </span>
+                  
+                  <span *ngSwitchCase="3" class="pending-finishing">
+                    <!-- Click open Finish Modal -->
+                    {{hour * 2}}:00
+                  </span>
 
+                  <span *ngSwitchCase="4" (click)="openRatingModal()" class="pending-rating">
+                    {{hour * 2}}:00
+                  </span>
+
+                  <span *ngSwitchCase="5" class="finished">
+                    {{hour * 2}}:00
+                  </span>
+                  
+                  <span *ngSwitchDefault>
+                    {{hour * 2}}:00
+                  </span>
+                
+                </div>
+
+                <div [ngSwitch]="isReserved(hour * 2 + 1, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek])" class="col-6">
+                  
+                  <span *ngSwitchCase="1" (click)="openRatingModal()"
+                        class="col-6 blocked-hour">
+                        <!-- (click)="openModalReservation(hour * 2 + 1, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek])" -->
+                    {{hour * 2 + 1}}:00
+                  </span>
+
+                  <span *ngSwitchCase="2" class="complementary-blocked-hour">
+                    {{hour * 2 + 1}}:00
+                  </span>
+
+                  <span *ngSwitchCase="3" class="pending-finishing">
+                    {{hour * 2 + 1}}:00
+                  </span>
+
+                  <span *ngSwitchCase="4" (click)="openRatingModal()" class="pending-rating">
+                    {{hour * 2 + 1}}:00
+                  </span>
+
+                  <span *ngSwitchCase="5" class="finished">
+                    <!-- Click open Rating Modal-->
+                    {{hour * 2 + 1}}:00
+                  </span>
+                  
+                  <span *ngSwitchDefault>
+                    {{hour * 2 + 1}}:00
+                  </span>
+                
+                </div>
               </div>
             </tr>
             </tbody>

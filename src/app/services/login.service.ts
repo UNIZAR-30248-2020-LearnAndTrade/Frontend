@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {ChatService} from "./chat.service";
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class LoginService {
 
   public urlLogin: string;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private chatService: ChatService) {
     this.urlLogin = 'https://learn-and-trade-backend.herokuapp.com/user/login';
    }
 
@@ -26,7 +27,7 @@ export class LoginService {
     console.log(user);
 
     localStorage.setItem('userJSON', JSON.stringify(user));
-   
+
     console.log(user);
   }
 
@@ -43,12 +44,13 @@ export class LoginService {
     else{
       return false;
     }
-    
+
   }
 
   public cerrarSesion(){
     localStorage.removeItem('userJSON');
     console.log(localStorage.getItem('userJSON'));
+    this.chatService._disconnect();
     window.location.href = "/login";
   }
 }

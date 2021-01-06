@@ -10,8 +10,13 @@ import { ReservationService } from "../../../services/reservation.service";
 import { user } from 'src/app/models/user';
 import { theme } from 'src/app/models/theme';
 import { ReservationModalComponent } from "../../shared/reservation-modal/reservation-modal.component";
+
 import { GetReservationModalComponent } from "../../shared/get-reservation-modal/get-reservation-modal.component";
 import { ChangePassComponent } from '../../shared/change-pass/change-pass.component';
+
+
+import { SearchUsersService } from "../../../services/search-users.service";
+import {ChatService} from "../../../services/chat.service";
 
 
 @Component({
@@ -32,7 +37,8 @@ export class homepageComponent implements OnInit {
 
   constructor(private ComplementaryUsersService: ComplementaryUsersService, private UserService: GetUserService,
     private EditProfile: EditProfileService, private loginService: LoginService, private ThemeService: GetThemeService,
-    public dialog: MatDialog, private reservationService: ReservationService, private router: Router) { }
+    public dialog: MatDialog, private reservationService: ReservationService, private router: Router,
+              private chatService: ChatService) { }
 
   ngOnInit(): void {
     this.miPerfil = {
@@ -42,7 +48,10 @@ export class homepageComponent implements OnInit {
       knowledges: [],
       name: '',
       surname: '',
-      birthdate: new Date
+      birthDate: new Date,
+      password:'',
+      imageUrl:''
+
     };
 
     this.autenticado = this.loginService.isAuthenticated(); // Comprobar si está autentificado
@@ -54,7 +63,6 @@ export class homepageComponent implements OnInit {
       window.location.href = "/login";
     }
 
-
   }
 
   getComplementary(usuario){
@@ -62,7 +70,8 @@ export class homepageComponent implements OnInit {
     this.ComplementaryUsersService.getComplementaryUsers(usuario).subscribe(
       response => {
         console.log(response);
-        this.usuarios = response
+        this.usuarios = response;
+        this.filtrarMismoUsuario();
       },
       error => {
         var errorMessage = <any>error;
@@ -166,10 +175,15 @@ export class homepageComponent implements OnInit {
   editProfile(){
     this.EditProfile.editProfile(this.miPerfil).subscribe(
       response => {
+
         localStorage.setItem('userJSON', JSON.stringify(this.miPerfil));
+
+        console.log(response);
+
         this.dialog.open(DialogConfirmDialog);
       },
       error => {
+        console.log(error);
         this.dialog.open(DialogErrorEdit);
         var errorMessage = <any>error;
         if (errorMessage != null) {
@@ -193,6 +207,25 @@ export class homepageComponent implements OnInit {
 
   goToProfile(username) {
     this.router.navigate(["/profile/" + username]);
+  }
+
+  filtrarMismoUsuario() {
+    for (let i = 0; i < this.usuarios.length; i++) {
+      if (this.usuarios[i].name == this.miPerfil.name) {
+        this.usuarios.splice(i,1);
+      }
+    }
+  }
+
+  newChat(usuario: user) {
+    this.chatService.createRoom(this.miPerfil.username, usuario.username).subscribe( result => {
+      console.log(result);
+      this.goToChat();
+    })
+  }
+
+  goToChat() {
+    this.router.navigate(["/chat"]);
   }
 
 }

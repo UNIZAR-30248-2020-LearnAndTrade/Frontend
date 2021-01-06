@@ -35,20 +35,29 @@
             </li>
         </ul>
         <div *ngIf="autenticado">
-          <button class="btn btn-outline-secondary" (click)="goToCalendar()">
-            <mat-icon style="vertical-align: middle;">calendar_today</mat-icon>
-                Ver calendario
-          </button>
+            <button class="btn btn-outline-primary" (click)="goToChat()">
+              <mat-icon *ngIf="newMessages" style="vertical-align: middle; color: green">mark_chat_unread</mat-icon>
+              <mat-icon *ngIf="!newMessages" style="vertical-align: middle;">chat</mat-icon>
+              Chat
+            </button>
+            <button class="btn btn-outline-primary" (click)="goToSearch()">
+              <mat-icon style="vertical-align: middle;">search</mat-icon>
+                Buscar usuarios
+            </button>
+            <button class="btn btn-outline-primary" (click)="goToCalendar()">
+              <mat-icon style="vertical-align: middle;">calendar_today</mat-icon>
+                Calendario
+            </button>
             <button (click)="goToPerfil()" id="goToProfileBtn" class="btn btn-outline-primary">
                 <mat-icon style="vertical-align: middle;">account_circle</mat-icon>
                 Mi perfil
             </button>
             <button
                 id="closeSessionBtn"
-                class="btn btn-outline-primary"
+                class="btn btn-outline-danger"
                 (click)="cerrarsesion()"
             >
-                <mat-icon style="vertical-align: middle;">account_circle</mat-icon>
+                <mat-icon style="vertical-align: middle;">login</mat-icon>
                 Cerrar sesión
             </button>
         </div>
