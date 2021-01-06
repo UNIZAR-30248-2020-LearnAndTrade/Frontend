@@ -37,6 +37,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 import { MatInputModule } from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
+
 
 
 
@@ -48,6 +52,7 @@ import { GetReservationModalComponent } from './components/shared/get-reservatio
 import { RateModalComponent } from './components/shared/rate-modal/rate-modal.component';
 import { SearchComponent } from './components/pages/search/search.component';
 import { ConfirmImpartedLessonModalComponent } from './components/shared/confirm-imparted-lesson-modal/confirm-imparted-lesson-modal.component';
+import { RankingComponent } from './components/pages/ranking/ranking.component';
 
 
 
@@ -73,7 +78,8 @@ import { ConfirmImpartedLessonModalComponent } from './components/shared/confirm
     RateModalComponent,
     SearchComponent,
     DialogErrorEdit,
-    ConfirmImpartedLessonModalComponent
+    ConfirmImpartedLessonModalComponent,
+    RankingComponent
 
   ],
   imports: [
@@ -94,12 +100,14 @@ import { ConfirmImpartedLessonModalComponent } from './components/shared/confirm
     MatButtonModule,
     HttpClientModule,
     MatDialogModule,
+    MatPaginatorModule,
 
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
 
     MatSnackBarModule,
+    MatTableModule
 
   ],
   exports: [
@@ -112,7 +120,9 @@ import { ConfirmImpartedLessonModalComponent } from './components/shared/confirm
     MatDialogModule,
     MatInputModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [RootComponent]

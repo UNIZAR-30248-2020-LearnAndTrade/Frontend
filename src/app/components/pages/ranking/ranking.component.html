@@ -1,0 +1,69 @@
+<div id="BoxIzq" class="infoIzq">
+    <mat-card style="width:100%;">
+      <mat-card-title id="test-pointer-2">Tema seleccionado</mat-card-title>
+      <mat-card-content>
+  
+        <div class="row" style="align-items: center; padding-left: 18%">
+            <mat-form-field appearance="fill" style="padding-top: 5%">
+              <mat-label>Lista de intereses</mat-label>
+
+              <mat-select id="interest-option" [(value)]="selectedInterest">
+                <mat-option *ngFor="let theme of themesList" [value]="theme">
+                  {{theme.name}}
+                </mat-option>
+              </mat-select>
+
+            </mat-form-field>
+            
+            
+          </div>
+
+        <div class="row" style="align-items: center; padding-left: 15%">
+            <div class="boton" style="padding: inherit">
+              <button mat-flat-button (click)="buscar(selectedInterest)"
+                      style="padding: 2% 60%; border-radius: 35px 35px 35px 35px; background-color: lightskyblue; color: black">
+                Buscar
+              </button>
+            </div>
+          </div>
+              
+  
+  
+      </mat-card-content>
+  
+    </mat-card>
+  </div>
+  
+  <div id="BoxDcha" class="infoDcha">
+    <mat-card style="width:100%;">
+      <mat-card-title id="test-pointer">Ranking sobre el tema: {{theme}}</mat-card-title>
+      <mat-card-content>
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource">
+          
+              <!-- Position Column -->
+              <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+              </ng-container>
+          
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.rating}} </td>
+              </ng-container>
+          
+              
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+          </div>
+          
+  
+      </mat-card-content>
+    </mat-card>
+  </div>
+  
+  
