@@ -28,7 +28,7 @@ export class ChangePassComponent implements OnInit {
   }
 
   change(){
-    this.loginService.validate(this.email.value, this.password.value)
+    this.loginService.validate(this.email.value, MD5(this.password.value))
       .subscribe((response) => {
         //SERVICIO CAMBIAR CONTRASEÑA
         this.editUser = JSON.parse(localStorage.getItem('userJSON'));
