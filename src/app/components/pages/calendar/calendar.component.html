@@ -114,7 +114,7 @@
                 <div [ngSwitch]="isReserved(hour * 2, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek])" class="col-6">
                   
                   <span *ngSwitchCase="1" (click)="openModalReservation(hour * 2, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek])"
-                    class="blocked-hour">
+                        class="blocked-hour">
                   {{hour * 2}}:00
                   </span>
 
@@ -122,12 +122,14 @@
                     {{hour * 2}}:00
                   </span>
                   
-                  <span *ngSwitchCase="3" class="pending-finishing">
+                  <span *ngSwitchCase="3" (click)="openConfirmImpartedModal(hour * 2, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek])"
+                        class="pending-finishing">
                     <!-- Click open Finish Modal -->
                     {{hour * 2}}:00
                   </span>
 
-                  <span *ngSwitchCase="4" (click)="openRatingModal()" class="pending-rating">
+                  <span *ngSwitchCase="4" (click)="openRatingModal(hour * 2, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek])" 
+                        class="pending-rating">
                     {{hour * 2}}:00
                   </span>
 
@@ -143,9 +145,8 @@
 
                 <div [ngSwitch]="isReserved(hour * 2 + 1, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek])" class="col-6">
                   
-                  <span *ngSwitchCase="1" (click)="openRatingModal()"
-                        class="col-6 blocked-hour">
-                        <!-- (click)="openModalReservation(hour * 2 + 1, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek])" -->
+                  <span *ngSwitchCase="1" (click)="openModalReservation(hour * 2 + 1, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek])"
+                        class="blocked-hour">
                     {{hour * 2 + 1}}:00
                   </span>
 
@@ -153,11 +154,13 @@
                     {{hour * 2 + 1}}:00
                   </span>
 
-                  <span *ngSwitchCase="3" class="pending-finishing">
+                  <span *ngSwitchCase="3" (click)="openConfirmImpartedModal(hour * 2 + 1, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek])"
+                        class="pending-finishing">
                     {{hour * 2 + 1}}:00
                   </span>
 
-                  <span *ngSwitchCase="4" (click)="openRatingModal()" class="pending-rating">
+                  <span *ngSwitchCase="4" (click)="openRatingModal(hour * 2 + 1, daysOfMonth[index + (indexRow * 7) - numberOfDayOnAWeek])" 
+                        class="pending-rating">
                     {{hour * 2 + 1}}:00
                   </span>
 

@@ -12,7 +12,8 @@
           <ngb-rating [max]="5" [formControl] = "RatingForm"></ngb-rating>
         </div>
         <div *ngIf="RatingForm.valid">Puntuación: {{ RatingForm.value }}/5</div>
-        <div *ngIf="RatingForm.invalid">Puntuación: 0/5</div>
+        <div *ngIf="RatingForm.invalid && reservation.rating > -1">Puntuación: {{ reservation.rating }}/5</div>
+        <div *ngIf="RatingForm.invalid && reservation.rating < 0">Puntuación: 0/5</div>
     </div>
   </div>
 </div>
