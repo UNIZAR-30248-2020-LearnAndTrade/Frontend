@@ -97,5 +97,8 @@ export class HeaderComponent implements OnInit {
   goToChat() {
     this.router.navigate(["/chat"]);
   }
+  goToRanking() {
+    this.router.navigate(["/ranking"]);
+  }
 
 }

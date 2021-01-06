@@ -1,0 +1,45 @@
+.infoIzq{
+    padding: 10px;
+    float: left;
+    width: 25%;
+    text-align: justify;
+  }
+  
+  .infoDcha{
+    padding: 10px;
+    float: left;
+    width: 75%;
+    text-align: justify;
+  }
+  
+  .infoCentral{
+    padding: 10px;
+    float: left;
+    width: 100%;
+    text-align: justify;
+  }
+  
+  .imagenTarjeta{
+    padding: 10px;
+    max-width: 20%;
+    border-radius: 50%
+  
+  }
+  .infoTarjeta{
+    padding: 10px;
+    float: left;
+    width: 60%;
+    text-align: justify;
+  }
+  
+  .tituloCard{
+    width: 100%;
+    text-align: left;
+  }
+  .ContenidoCard{
+    text-align: left;
+    padding-left: 15%;
+  }
+  table {
+    width: 100%;
+  }
