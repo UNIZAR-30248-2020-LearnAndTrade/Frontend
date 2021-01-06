@@ -3,7 +3,7 @@
     <div id="chat-container">
         <div id="search-container">Chat L&T</div>
         <div id="conversation-list">
-            <div *ngFor="let room of rooms; index as i;" class="conversation" (click)="cambiarChat(i)">
+            <div *ngFor="let room of rooms; index as i;" class="conversation {{room.active}}" (click)="cambiarChat(i)">
                 <img
                     src="../../../../assets/img/perfil.jpg"
                 >

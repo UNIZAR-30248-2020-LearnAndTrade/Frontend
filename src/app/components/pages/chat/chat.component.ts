@@ -126,6 +126,7 @@ export class ChatComponent implements OnInit {
         return message;
       });
       this.chatService.makeHeaderCount();
+      this.setActiveHTML();
       this.rooms[index].messagesToRead = 0;
       console.log(this.listaMessages);
     });
@@ -137,6 +138,16 @@ export class ChatComponent implements OnInit {
       console.log(this.rooms);
       this.contar();
     });
+  }
+
+  setActiveHTML() {
+    for (let i = 0; i < this.rooms.length; i++) {
+      this.rooms[i].active = '';
+    }
+
+    if (this.conversacionActiva >= 0) {
+      this.rooms[this.conversacionActiva].active = 'active';
+    }
   }
 
 }
