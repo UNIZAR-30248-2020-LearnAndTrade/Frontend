@@ -1,4 +1,4 @@
-<!-- <div class="row" style="margin: auto">
+<div class="row" style="margin: auto">
     <h1 style="text-align: center; margin: auto;" mat-dialog-title>
       Confirmar lección de TEMA
     </h1>
@@ -7,7 +7,8 @@
   <div class="row" style="text-align: center">
     <div class="col">
       <div>
-        <p>¿Se ha impartido la lección de USERNAME del día DD/MM/AAAA?</p>
+        <p>¿Se ha impartido la lección de {{reservation.theme.name}} entre
+          {{reservation.studentUsername}} y {{reservation.teacherUsername}}?</p>
       </div>
     </div>
   </div>
@@ -47,6 +48,5 @@
       </div>
     </div>
   </div>
--->
 
 
