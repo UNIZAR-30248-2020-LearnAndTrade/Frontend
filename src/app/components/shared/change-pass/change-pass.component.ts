@@ -32,7 +32,7 @@ export class ChangePassComponent implements OnInit {
       .subscribe((response) => {
         //SERVICIO CAMBIAR CONTRASEÑA
         this.editUser = JSON.parse(localStorage.getItem('userJSON'));
-        this.editUser.password = MD5(this.passwordrepeat);
+        this.editUser.password = MD5(this.passwordrepeat.value);
         this.EditProfileService.editProfile(this.editUser)
           .subscribe((response) => {
             //OK Y REDIRECT AL HOME
