@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { LoginService } from '../../../services/login.service';
-
+import { EditProfileService } from '../../../services/edit-profile.service';
+import { user } from 'src/app/models/user';
 
 
 @Component({
@@ -12,14 +13,14 @@ import { LoginService } from '../../../services/login.service';
 export class ChangePassComponent implements OnInit {
 
   public error: boolean = false;
-
+  public editUser: user;
 
   email = new FormControl('');
   password = new FormControl('');
   passwordrepeat = new FormControl('');
 
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService, private EditProfileService:EditProfileService) { }
 
   ngOnInit(): void {
   }
@@ -27,10 +28,10 @@ export class ChangePassComponent implements OnInit {
   change(){
     this.loginService.validate(this.email.value, this.password.value)
       .subscribe((response) => {
-        this.error = false;
-
         //SERVICIO CAMBIAR CONTRASEÑA
-        this.loginService.validate(this.email.value, this.passwordrepeat.value)
+        this.editUser = JSON.parse(localStorage.getItem('userJSON'));
+        this.editUser.password = MD5(this.passwordrepeat);
+        this.EditProfileService.editProfile(this.editUser)
           .subscribe((response) => {
             //OK Y REDIRECT AL HOME
             window.location.href = "/home";
@@ -39,11 +40,6 @@ export class ChangePassComponent implements OnInit {
             console.log(err.status);
             this.error = true;
           });
-
-
-
-        
-
       },
       (err) => {
         console.log(err.status);
