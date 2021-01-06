@@ -6,6 +6,8 @@ import {user} from "../../../models/user";
 import {ReservationService} from "../../../services/reservation.service";
 import {GetUserService} from "../../../services/get-user.service";
 import {LoginService} from "../../../services/login.service";
+import {Observable} from "rxjs";
+import {HeaderComponent} from "../../shared/header/header.component";
 
 
 
@@ -25,6 +27,8 @@ export class ChatComponent implements OnInit {
 
   conversacionActiva = -1;
 
+  messageObservable: Observable<chatMessage> = undefined;
+
   monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
@@ -40,20 +44,22 @@ export class ChatComponent implements OnInit {
       knowledges: [],
       name: '',
       surname: '',
-      birthdate: new Date,
-      imageUrl: ''
+      birthDate: new Date,
+      imageUrl: '',
+      password:''
     };
 
     this.autenticado = this.loginService.isAuthenticated(); // Comprobar si está autentificado
     if (this.autenticado) {
       this.getMyProfile();
-      this.connect(this.user.username);
       this.getRooms();
+      this.connectChat();
 
     } else {
       window.location.href = "/login";
     }
   }
+
   getMyProfile(){
     this.user = JSON.parse(localStorage.getItem('userJSON'));
     console.log(this.user);
@@ -71,8 +77,17 @@ export class ChatComponent implements OnInit {
     );
   }
 
-  connect(username){
-    this.chatService._connect(username);
+  connectChat(){
+    if (this.messageObservable == undefined) {
+      this.messageObservable = this.chatService.getObservableChat();
+      this.messageObservable.subscribe((msg) => {
+        console.log("MENSAJE EN CHAT");
+        if (this.conversacionActiva >= 0) {
+          this.cambiarChat(this.conversacionActiva);
+        }
+        this.contar();
+      });
+    }
   }
 
   disconnect(){
@@ -110,6 +125,9 @@ export class ChatComponent implements OnInit {
         message.timestamp = new Date(message.timestamp);
         return message;
       });
+      this.chatService.makeHeaderCount();
+      this.setActiveHTML();
+      this.rooms[index].messagesToRead = 0;
       console.log(this.listaMessages);
     });
   }
@@ -120,6 +138,16 @@ export class ChatComponent implements OnInit {
       console.log(this.rooms);
       this.contar();
     });
+  }
+
+  setActiveHTML() {
+    for (let i = 0; i < this.rooms.length; i++) {
+      this.rooms[i].active = '';
+    }
+
+    if (this.conversacionActiva >= 0) {
+      this.rooms[this.conversacionActiva].active = 'active';
+    }
   }
 
 }

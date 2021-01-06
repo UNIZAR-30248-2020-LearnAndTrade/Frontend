@@ -8,6 +8,7 @@ import { chatRoom } from 'src/app/models/chatRoom';
 import { homepageComponent } from '../components/pages/homepage/homepage.component';
 import { ChatComponent } from '../components/pages/chat/chat.component';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import {Observable, Subscriber} from "rxjs";
 
 
 @Injectable({
@@ -20,8 +21,26 @@ export class ChatService {
   stompClient: any;
   newMensaje: chatMessage;
 
-  constructor(private http: HttpClient){
+  subscriberHeader: Subscriber<chatMessage>;
+  subscriberChat: Subscriber<chatMessage>;
+  observableHeader: Observable<chatMessage>;
+  observableChat: Observable<chatMessage>;
 
+  constructor(private http: HttpClient){
+    this.observableHeader = new Observable(observer => {
+      this.subscriberHeader = observer;
+    });
+    this.observableChat = new Observable(observer => {
+      this.subscriberChat = observer;
+    });
+  }
+
+  getObserverHeader() {
+    return this.observableHeader;
+  }
+
+  getObservableChat() {
+    return this.observableChat;
   }
 
   _connect(username) {
@@ -32,9 +51,11 @@ export class ChatService {
     const _this = this;
     _this.stompClient.connect({}, function (frame) {
       _this.stompClient.subscribe("/user/" + username + "/queue/messages", function (sdkEvent) {
-        console.log("SDK EVENT:");
+        /*console.log("SDK EVENT:");
         console.log(sdkEvent);
-        _this.onMessageReceived(sdkEvent);
+        _this.onMessageReceived(sdkEvent);*/
+        _this.subscriberHeader.next(sdkEvent);
+        _this.subscriberChat.next(sdkEvent);
       });
       _this.stompClient.reconnect_delay = 2000;
     }, this.errorCallBack);
@@ -70,22 +91,26 @@ export class ChatService {
 
   countMessages(senderId, recipientId) {
     return this.http.get(this.webSocketEndPoint + "messages/" + senderId + "/" + recipientId + "/count");
+  }
 
+  countAnyMessages(recipientId) {
+    return this.http.get(this.webSocketEndPoint + "messages/" + recipientId + "/count");
   }
 
   seeMessages(senderId, recipientId) {
     return this.http.get(this.webSocketEndPoint + "messages/" + senderId + "/" + recipientId);
-
   }
 
   createRoom(senderId, recipientId) {
     return this.http.get(this.webSocketEndPoint + "rooms/" + senderId + "/" + recipientId);
-
   }
 
   getRooms(senderId) {
     return this.http.get(this.webSocketEndPoint + "rooms/" + senderId );
+  }
 
+  makeHeaderCount() {
+    this.subscriberHeader.next();
   }
 
 }

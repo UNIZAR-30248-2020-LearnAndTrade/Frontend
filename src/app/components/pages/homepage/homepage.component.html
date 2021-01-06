@@ -32,7 +32,7 @@
                 >
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <img
-                            src="assets/img/perfil.jpg"
+                            src={{usuario.imageUrl}}
                             id="imagenTarjeta"
                             (click)="goToProfile(usuario.username)"
                         >
@@ -104,10 +104,11 @@
         <mat-card-title id="test-pointer">Mi Perfil</mat-card-title>
         <mat-card-content>
             <div class="row">
-                <div class="avatarPerfil">
+                <div class="avatarPerfil" >
                     <img
+                    style="border: 2px outset;"
                         mat-card-md-image
-                        src="assets/img/perfil.jpg"
+                        src="{{miPerfil.imageUrl}}"
                     >
                 </div>
                 <div class="columnPerfil">
@@ -115,7 +116,13 @@
                         <b>{{miPerfil.name}} {{miPerfil.surname}}</b>
                     </h2>
                     <h3 style="margin: 0px;">Username: {{miPerfil.username}}</h3>
-                    <h3 style="margin: 0px;">{{miPerfil.email}}</h3>
+                    <form class="signup-form" [formGroup]="emailForm" >
+                        <mat-form-field class="signup-full-width">
+                            <mat-label>Email</mat-label>
+                            <input matInput formControlName="email" id="email">
+                        </mat-form-field>
+                    </form>
+                    
                 </div>
             </div>
             <div class="row">
@@ -232,6 +239,14 @@
                     style="background-color: lightgreen;"
                 >
                     Guardar cambios
+                </button>
+                <button
+                    id="save-changes"
+                    (click)="changePass()"
+                    mat-raised-button
+                    style="background-color: lightskyblue; left: 10px;"
+                >
+                    Cambiar contraseña
                 </button>
             </div>
 

@@ -10,8 +10,16 @@ import { ReservationService } from "../../../services/reservation.service";
 import { user } from 'src/app/models/user';
 import { theme } from 'src/app/models/theme';
 import { ReservationModalComponent } from "../../shared/reservation-modal/reservation-modal.component";
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+
+
+import { GetReservationModalComponent } from "../../shared/get-reservation-modal/get-reservation-modal.component";
+import { ChangePassComponent } from '../../shared/change-pass/change-pass.component';
+
+
 import { SearchUsersService } from "../../../services/search-users.service";
 import {ChatService} from "../../../services/chat.service";
+
 
 @Component({
   selector: 'app-homepage',
@@ -19,6 +27,8 @@ import {ChatService} from "../../../services/chat.service";
   styleUrls: ['./homepage.component.css']
 })
 export class homepageComponent implements OnInit {
+
+  emailForm: FormGroup;
 
   public usuarios: user[];
   public miPerfil: user;
@@ -29,12 +39,13 @@ export class homepageComponent implements OnInit {
   public selectedKnowledge: theme;
   public autenticado: boolean;
 
-  constructor(private ComplementaryUsersService: ComplementaryUsersService, private UserService: GetUserService,
+  constructor(private formBuilder: FormBuilder,private ComplementaryUsersService: ComplementaryUsersService, private UserService: GetUserService,
     private EditProfile: EditProfileService, private loginService: LoginService, private ThemeService: GetThemeService,
     public dialog: MatDialog, private reservationService: ReservationService, private router: Router,
               private chatService: ChatService) { }
 
   ngOnInit(): void {
+
     this.miPerfil = {
       username: '',
       email: '',
@@ -42,9 +53,15 @@ export class homepageComponent implements OnInit {
       knowledges: [],
       name: '',
       surname: '',
-      birthdate: new Date,
-      imageUrl: ''
+      birthDate: new Date,
+      password:'',
+      imageUrl:''
+
     };
+
+    this.emailForm = this.formBuilder.group({
+      email:[this.miPerfil.email]
+    });
 
     this.autenticado = this.loginService.isAuthenticated(); // Comprobar si está autentificado
     if(this.autenticado){
@@ -99,6 +116,9 @@ export class homepageComponent implements OnInit {
         this.miPerfil = response;
         this.elegidos = this.miPerfil.interests;
         console.log(response);
+        this.emailForm = this.formBuilder.group({
+          email:[this.miPerfil.email]
+        });
         this.getComplementary(this.miPerfil.username);
       },
       error => {
@@ -165,9 +185,14 @@ export class homepageComponent implements OnInit {
   }
 
   editProfile(){
+    this.miPerfil.email = this.emailForm.controls['email'].value
     this.EditProfile.editProfile(this.miPerfil).subscribe(
       response => {
+
+        localStorage.setItem('userJSON', JSON.stringify(this.miPerfil));
+
         console.log(response);
+
         this.dialog.open(DialogConfirmDialog);
       },
       error => {
@@ -179,6 +204,10 @@ export class homepageComponent implements OnInit {
         }
       }
     );
+  }
+
+  changePass(){
+    this.dialog.open(ChangePassComponent);
   }
 
   openModalNewReservation(user) {

@@ -128,7 +128,7 @@
 
       <ul class="list-group" *ngFor="let usuario of usuarios">
         <li class="list-group-item d-flex justify-content-between align-items-center">
-          <img src="assets/img/perfil.jpg" class="imagenTarjeta" (click)="goToProfile(usuario.username)">
+          <img src={{usuario.imageUrl}} class="imagenTarjeta" (click)="goToProfile(usuario.username)">
           <div class="infoTarjeta">
             <div class="tituloCard">
               <b>

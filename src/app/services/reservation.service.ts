@@ -1,5 +1,6 @@
 import {Component, Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import {reservation} from "../models/reservation";
 import {user} from "../models/user";
 
@@ -56,5 +57,9 @@ export class ReservationService {
     return this.http.get(this.urlReservation + '/getAll', { params:params });
   }
 
+  public updateReservation(r: reservation): Observable<any> {
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post(this.urlReservation + '/updatereservation', JSON.stringify(r), {headers: headers});
+  }
 
 }
