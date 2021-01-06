@@ -10,6 +10,8 @@ import { ReservationService } from "../../../services/reservation.service";
 import { user } from 'src/app/models/user';
 import { theme } from 'src/app/models/theme';
 import { ReservationModalComponent } from "../../shared/reservation-modal/reservation-modal.component";
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+
 
 import { GetReservationModalComponent } from "../../shared/get-reservation-modal/get-reservation-modal.component";
 import { ChangePassComponent } from '../../shared/change-pass/change-pass.component';
@@ -26,6 +28,8 @@ import {ChatService} from "../../../services/chat.service";
 })
 export class homepageComponent implements OnInit {
 
+  emailForm: FormGroup;
+
   public usuarios: user[];
   public miPerfil: user;
   public knowledgeList: theme[];
@@ -35,12 +39,13 @@ export class homepageComponent implements OnInit {
   public selectedKnowledge: theme;
   public autenticado: boolean;
 
-  constructor(private ComplementaryUsersService: ComplementaryUsersService, private UserService: GetUserService,
+  constructor(private formBuilder: FormBuilder,private ComplementaryUsersService: ComplementaryUsersService, private UserService: GetUserService,
     private EditProfile: EditProfileService, private loginService: LoginService, private ThemeService: GetThemeService,
     public dialog: MatDialog, private reservationService: ReservationService, private router: Router,
               private chatService: ChatService) { }
 
   ngOnInit(): void {
+
     this.miPerfil = {
       username: '',
       email: '',
@@ -53,6 +58,10 @@ export class homepageComponent implements OnInit {
       imageUrl:''
 
     };
+
+    this.emailForm = this.formBuilder.group({
+      email:[this.miPerfil.email]
+    });
 
     this.autenticado = this.loginService.isAuthenticated(); // Comprobar si está autentificado
     if(this.autenticado){
@@ -107,6 +116,9 @@ export class homepageComponent implements OnInit {
         this.miPerfil = response;
         this.elegidos = this.miPerfil.interests;
         console.log(response);
+        this.emailForm = this.formBuilder.group({
+          email:[this.miPerfil.email]
+        });
         this.getComplementary(this.miPerfil.username);
       },
       error => {
@@ -173,6 +185,7 @@ export class homepageComponent implements OnInit {
   }
 
   editProfile(){
+    this.miPerfil.email = this.emailForm.controls['email'].value
     this.EditProfile.editProfile(this.miPerfil).subscribe(
       response => {
 
