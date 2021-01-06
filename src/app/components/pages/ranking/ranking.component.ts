@@ -65,6 +65,7 @@ export class RankingComponent implements OnInit {
         
       },
       error => {
+        this.usuarios = [];
         console.log("errorMessage");
       }
     );
