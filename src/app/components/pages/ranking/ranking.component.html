@@ -38,29 +38,26 @@
     <mat-card style="width:100%;">
       <mat-card-title id="test-pointer">Ranking sobre el tema: {{theme}}</mat-card-title>
       <mat-card-content>
-        <div class="mat-elevation-z8">
-            <table mat-table [dataSource]="dataSource">
+        
           
-              <!-- Position Column -->
-              <ng-container matColumnDef="position">
-                <th mat-header-cell *matHeaderCellDef> No. </th>
-                <td mat-cell *matCellDef="let element"> {{element.username}} </td>
-              </ng-container>
-          
-              <!-- Name Column -->
-              <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef> Name </th>
-                <td mat-cell *matCellDef="let element"> {{element.rating}} </td>
-              </ng-container>
-          
-              
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-          
-            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-          </div>
-          
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Username</th>
+              <th scope="col">Rating</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let user of usuarios; index as i">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>
+                {{ user.username }}
+              </td>
+              <td>{{ user.rating }}</td>
+            </tr>
+            </tbody>
+          </table>
   
       </mat-card-content>
     </mat-card>
