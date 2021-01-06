@@ -7,7 +7,8 @@
 <div class="row" style="text-align: center">
   <div class="col">
     <div>
-      <p>Valorar la lección de USERNAME del día DATE DD/MM/AAAA</p>
+      <p>Valorar la lección de {{reservation.theme.name}} entre
+      {{reservation.studentUsername}} y {{reservation.teacherUsername}}</p>
         <div class="form-group">
           <ngb-rating [max]="5" [formControl] = "RatingForm"></ngb-rating>
         </div>
@@ -17,7 +18,7 @@
     </div>
   </div>
 </div>
-  
+
 <div class="row">
   <div class="col">
     <div mat-dialog-actions style="height: 20%">
