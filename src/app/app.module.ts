@@ -45,9 +45,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ReservationModalComponent } from './components/shared/reservation-modal/reservation-modal.component';
 import { CalendarComponent } from './components/pages/calendar/calendar.component';
 import { GetReservationModalComponent } from './components/shared/get-reservation-modal/get-reservation-modal.component';
+
+import { ChangePassComponent } from './components/shared/change-pass/change-pass.component';
+
 import { RateModalComponent } from './components/shared/rate-modal/rate-modal.component';
 import { SearchComponent } from './components/pages/search/search.component';
 import { ConfirmImpartedLessonModalComponent } from './components/shared/confirm-imparted-lesson-modal/confirm-imparted-lesson-modal.component';
+
 
 
 
@@ -70,10 +74,14 @@ import { ConfirmImpartedLessonModalComponent } from './components/shared/confirm
     ReservationModalComponent,
     CalendarComponent,
     GetReservationModalComponent,
+
+    ChangePassComponent,
+
     RateModalComponent,
     SearchComponent,
     DialogErrorEdit,
     ConfirmImpartedLessonModalComponent
+
 
   ],
   imports: [

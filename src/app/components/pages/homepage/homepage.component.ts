@@ -10,8 +10,14 @@ import { ReservationService } from "../../../services/reservation.service";
 import { user } from 'src/app/models/user';
 import { theme } from 'src/app/models/theme';
 import { ReservationModalComponent } from "../../shared/reservation-modal/reservation-modal.component";
+
+import { GetReservationModalComponent } from "../../shared/get-reservation-modal/get-reservation-modal.component";
+import { ChangePassComponent } from '../../shared/change-pass/change-pass.component';
+
+
 import { SearchUsersService } from "../../../services/search-users.service";
 import {ChatService} from "../../../services/chat.service";
+
 
 @Component({
   selector: 'app-homepage',
@@ -169,7 +175,11 @@ export class homepageComponent implements OnInit {
   editProfile(){
     this.EditProfile.editProfile(this.miPerfil).subscribe(
       response => {
+
+        localStorage.setItem('userJSON', JSON.stringify(this.miPerfil));
+
         console.log(response);
+
         this.dialog.open(DialogConfirmDialog);
       },
       error => {
@@ -181,6 +191,10 @@ export class homepageComponent implements OnInit {
         }
       }
     );
+  }
+
+  changePass(){
+    this.dialog.open(ChangePassComponent);
   }
 
   openModalNewReservation(user) {
