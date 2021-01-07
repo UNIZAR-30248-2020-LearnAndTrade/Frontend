@@ -43,7 +43,7 @@
 
         <div class="col d-xl-flex justify-content-xl-center" id="opinion-col">
             <div class="row">
-                <div class="col" *ngIf="avgByTheme; then thenBlock else elseBlock">
+                <div class="col" *ngIf="avgByTheme.size > 0; then thenBlock else elseBlock">
                 </div>
                 <ng-template #thenBlock>
                     

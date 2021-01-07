@@ -15,7 +15,6 @@ export class ProfileComponent implements OnInit {
 
   public myprofile: user;
 
-  public starRating = 1.5;
   public userProfile: user;
   public authenticated: boolean;
   public status: string;
@@ -24,39 +23,10 @@ export class ProfileComponent implements OnInit {
   private rateByTheme: Map<string, Array<number>>;
 
   constructor( private activatedRoute: ActivatedRoute, private UserService: GetUserService,
-    private loginService: LoginService, private chatService: ChatService, private router: Router,
-    private reservationService:ReservationService) { 
+               private loginService: LoginService, private chatService: ChatService, private router: Router,
+               private reservationService:ReservationService) { 
       this.rateByTheme = new Map();
-    }
-
-  getProfile(username: string){
-    this.myprofile = {
-      username: '',
-      email: '',
-      interests: [],
-      knowledges: [],
-      name: '',
-      surname: '',
-      birthDate: new Date,
-      imageUrl: '',
-      password: ''
-    };
-
-    this.userProfile = JSON.parse(localStorage.getItem('userJSON'));
-    console.log(this.userProfile);
-    this.UserService.getUser(username).subscribe(
-      response => {
-        this.userProfile = response;
-        console.log(response);
-      },
-      error => {
-        var errorMessage = <any>error;
-        console.log(errorMessage);
-        if (errorMessage != null) {
-          this.status = 'error';
-        }
-      }
-    );
+      this.avgByTheme = new Map();
   }
 
   ngOnInit(): void {
@@ -67,17 +37,6 @@ export class ProfileComponent implements OnInit {
       this.getMyProfile();
     }
     this.getProfile(profileUser);
-    this.getRating();
-    this.calculateAVG();
-  }
-
-  getMyProfile(){
-    this.myprofile = JSON.parse(localStorage.getItem('userJSON'));
-    console.log(this.myprofile);
-    this.UserService.getUser(this.myprofile.username).subscribe(
-      response => {
-        this.myprofile = response;
-      });
   }
 
   newChat() {
@@ -91,16 +50,55 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(["/chat"]);
   }
 
-  private isStudent(r:reservation){
-    return this.myprofile.username == r.studentUsername;
+  private getProfile(username: string){
+    this.myprofile = {
+      username: '',
+      email: '',
+      interests: [],
+      knowledges: [],
+      name: '',
+      surname: '',
+      birthDate: new Date,
+      imageUrl: '',
+      password: ''
+    };
+
+    this.userProfile = JSON.parse(localStorage.getItem('userJSON'));
+    this.UserService.getUser(username).subscribe(
+      response => {
+        this.userProfile = response;
+        this.getRating(username);
+        console.log(response);
+      },
+      error => {
+        var errorMessage = <any>error;
+        console.log(errorMessage);
+        if (errorMessage != null) {
+          this.status = 'error';
+        }
+      }
+    );
   }
 
-  private isFinished(r:reservation){
+  private getMyProfile(){
+    this.myprofile = JSON.parse(localStorage.getItem('userJSON'));
+    console.log(this.myprofile);
+    this.UserService.getUser(this.myprofile.username).subscribe(
+      response => {
+        this.myprofile = response;
+      });
+  }
+
+  private isTeacher(r:reservation): boolean{
+    return this.userProfile.username == r.teacherUsername;
+  }
+
+  private isFinished(r:reservation): boolean{
     return r.studentFinished && r.teacherFinished;
   }
 
-  private getRating(){
-    this.reservationService.getReservationsForCalendar(JSON.parse(localStorage.getItem('userJSON')).username).subscribe(response => {
+  private getRating(username: string){
+    this.reservationService.getReservationsForCalendar(username).subscribe(response => {
       for (let index in response) {
         let r: reservation = {
           id: response[index].id,
@@ -114,7 +112,7 @@ export class ProfileComponent implements OnInit {
           teacherFinished: response[index].teacherFinished,
           rating: response[index].rating,
         }
-        if(this.isFinished(r) && this.isStudent(r)) {
+        if(this.isFinished(r) && this.isTeacher(r)) {
           // Only adds rate if finished and is student
           let rateList: Array<number>;
           if(this.rateByTheme.has(r.theme.name)){
@@ -127,7 +125,7 @@ export class ProfileComponent implements OnInit {
           }
         }
       }
-      console.log(this.rateByTheme);
+      this.calculateAVG();
     });
   }
 
@@ -141,10 +139,10 @@ export class ProfileComponent implements OnInit {
     if(this.rateByTheme.has(theme)){
       let rates = this.rateByTheme.get(theme);
       let rateAVG:number = 0;
-      for (let i = 0; 0 < rates.length; i++) {
-        rateAVG = rateAVG + rates[i];
+      for (let r of rates) {
+        rateAVG = rateAVG + r;
       }
-      return rateAVG/this.rateByTheme.get(theme).length;
+      return rateAVG/rates.length;
     }
     else{
       return -1;
@@ -152,10 +150,13 @@ export class ProfileComponent implements OnInit {
   }
 
   private calculateAVG(){
-    this.rateByTheme.forEach((value: number[], key: string) => {
-      this.avgByTheme.set(key, this.calculateAVGRateByTheme(key));
-    });
-    console.log("avgByTheme " + this.avgByTheme);
+    for(let t of this.userProfile.knowledges){
+      let avg = this.calculateAVGRateByTheme(t.name);
+      if (avg > -1){
+        this.avgByTheme.set(t.name, avg);
+      }
+    }
+    console.log(this.avgByTheme);
   }
 
 }
